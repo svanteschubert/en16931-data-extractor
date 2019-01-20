@@ -16,6 +16,7 @@ The data of the above mapping tables is being read from the tables.
 The XML part (dark grey) is loaded as XMLNode object.
 The semantic part (light grey) is loaded as SemanticNode object.
 The data extractor saves the model of each table in its own XML file to ease reading the data.
+The own XML file consists of a sequence of semantic elements containing XML elements. 
 The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making comparison easier.
 The name of our own XML files are a combination out of:  "specification document name" + "table name" + ".xml"
 
