@@ -27,9 +27,9 @@ More about the used class representation in the [JavaDoc](https://svanteschubert
 
 ## Usage for Technical Writer
 1. Download the JAR with all dependencies includes [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)
-2. To see version information call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)"
+2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)"
 3. Safe the DOCX documents of en16931-3 to ODT
-4. To extract data from the specification call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <specification.odt> or directory"
+4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <specification.odt> or directory"
 5. The output XML will be aside of the input documents.
 
 ## Usage for Software Developer
