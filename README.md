@@ -19,16 +19,17 @@ The data extractor saves the model of each table in its own XML file to ease rea
 The own XML file consists of a sequence of semantic elements containing the XML syntax elements. 
 The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making file comparison easier.
 The name of our own XML files is a combination of: "specification document name" + "table name" + ".xml"
-More about the used class representation in the [JavaDoc](src/site/apidocs/index.html).
+More about the used class representation in the [JavaDoc](en16931-3-reader/src/site/apidocs/index.html).
 
 ## Software Prerequisites
 1) [JDK 1.8 (at least)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2) [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
 ## Usage for Technical Writer
-1) In the command line from the root directory of the project call:<br/>"java -jar [src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)" to see version information
+1) Download the JAR with all dependencies includes [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)
+1) To see version information call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)"
 2) Safe the DOCX documents of en16931-3 to ODT
-3) In the command line from the root directory of the project call:<br/>"java -jar [src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <specification.odt> or directory"
+3) To extract data from the specification call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <specification.odt> or directory"
 4) The output XML will be aside of the input documents.
 
 ## Usage for Software Developer
