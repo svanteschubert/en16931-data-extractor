@@ -25,7 +25,8 @@ The name of our own XML files is a combination of:  "specification document name
 2) [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
 ## Usage
-1) Call 'mvn install' in the root directory of the project once, to build the ODF reader (ODFDOM library)
+1) Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom)
+NOTE: This ODF library will become the 1.0.0 version of the [ODF Toolkit from "The Document Foundation"](https://github.com/tdf/odftoolkit), but yet no Maven artifacts are available to be downloaded.
 2) Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from DOCX as OpenDocument Text format (ODT) in the folder en16931-3-reader/src/test/resources
 3) Provide its name in the test en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
 4) Call 'mvn install' in the 'en16931-3-reader' folder
