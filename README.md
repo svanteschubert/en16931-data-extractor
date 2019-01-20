@@ -20,6 +20,10 @@ The own XML file consists of a sequence of semantic elements containing the XML 
 The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making file comparison easier.
 The name of our own XML files is a combination of:  "specification document name" + "table name" + ".xml"
 
+## Software Prerequisites
+1) [JDK 1.8 (at least)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+2) [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
+
 ## Usage
 1) Call 'mvn install' in the root directory of the project once, to build the ODF reader (ODFDOM library)
 2) Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from DOCX as OpenDocument Text format (ODT) in the folder en16931-3-reader/src/test/resources
