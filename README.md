@@ -4,7 +4,7 @@ Open sourced for the creators of the e-invoice specification to allow easier san
 Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specifcation (en16931)](https://invoice.fans/en/en16931-en/).
 
 ## XML Syntax Binding of en16931
-The EU e-invoice specification demands the support of two XML file formats (OASIS UBL 1.2)[http://docs.oasis-open.org/ubl/UBL-2.1.html] and (UN/CEFACT XML Industry Invoice D16B)[https://www.unece.org/cefact/xml_schemas/index].
+The EU e-invoice specification demands the support of two XML file formats [OASIS UBL 1.2](http://docs.oasis-open.org/ubl/UBL-2.1.html) and [UN/CEFACT XML Industry Invoice D16B](https://www.unece.org/cefact/xml_schemas/index).
 In its 3rd part the EU specification binds the XML syntax to the EU e-invoice semantic. For each syntax exist a document with at least two mapping table.
 The first normative table describe the syntax binding from the semantic to XML, the second informative table describes it the other way around from XML to semantic.
 ![Two example tables for UN/CEFACT](en16931-3-reader/src/site/3-3-both-tables.png)
@@ -24,8 +24,7 @@ The normative tables is being saved twice, once with all information and a secon
 3) Provide its name in the test en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
 4) Call 'mvn install' in the 'en16931-3-reader' folder
 5) The extracted data can be found as XML files in the folder en16931-3-reader/target/test-classes
-6) Use a text comparing tool like (Total Commander on Windows)[https://www.ghisler.com/download.htm] to find any differences between the
-
+6) Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the
 
 ## Future features
 1) Support of reading EDITFACT tables from 16931-3-4 using different column numbers.
