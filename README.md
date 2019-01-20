@@ -17,6 +17,7 @@ The XML part (dark grey) is loaded as XMLNode object.
 The semantic part (light grey) is loaded as SemanticNode object.
 The data extractor saves the model of each table in its own XML file to ease reading the data.
 The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making comparison easier.
+The name of our own XML files are a combination out of:  "specification document name" + "table name" + ".xml"
 
 ## Usage
 1) Call 'mvn install' in the root directory of the project once, to build the ODF reader (ODFDOM library)
@@ -24,7 +25,8 @@ The normative tables is being saved twice, once with all information and a secon
 3) Provide its name in the test en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
 4) Call 'mvn install' in the 'en16931-3-reader' folder
 5) The extracted data can be found as XML files in the folder en16931-3-reader/target/test-classes
-6) Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the
+6) Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example__Table 3 — UN_CEFACT syntax elements to semantic model mapping (informative.xml) and the ["normative SUBSET"](16931-3-3_example_SUBSET___Table 2 — Semantic model to UN_CEFACT syntax elements mapping (normative.xml) XML files. 
+![In our example only the title is different between the two tables](TotalCommanderComparison.png)
 
 ## Future features
 1) Support of reading EDITFACT tables from 16931-3-4 using different column numbers.
