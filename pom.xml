@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.prototypefund</groupId>
+    <artifactId>en16931-extractor</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>19</version>
+    </parent>
+
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.4.01</version>
+            </dependency>
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>2.12.0</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-core</artifactId>
+                <version>3.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-core</artifactId>
+                <classifier>tests</classifier>
+                <version>3.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>net.rootdev</groupId>
+                <artifactId>java-rdfa</artifactId>
+                <version>0.4.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>en16931-3-reader</module>
+        <module>odf-reader</module>
+    </modules>
+
+    <name>Data extractor for the european e-invoice specifcation (en16931)</name>
+    <description>
+        Open sourced for the creators of the e-invoice specification to allow easier sanity checks of the data within the tables.
+        Build as part of the PrototypeFund project "paperless" to generate larger parts of the software implementing the european e-invoice specifcation (en16931).
+    </description>
+    <url>https://prototypefund.de/project/papierloser-alltag/</url>
+    <organization>
+        <name>PrototypeFund</name>
+        <url>https://prototypefund.de</url>
+    </organization>
+    <scm>
+		<connection>scm:git:git://github.com/svanteschubert/en16931-data-extractor.git</connection>
+		<developerConnection>scm:git:git@github.com:svanteschubert/en16931-data-extractor.git</developerConnection>
+		<url>https://github.com/svanteschubert/en16931-data-extractor.git</url>		
+    </scm>
+    
+    <developers>
+        <developer>
+            <id>svanteschubert</id>
+            <name>Svante</name>
+            <email>svanteschubert AT apache.org</email>
+            <organization>Freelancer</organization>
+            <roles>
+                <role>OASIS ODF Collaboration subcommittee chair</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <!--<profiles>
+        <profile>
+            <id>pedantic</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>CHANGES.txt</exclude>
+								<exclude>.gitignore</exclude>
+                                <exclude>DEPENDENCIES</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>       
+	</profiles>-->
+</project>

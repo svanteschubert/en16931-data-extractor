@@ -1,0 +1,20 @@
+{"operations":[
+{"name":"insertFontDescription","attrs":{"family":"Arial","familyGeneric":"swiss","pitch":"variable"},"fontName":"Arial"},
+{"name":"insertFontDescription","attrs":{"family":"Mangal","familyGeneric":"system","pitch":"variable"},"fontName":"Mangal"},
+{"name":"insertFontDescription","attrs":{"family":"'Microsoft YaHei'","familyGeneric":"system","pitch":"variable"},"fontName":"Microsoft YaHei"},
+{"name":"insertFontDescription","attrs":{"family":"'Segoe UI'","familyGeneric":"system","pitch":"variable"},"fontName":"Segoe UI"},
+{"name":"insertFontDescription","attrs":{"family":"Tahoma","familyGeneric":"system","pitch":"variable"},"fontName":"Tahoma"},
+{"name":"insertStyleSheet","type":"cell","styleId":"Default","attrs":{"character":{"fontNameAsian":"Microsoft YaHei","fontNameComplex":"Mangal"}},"parent":"default_cell_style"},
+{"name":"insertStyleSheet","type":"cell","styleId":"default_cell_style","attrs":{"character":{"fontName":"Arial","fontNameAsian":"Segoe UI","fontNameComplex":"Tahoma","language":"de-DE"},"paragraph":{"document":{"defaultTabStop":1250}}},"default":true,"hidden":true,"styleName":"Default Cell Style"},
+{"name":"insertStyleSheet","type":"cell","styleId":"Heading","attrs":{"character":{"bold":true,"fontSize":16,"italic":true},"paragraph":{"alignment":"center"}},"parent":"Default"},
+{"name":"insertStyleSheet","type":"cell","styleId":"Heading1","attrs":{},"parent":"Heading"},
+{"name":"insertStyleSheet","type":"cell","styleId":"Result","attrs":{"character":{"bold":true,"italic":true,"underline":true}},"parent":"Default"},
+{"name":"insertStyleSheet","type":"cell","styleId":"Result2","attrs":{"cell":{"numberFormat":{"code":"#,##0.00 [$\u20AC-407];[RED]-#,##0.00 [$\u20AC-407]"}}},"parent":"Result"},
+{"name":"setDocumentAttributes","attrs":{"document":{"fileFormat":"odf"}}},
+{"name":"insertSheet","attrs":{"sheet":{"visible":true}},"sheet":0,"sheetName":"Sheet1"},
+{"name":"setColumnAttributes","start":0,"attrs":{"column":{"width":2258}},"sheet":0},
+{"name":"setRowAttributes","start":0,"attrs":{"row":{"customHeight":false,"height":432}},"sheet":0},
+{"name":"setCellContents","start":[0,0],"contents":[[{"attrs":{"styleId":"Default"},"value":1},{"value":2},{"value":3},{"value":4},{"value":5}]],"sheet":0},
+{"name":"setCellContents","start":[0,1],"contents":[[{"attrs":{"styleId":"Default"},"value":2},{"value":3},{"value":4},{"value":5},{"value":6}]],"sheet":0},
+{"name":"setCellContents","start":[0,2],"contents":[[{"attrs":{"styleId":"Default"},"value":3},{"value":4},{"value":5},{"value":6},{"value":7}]],"sheet":0}
+]}

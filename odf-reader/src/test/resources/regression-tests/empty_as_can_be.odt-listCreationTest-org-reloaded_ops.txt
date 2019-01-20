@@ -1,0 +1,5 @@
+{"operations":[
+{"name":"noOp"},
+{"name":"insertParagraph","start":[0],"attrs":{"paragraph":{"listLevel":3,"listStyleId":"OTK_DEFAULT_LIST"}}},
+{"name":"insertText","start":[0,0],"text":"1"}
+]}

@@ -1,0 +1,17 @@
+{"operations":[
+{"name":"setDocumentAttributes","attrs":{"document":{"fileFormat":"odf"}}},
+{"name":"insertFontDescription","attrs":{"family":"'Liberation Serif'","familyGeneric":"roman","pitch":"variable"},"fontName":"Liberation Serif"},
+{"name":"insertFontDescription","attrs":{"family":"'Liberation Sans'","familyGeneric":"swiss","pitch":"variable"},"fontName":"Liberation Sans"},
+{"name":"insertFontDescription","attrs":{"family":"'Arial Unicode MS'","familyGeneric":"system","pitch":"variable"},"fontName":"Arial Unicode MS"},
+{"name":"insertStyleSheet","type":"drawing","styleId":"default_drawing_style","attrs":{"character":{"color":{"type":"auto"},"fontName":"Liberation Serif","fontNameAsian":"Arial Unicode MS","fontNameComplex":"Arial Unicode MS","fontSize":12,"fontSizeAsian":10.5,"language":"de-DE"},"fill":{"type":"solid","color":{"type":"rgb","value":"729fcf"}}},"default":true,"hidden":true,"styleName":"Default Graphic Style"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Caption","attrs":{"character":{"fontSize":12,"fontSizeAsian":12,"italic":true,"italicAsian":true,"italicComplex":true},"paragraph":{"marginBottom":212,"marginTop":212}},"parent":"Standard"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Heading","attrs":{"character":{"fontName":"Liberation Sans","fontNameAsian":"Arial Unicode MS","fontNameComplex":"Arial Unicode MS","fontSize":14,"fontSizeAsian":14},"paragraph":{"marginBottom":212,"marginTop":423,"nextStyleId":"Text_20_body"}},"parent":"Standard"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Index","attrs":{"character":{"fontSizeAsian":12}},"parent":"Standard"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"List","attrs":{"character":{"fontSizeAsian":12}},"parent":"Text_20_body"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Standard","attrs":{},"parent":"default_paragraph_style"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Text_20_body","attrs":{"paragraph":{"lineHeight":{"type":"percent","value":120},"marginBottom":247,"marginTop":0}},"parent":"Standard","styleName":"Text body"},
+{"name":"insertParagraph","start":[0],"attrs":{"styleId":"Standard"}},
+{"name":"insertText","start":[0,0],"text":"A"},
+{"name":"insertParagraph","start":[1],"attrs":{"styleId":"Standard","paragraph":{"pageBreakBefore":true}}},
+{"name":"insertText","start":[1,0],"text":"B"}
+]}

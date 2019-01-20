@@ -1,0 +1,18 @@
+{"operations":[
+{"name":"setDocumentAttributes","attrs":{"document":{"fileFormat":"odf"}}},
+{"name":"insertFontDescription","attrs":{"family":"Thorndale","familyGeneric":"roman","pitch":"variable"},"fontName":"Thorndale"},
+{"name":"insertFontDescription","attrs":{"family":"'Andale Sans UI'","familyGeneric":"system","pitch":"variable"},"fontName":"Andale Sans UI"},
+{"name":"insertFontDescription","attrs":{"family":"Tahoma","familyGeneric":"system","pitch":"variable"},"fontName":"Tahoma"},
+{"name":"insertStyleSheet","type":"drawing","styleId":"default_drawing_style","attrs":{"character":{"color":{"type":"rgb","value":"000000"},"fontSize":12,"fontSizeAsian":12,"language":"en-US"}},"default":true,"hidden":true,"styleName":"Default Graphic Style"},
+{"name":"insertStyleSheet","type":"drawing","styleId":"Frame","attrs":{"drawing":{"anchorHorAlign":"center","anchorHorBase":"column","anchorVertAlign":"top","anchorVertBase":"paragraph","indentLeft":201,"indentRight":201,"marginBottom":201,"marginLeft":201,"marginRight":201,"marginTop":201,"textWrapMode":"square","textWrapSide":"both"},"line":{"type":"solid","color":{"type":"rgb","value":"000000"},"style":"solid","width":2},"shape":{"paddingBottom":150,"paddingLeft":150,"paddingRight":150,"paddingTop":150}},"parent":"default_drawing_style"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"default_paragraph_style","attrs":{"character":{"color":{"type":"rgb","value":"000000"},"fontName":"Thorndale","fontNameAsian":"Andale Sans UI","fontNameComplex":"Tahoma","fontSize":12,"fontSizeAsian":12,"language":"en-US"}},"default":true,"hidden":true,"styleName":"Default Paragraph Style"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Frame_20_contents","attrs":{},"parent":"Text_20_body","styleName":"Frame contents"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Standard","attrs":{},"parent":"default_paragraph_style"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Table_20_Contents","attrs":{},"parent":"Standard","styleName":"Table Contents"},
+{"name":"insertStyleSheet","type":"paragraph","styleId":"Text_20_body","attrs":{"paragraph":{"marginBottom":212,"marginTop":0}},"parent":"Standard","styleName":"Text body"},
+{"name":"insertParagraph","start":[0],"attrs":{"styleId":"Standard"}},
+{"name":"insertDrawing","start":[0,0],"type":"shape","attrs":{"styleId":"Frame","drawing":{"anchorHorAlign":"center","anchorHorBase":"column","anchorVertAlign":"top","anchorVertBase":"paragraph","inline":false,"width":6142},"fill":{"color":"ffffff"},"image":{},"line":{"type":"solid","color":{"type":"rgb","value":"000000"},"style":"solid","width":39},"shape":{"autoResizeHeight":"true","paddingBottom":150,"paddingLeft":150,"paddingRight":150,"paddingTop":150}}},
+{"name":"insertParagraph","start":[0,0,0],"attrs":{"styleId":"Frame_20_contents"}},
+{"name":"insertText","start":[0,0,0,0],"text":"Frame Content"},
+{"name":"insertText","start":[0,1],"text":"Page Content"}
+]}
