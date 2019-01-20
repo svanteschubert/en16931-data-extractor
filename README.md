@@ -6,7 +6,7 @@ Build as part of the [PrototypeFund project "paperless"](https://prototypefund.d
 ## XML Syntax Binding of en16931
 The EU e-invoice specification demands the support of two XML file formats [OASIS UBL 1.2](http://docs.oasis-open.org/ubl/UBL-2.1.html) and [UN/CEFACT XML Industry Invoice D16B](https://www.unece.org/cefact/xml_schemas/index).
 In its 3rd, part the EU specification binds the XML syntax to the EU e-invoice semantic. For each syntax exist a document with at least two mapping table.
-The first normative table describe the syntax binding from the semantic to XML, the second informative table describes it the other way around from XML to semantic.
+The first normative table describe the syntax binding from the semantic (light grey) to XML (dark grey), the second informative table describes it the other way around from XML to semantic.
 ![Two example tables for UN/CEFACT](en16931-3-reader/src/site/3-3-both-tables.png)
 The informative table does not add any new information. It starts with the XML part, but uses only two of the five XML attributes from the normative table.
 In theory, the comparison of both tables should provide the same data.
