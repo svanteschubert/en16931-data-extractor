@@ -22,25 +22,25 @@ The name of our own XML files is a combination of: "specification document name"
 More about the used class representation in the [JavaDoc](https://svanteschubert.github.io/en16931-data-extractor/en16931-3-reader/docs/).
 
 ## Software Prerequisites
-1) [JDK 1.8 (at least)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
-2) [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
+1. [JDK 1.8 (at least)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+2. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
 ## Usage for Technical Writer
-1) Download the JAR with all dependencies includes [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)
-1) To see version information call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)"
-2) Safe the DOCX documents of en16931-3 to ODT
-3) To extract data from the specification call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <specification.odt> or directory"
-4) The output XML will be aside of the input documents.
+1. Download the JAR with all dependencies includes [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)
+2. To see version information call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)"
+3. Safe the DOCX documents of en16931-3 to ODT
+4. To extract data from the specification call from command-line:<br/>"java -jar [en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <specification.odt> or directory"
+5. The output XML will be aside of the input documents.
 
 ## Usage for Software Developer
-1) Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom)
+1. Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom)
 NOTE: This ODF library will become the 1.0.0 version of the [ODF Toolkit from "The Document Foundation"](https://github.com/tdf/odftoolkit), but yet no Maven artifacts are available for download.
-2) Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from original DOCX to OpenDocument Text format (ODT) format into the folder en16931-3-reader/src/test/resources
-3) Provide its name in the test file: en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
-4) Call via command line 'mvn install' in the 'en16931-3-reader' folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/nb90/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).
-5) The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
-6) Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example_informative.xml) and the ["normative SUBSET"](en16931-3-reader/src/site/16931-3-3_example_SUBSETnormative.xml) XML files. 
+2. Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from original DOCX to OpenDocument Text format (ODT) format into the folder en16931-3-reader/src/test/resources
+3. Provide its name in the test file: en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
+4. Call via command line 'mvn install' in the 'en16931-3-reader' folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/nb90/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).
+5. The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
+6. Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example_informative.xml) and the ["normative SUBSET"](en16931-3-reader/src/site/16931-3-3_example_SUBSETnormative.xml) XML files. 
 ![In our example only the title is different between the two tables](en16931-3-reader/src/site/TotalCommanderComparison.png)
 
 ## Future features
-1) Support of reading EDIFACT tables from 16931-3-4 using different column numbers.
+1. Support of reading EDIFACT tables from 16931-3-4 using different column numbers.
