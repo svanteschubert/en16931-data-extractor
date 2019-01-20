@@ -20,6 +20,7 @@ import de.prototypefund.en16931.type.Cardinality;
 import de.prototypefund.en16931.type.DataType;
 import de.prototypefund.utils.ResourceUtilities;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -270,18 +271,18 @@ public class SemanticNode {
         return xml.toString();
     }
 
-    public void createSubXMLFile(String fileName, String title) {
-        createXMLFileVariants(fileName, title, Boolean.TRUE);
+    public void createSubXMLFile(String fileName, String outputPath, String title) {
+        createXMLFileVariants(fileName, outputPath, title, Boolean.TRUE);
     }
 
-    public void createXMLFile(String fileName, String title) {
-        createXMLFileVariants(fileName, title, Boolean.FALSE);
+    public void createXMLFile(String fileName, String outputPath, String title) {
+        createXMLFileVariants(fileName, outputPath, title, Boolean.FALSE);
     }
 
-    private void createXMLFileVariants(String fileName, String title, Boolean isSubFile) {
+    private void createXMLFileVariants(String fileName, String outputPath, String title, Boolean isSubFile) {
         try {
             if (fileName.endsWith(ODT_SUFFIX)) {
-                fileName = fileName.substring(0, (fileName.length() - 1) - ODT_SUFFIX.length());
+                fileName = fileName.substring(0, fileName.length() - ODT_SUFFIX.length());
             }
 
             if (isSubFile) {
@@ -310,7 +311,7 @@ public class SemanticNode {
             StringBuilder xml_Prefix = new StringBuilder();
             int semanticCount = semanticNodes.size();
             xml_Prefix.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<semantics semantics=\"" + semanticCount + "\" xml=\"" + xmlCount + "\" file=\"" + fileName + "\" table=\"" + title + "\">\n");
-            String outputFilePath = ResourceUtilities.saveStringToFile(ResourceUtilities.newTestOutputFile(fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
+            String outputFilePath = ResourceUtilities.saveStringToFile(new File(outputPath + fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
             LOG.info("Saving table model into XML file: " + outputFilePath + "\n");
         } catch (Throwable e) {
             LoggerFactory.getLogger(SemanticNode.class.getName()).error(e.getMessage(), e);

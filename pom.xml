@@ -21,7 +21,7 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.prototypefund</groupId>
+    <groupId>de.prototypefund</groupId>
     <artifactId>en16931-extractor</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -72,7 +72,7 @@
         <module>odf-reader</module>
     </modules>
 
-    <name>Data extractor for the European e-invoice specification (en16931)</name>
+    <name>Data Extractor for the European e-Invoice Specification (en16931)</name>
     <description>
         Open sourced for the creators of the e-invoice specification to allow easier sanity checks of the data within the tables.
         Build as part of the PrototypeFund project "paperless" to generate larger parts of the software implementing the european e-invoice specifcation (en16931).
@@ -83,9 +83,9 @@
         <url>https://prototypefund.de</url>
     </organization>
     <scm>
-		<connection>scm:git:git://github.com/svanteschubert/en16931-data-extractor.git</connection>
-		<developerConnection>scm:git:git@github.com:svanteschubert/en16931-data-extractor.git</developerConnection>
-		<url>https://github.com/svanteschubert/en16931-data-extractor.git</url>		
+        <connection>scm:git:git://github.com/svanteschubert/en16931-data-extractor.git</connection>
+        <developerConnection>scm:git:git@github.com:svanteschubert/en16931-data-extractor.git</developerConnection>
+        <url>https://github.com/svanteschubert/en16931-data-extractor.git</url>		
     </scm>
     
     <developers>

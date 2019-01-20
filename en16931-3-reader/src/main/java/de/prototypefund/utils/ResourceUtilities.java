@@ -164,12 +164,7 @@ public final class ResourceUtilities {
     }
 
     /**
-     * Relative to the test input directory (ie. "src/test/resources") a test
-     * file will be returned dependent on the relativeFilePath provided.
-     *
-     * @param relativeFilePath Path of the test output resource relative to
-     * <code>target/test-classes/</code>.
-     * @return the empty <code>File</code> of the test output (to be filled)
+     * @return the <code>File</code> of the reference input directory, usually "src/test/resources"
      */
     public static File getTestReferenceFolder() {
         String filepath = null;

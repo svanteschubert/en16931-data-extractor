@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar - we want to support technical writers as well providing the JAR
 *.war
 *.nar
 *.ear

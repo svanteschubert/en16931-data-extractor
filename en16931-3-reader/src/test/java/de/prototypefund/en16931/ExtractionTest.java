@@ -24,10 +24,10 @@ import org.junit.Test;
 
 public class ExtractionTest {
 
-    private static final String odtfilename = "16931-3-3_example";
+    private static final String odtFileName = "16931-3-3_example";
 
     @Test
     public void collectSpecData() throws Exception {
-        new OdtTableExtraction().collectSpecData(odtfilename);
+        new OdtTableExtraction().collectSpecData(odtFileName);
     }
 }

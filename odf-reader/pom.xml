@@ -23,30 +23,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.prototypefund</groupId>
+        <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
   
     <artifactId>odfdom-java</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     
     <name>ODFDOM</name>
     <description>
         ODFDOM is an OpenDocument Format (ODF) framework. Its purpose 
-		is to provide an easy common way to create, access and 
-		manipulate ODF files, without requiring detailed knowledge of
-		the ODF specification. It is designed to provide the ODF
-		developer community with an easy lightwork programming API
-		portable to any object-oriented language.
+        is to provide an easy common way to create, access and 
+        manipulate ODF files, without requiring detailed knowledge of
+        the ODF specification. It is designed to provide the ODF
+        developer community with an easy lightwork programming API
+        portable to any object-oriented language.
 
-		The collaboration feature was sponsored by the PrototypeFund see https://prototypefund.de/project/documents-for-democracy/
-		This library will become the future 1.0.0 of the ODF Toolkit from "The Document Foundation" see https://github.com/tdf/odftoolkit
+        The collaboration feature was sponsored by the PrototypeFund see https://prototypefund.de/project/documents-for-democracy/
+        This library will become the future 1.0.0 of the ODF Toolkit from "The Document Foundation" see https://github.com/tdf/odftoolkit
     </description>    
     <scm>
-		<url>https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom</url>		
+        <url>https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom</url>		
     </scm>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->

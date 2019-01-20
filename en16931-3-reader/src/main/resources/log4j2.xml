@@ -15,7 +15,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.odftoolkit" level="info"/>
+        <Logger name="de.prototypefund" level="info"/>
 
         <Root level="info">
             <AppenderRef ref="STDOUT"/>

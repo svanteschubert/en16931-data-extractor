@@ -22,7 +22,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
-	<groupId>org.prototypefund</groupId>
+	<groupId>de.prototypefund</groupId>
 	<artifactId>en16931-data-extractor</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -30,7 +30,7 @@
     <properties>
         <jdk.version>1.8</jdk.version>
         <skipTests>false</skipTests>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>        
@@ -54,13 +54,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
         </dependency>  
-        <!--  
-        Binding for java.util.logging, also referred to as JDK 1.4 logging
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>1.7.25</version>
-        </dependency>   -->
         <dependency> 
           <groupId>org.apache.logging.log4j</groupId>
           <artifactId>log4j-slf4j-impl</artifactId>
@@ -112,25 +105,24 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
                 <configuration>
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
+                            <mainClass>de.prototypefund.JarManifest</mainClass>
                         </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>
                         </manifestEntries>
                         <manifestSections>
                             <manifestSection>
-                                <name>ODFDOM</name>
+                                <name>en16931-data-extractor</name>
                                 <manifestEntries>
-                                    <ODFDOM-Name>odfdom</ODFDOM-Name>
-                                    <ODFDOM-Version>${project.version}</ODFDOM-Version>
-                                    <ODFDOM-Website>http://incubator.apache.org/odftoolkit/odfdom/index.html</ODFDOM-Website>
-                                    <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
-                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                    <Project-Name>en16931-data-extractor</Project-Name>
+                                    <Project-Version>${project.version}</Project-Version>
+                                    <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
+                                    <Project-Built-Date>${build.timestamp}</Project-Built-Date>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
@@ -149,12 +141,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>				
                 <version>2.22.0</version>
-                <configuration>
-                    <forkMode>pertest</forkMode>
+                <configuration>                    
                     <systemPropertyVariables>
-                        <odfdom.version>${project.version}</odfdom.version>
-                        <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-                        <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
+                        <project.version>${project.version}</project.version>
+                        <project.timestamp>${build.timestamp}</project.timestamp>                        
                         <skipTests>${skipTests}</skipTests>
                     </systemPropertyVariables>
                 </configuration>
@@ -190,24 +180,24 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
+                            <mainClass>de.prototypefund.JarManifest</mainClass>
                         </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>
                         </manifestEntries>
                         <manifestSections>
                             <manifestSection>
-                                <name>ODFDOM</name>
+                                <name>en16931-data-extractor</name>
                                 <manifestEntries>
-                                    <ODFDOM-Name>odfdom</ODFDOM-Name>
-                                    <ODFDOM-Version>${project.version}</ODFDOM-Version>
-                                    <ODFDOM-Website>http://incubator.apache.org/odftoolkit/odfdom/index.html</ODFDOM-Website>
-                                    <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
-                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                    <Project-Name>en16931-data-extractor</Project-Name>
+                                    <Project-Version>${project.version}</Project-Version>
+                                    <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
+                                    <Project-Built-Date>${build.timestamp}</Project-Built-Date>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
@@ -225,40 +215,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>src/main/resources/**</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.0</version>
-                <configuration>
-                    <excludes>                                        
-                        <exclude>**/PerformanceIT.java</exclude>
-                    </excludes>
-                    <systemPropertyVariables>
-                        <odfdom.version>${project.version}</odfdom.version>
-                        <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
-                    </systemPropertyVariables>
-                </configuration>                
-                <executions>
-                    <execution>
-                        <id>failsafe-it</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>     
+            </plugin>        
         </plugins>
     </build>
     <reporting>
@@ -268,7 +225,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
-                    <doctitle>ODFDOM</doctitle>
+                    <doctitle>en16931-data-extractor</doctitle>
                     <minmemory>512m</minmemory>
                     <maxmemory>1024m</maxmemory>
                     <links>
@@ -276,7 +233,7 @@
                         <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
                     </links>
                     <splitindex>true</splitindex>
-                    <!--<windowtitle>ODFDOM API v${project.version} - http://incubator.apache.org/odftoolkit/</windowtitle>-->
+                    <windowtitle>Project API v${project.version} - https://github.com/svanteschubert/en16931-data-extractor</windowtitle>
                 </configuration>
             </plugin>
             <!-- Code Coverage Testing generated by Cobertura -->
@@ -287,7 +244,7 @@
                 <configuration>
                     <instrumentation>
                         <excludes>
-                            <exclude>org/odftoolkit/**/*Test.class</exclude>
+                            <exclude>de/prototypefund/**/*Test.class</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
@@ -360,9 +317,8 @@
                         <version>2.22.0</version>
                         <configuration>
                             <systemPropertyVariables>
-                                <odfdom.version>${project.version}</odfdom.version>
-                                <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-                                <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
+                                <project.version>${project.version}</project.version>
+                                <project.timestamp>${build.timestamp}</project.timestamp>                                
                             </systemPropertyVariables>
                             <skipTests>${skipTests}</skipTests>
                         </configuration>

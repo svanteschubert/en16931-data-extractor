@@ -65,7 +65,7 @@ public class OdtTableExtraction {
         LOG = LoggerFactory.getLogger(OdtTableExtraction.class);
     }
 
-    OdfTextDocument odtdoc;
+    OdfTextDocument odtDoc;
     OdfTable odtTable;
     SemanticHeading[] SEMANTIC_TABLE_HEADINGS = SemanticNode.SemanticHeading.values();
     XmlHeading[] SYNTAX_TABLE_HEADINGS_FULL = XmlNode.XmlHeading.values();
@@ -75,14 +75,20 @@ public class OdtTableExtraction {
 
 
 
-    /** @param odtfilename the truncated name of the specification without the ".odt" suffix! */
-    public void collectSpecData(String odtfilename) throws Exception {
+    /** @param odtFileName the truncated name of the specification without the ".odt" suffix! */
+    public void collectSpecData(String odtFileName) throws Exception {
+        collectSpecData(new File(ResourceUtilities.getAbsolutePath(odtFileName + ".odt")));
+    }
 
-        odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + ".odt"));
-
-        LOG.info("\n*** Specification document: '" + odtfilename + "'\n\n\n");;
+    /** @param odtFile <code>File</code> representing the en16931 specification  */
+    public void collectSpecData(File odtFile) throws Exception {
+        odtDoc = OdfTextDocument.loadDocument(odtFile);
+        String absPath = odtFile.getAbsolutePath();
+        String odtFileName = absPath.substring(absPath.lastIndexOf(File.separatorChar) + 1);
+        String odtFilePath = absPath.substring(0, absPath.lastIndexOf(File.separatorChar) + 1);
+        LOG.info("\n*** Specification document: '" + odtFileName + "'\n\n\n");;
         // traverse top level user objects
-        OfficeTextElement root = odtdoc.getContentRoot();
+        OfficeTextElement root = odtDoc.getContentRoot();
         NodeList topChildren = root.getChildNodes();
 
         int i = 0;
@@ -107,7 +113,7 @@ public class OdtTableExtraction {
 
             }else if (child instanceof TableTableElement) {
                 if(hasPrecedingHeading || tableTitle != null && tableTitle.contains("Mapping")){
-                    extractTableData(((TableTableElement) child), odtfilename, tableTitle);
+                    extractTableData(((TableTableElement) child), odtFileName, odtFilePath, tableTitle);
                 }
                 hasPrecedingHeading = Boolean.FALSE;
                 tableTitle = null;
@@ -120,7 +126,7 @@ public class OdtTableExtraction {
         }
     }
 
-    private void extractTableData(TableTableElement tableElement, String fileName, String title) {
+    private void extractTableData(TableTableElement tableElement, String fileName, String outputPath, String title) {
         LOG.info("\n\nTable Heading: '" + title + "'\n");
         mTableId = title;
         OdfTable table = OdfTable.getInstance(tableElement);
@@ -249,9 +255,9 @@ public class OdtTableExtraction {
                 }
             }
             // dump the table model into an XML file
-            semanticNode.createXMLFile(fileName, title);
+            semanticNode.createXMLFile(fileName, outputPath, title);
             if(columnCount == NORMATIVE_TABLE_SIZE){
-                semanticNode.createSubXMLFile(fileName, title);
+                semanticNode.createSubXMLFile(fileName, outputPath, title);
             }
             // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
