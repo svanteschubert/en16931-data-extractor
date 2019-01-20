@@ -1,6 +1,6 @@
 # Data Extractor for the European e-Invoice Specification (en16931)
 ## Summary
-Open sourced for the creators of the e-invoice specification to allow easier sanity checks of the data within the tables to improve the quality of the specification.
+Open sourced for the creators of the EU e-invoice specification to allow easier sanity checks of the data within the tables to improve the quality of the specification.
 Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specifcation (en16931)](https://invoice.fans/en/en16931-en/).
 
 ## XML Syntax Binding of en16931
@@ -18,23 +18,22 @@ The semantic part (light grey) is loaded as SemanticNode object.
 The data extractor saves the model of each table in its own XML file to ease reading the data.
 The own XML file consists of a sequence of semantic elements containing the XML syntax elements. 
 The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making file comparison easier.
-The name of our own XML files is a combination of:  "specification document name" + "table name" + ".xml"
+The name of our own XML files is a combination of: "specification document name" + "table name" + ".xml"
 
 ## Software Prerequisites
 1) [JDK 1.8 (at least)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2) [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
-## Usage
+## Usage for Software developer
 1) Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom)
-NOTE: This ODF library will become the 1.0.0 version of the [ODF Toolkit from "The Document Foundation"](https://github.com/tdf/odftoolkit), but yet no Maven artifacts are available to be downloaded.
-2) Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from DOCX as OpenDocument Text format (ODT) in the folder en16931-3-reader/src/test/resources
-3) Provide its name in the test en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
-4) Call 'mvn install' in the 'en16931-3-reader' folder
-5) The extracted data can be found as XML files in the folder en16931-3-reader/target/test-classes
+NOTE: This ODF library will become the 1.0.0 version of the [ODF Toolkit from "The Document Foundation"](https://github.com/tdf/odftoolkit), but yet no Maven artifacts are available for download.
+2) Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from original DOCX to OpenDocument Text format (ODT) format into the folder en16931-3-reader/src/test/resources
+3) Provide its name in the test file: en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
+4) Call via command line 'mvn install' in the 'en16931-3-reader' folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/nb90/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).
+5) The extracted data can be found as XML files in the folder en16931-3-reader/target/test-classes.
 6) Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example_informative.xml) and the ["normative SUBSET"](en16931-3-reader/src/site/16931-3-3_example_SUBSETnormative.xml) XML files. 
 ![In our example only the title is different between the two tables](en16931-3-reader/src/site/TotalCommanderComparison.png)
 
 ## Future features
 1) Support of reading EDITFACT tables from 16931-3-4 using different column numbers.
-2) Providing an executable JAR instead of own build. Allowing to provide the ODT spec document path as argument on command line.
-3) Additional documentation.
+2) Providing an executable JAR instead of own build for specification editors. Allowing to provide the ODT spec document path as argument on command line.
