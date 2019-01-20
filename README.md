@@ -27,7 +27,7 @@ The name of our own XML files is a combination of: "specification document name"
 ## Usage for Technical Writer
 1) In the command line from the root directory of the project call:<br/>"java -jar [src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar)" to see version information
 2) Safe the DOCX documents of en16931-3 to ODT
-3) In the command line from the root directory of the project call:<br/>"java -jar [src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <directory> or <specification.odt>"
+3) In the command line from the root directory of the project call:<br/>"java -jar [src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar](src/site/en16931-data-extractor-1.0.0-SNAPSHOT-jar-with-dependencies.jar) <specification.odt> or directory"
 4) The output XML will be aside of the input documents.
 
 ## Usage for Software Developer
