@@ -65,7 +65,7 @@ public final class ResourceUtilities {
         try {
             URL url = ResourceUtilities.class.getClassLoader().getResource(relativeFilePath);
             if(url != null){
-                url.toURI();
+                uri = url.toURI();
             }
         } catch (URISyntaxException ex) {
             Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);

@@ -24,10 +24,14 @@ import org.junit.Test;
 
 public class ExtractionTest {
 
-    private static final String odtFileName = "16931-3-3_example.odt";
+    /* Might be a specification document as ODF or
+         a directory containg several ODT specification documents,
+        either relative to workign directory "en16831-3-reader" or
+        to classpath "target/test-classes" */
+    private static final String odtResource = "16931-3-3_example.odt";
 
     @Test
     public void collectSpecData() throws Exception {
-        new OdtTableExtraction().collectSpecData(odtFileName);
+        new OdtTableExtraction().collectSpecData(odtResource);
     }
 }

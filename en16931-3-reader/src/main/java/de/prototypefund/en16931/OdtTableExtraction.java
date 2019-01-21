@@ -78,18 +78,19 @@ public class OdtTableExtraction {
 
     /** @param odtFileName the file name of the specification or a directory where specifications are any descendant documents! */
     public void collectSpecData(String odtFileName) throws Exception {
-        System.out.println("odtFileName" + odtFileName);
         String absPath = null;
         try{
             absPath = ResourceUtilities.getAbsolutePath(odtFileName);
         }catch(FileNotFoundException e){
-            // expected if file is not in Java class path
+            // expected if file is not in Java classpath
         }
-        System.out.println("absPath1" + absPath);
         if(absPath == null){
             absPath = System.getProperty(WORKING_DIRECTORY);
+            if(!absPath.endsWith(File.separator)){
+                absPath += File.separator;
+            }
+            absPath += odtFileName;
         }
-        System.out.println("absPath2" + absPath);
         collectSpecData(new File(absPath));
     }
 

@@ -93,7 +93,6 @@ public class JarManifest {
             System.out.println(getProjectTitle() + " (build " + getProjectBuildDate() + ')' + "\nfrom " + getProjectWebsite());
         }else if(args.length == 1){
             try {
-                System.out.println("args[0]" + args[0]);
                 new OdtTableExtraction().collectSpecData(args[0]);
             } catch (Exception ex) {
                 Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
