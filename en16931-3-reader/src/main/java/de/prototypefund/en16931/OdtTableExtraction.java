@@ -26,6 +26,7 @@ import de.prototypefund.en16931.XmlNode.XmlHeading;
 import de.prototypefund.utils.ResourceUtilities;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -72,16 +73,50 @@ public class OdtTableExtraction {
     private String mTableId = null;
     private int NORMATIVE_TABLE_SIZE = 11;
     private int INFORMATIVE_TABLE_SIZE = 8;
+    private static final String ODT_SUFFIX = ".odt";
+    private static final String WORKING_DIRECTORY = "user.dir";
 
-
-
-    /** @param odtFileName the truncated name of the specification without the ".odt" suffix! */
+    /** @param odtFileName the file name of the specification or a directory where specifications are any descendant documents! */
     public void collectSpecData(String odtFileName) throws Exception {
-        collectSpecData(new File(ResourceUtilities.getAbsolutePath(odtFileName + ".odt")));
+        System.out.println("odtFileName" + odtFileName);
+        String absPath = null;
+        try{
+            absPath = ResourceUtilities.getAbsolutePath(odtFileName);
+        }catch(FileNotFoundException e){
+            // expected if file is not in Java class path
+        }
+        System.out.println("absPath1" + absPath);
+        if(absPath == null){
+            absPath = System.getProperty(WORKING_DIRECTORY);
+        }
+        System.out.println("absPath2" + absPath);
+        collectSpecData(new File(absPath));
     }
 
+
+    /** If file is a directory searches within children and provides all found documents that have an '.odt' suffix to the data extractor. */
+    private void collectSpecData(File f) throws Exception{
+        if(f.isDirectory()){
+            String absPath = f.getAbsolutePath();
+            LOG.info("Extracting data from directory: " + absPath);
+            for(String childPath : f.list()){
+                collectSpecData(new File(absPath + File.separatorChar + childPath));
+            }
+        }else{
+            String absPath = f.getAbsolutePath();
+            if(absPath.endsWith(ODT_SUFFIX)){
+                LOG.info("Extracting data from file: " + absPath);
+                extractData(f);
+            }else{
+                LOG.info("As without file suffix '.odt' ignoring: " + absPath);
+            }
+        }
+    }
+
+
+
     /** @param odtFile <code>File</code> representing the en16931 specification  */
-    public void collectSpecData(File odtFile) throws Exception {
+    private void extractData(File odtFile) throws Exception {
         odtDoc = OdfTextDocument.loadDocument(odtFile);
         String absPath = odtFile.getAbsolutePath();
         String odtFileName = absPath.substring(absPath.lastIndexOf(File.separatorChar) + 1);

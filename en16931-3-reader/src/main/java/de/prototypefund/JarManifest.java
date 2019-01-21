@@ -16,7 +16,6 @@
 package de.prototypefund;
 
 import de.prototypefund.en16931.OdtTableExtraction;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -35,7 +34,6 @@ public class JarManifest {
 
     private static final String CURRENT_CLASS_RESOURCE_PATH = "de/prototypefund/JarManifest.class";
     private static final String INNER_JAR_MANIFEST_PATH = "META-INF/MANIFEST.MF";
-    private static final String ODT_SUFFIX = ".odt";
     private static String PROJECT_NAME;
     private static String PROJECT_VERSION;
     private static String PROJECT_WEBSITE;
@@ -90,44 +88,27 @@ public class JarManifest {
 	 * Allowing version access from the JAR without the need to unzip the JAR nor naming the JAR
 	 * (requiring the change of classpath for every version due to JAR naming change).
 	 */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         if(args == null || args.length == 0){
             System.out.println(getProjectTitle() + " (build " + getProjectBuildDate() + ')' + "\nfrom " + getProjectWebsite());
         }else if(args.length == 1){
-            traverseFiles(new File(args[0]));
+            try {
+                System.out.println("args[0]" + args[0]);
+                new OdtTableExtraction().collectSpecData(args[0]);
+            } catch (Exception ex) {
+                Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else {
             for(String path : args){
-                traverseFiles(new File(path));
+                try {
+                    new OdtTableExtraction().collectSpecData(path);
+                } catch (Exception ex) {
+                    Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
 
-    /** If file is a directory searches within children and provides all found documents with '.odt' suffix to the data extractor. */
-    private static void traverseFiles(File f){
-        if(f.isDirectory()){
-            String absPath = f.getAbsolutePath();
-            System.out.println("Extracting data from directory: " + absPath);
-            for(String childPath : f.list()){
-                traverseFiles(new File(absPath + File.separatorChar + childPath));
-            }
-        }else{
-            String absPath = f.getAbsolutePath();
-            if(absPath.endsWith(ODT_SUFFIX)){
-                System.out.println("Extracting data from file: " + absPath);
-                extractData(f);
-            }else{
-                System.out.println("As without file suffix '.odt' ignoring: " + absPath);
-            }
-        }
-    }
-
-    private static void extractData(File f){
-        try {
-            new OdtTableExtraction().collectSpecData(f);
-        } catch (Exception ex) {
-            Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     /**
      * Return the project name

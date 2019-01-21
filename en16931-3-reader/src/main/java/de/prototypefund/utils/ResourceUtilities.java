@@ -34,6 +34,7 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,10 @@ public final class ResourceUtilities {
     public static String getAbsolutePath(String relativeFilePath) throws FileNotFoundException {
         URI uri = null;
         try {
-            uri = ResourceUtilities.class.getClassLoader().getResource(relativeFilePath).toURI();
+            URL url = ResourceUtilities.class.getClassLoader().getResource(relativeFilePath);
+            if(url != null){
+                url.toURI();
+            }
         } catch (URISyntaxException ex) {
             Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
         }
