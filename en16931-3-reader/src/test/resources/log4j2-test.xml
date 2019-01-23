@@ -9,17 +9,22 @@
         	<!-- 
         		INFO  | [main] en16931.ExtractionTest (ExtractionTest.java:85) - SPECIFICATION DOCUMENT: '16931-3-3_changesAccepted-NUR AB TABELLEN'
             <PatternLayout pattern="%-5p | [%t] %C{2} (%F:%L) - %m%n"/>
-            <PatternLayout pattern="%-5p | %C{2} - %m"/>-->
-            <PatternLayout pattern="%-5p | %C{2} - %m"/>
+            <PatternLayout pattern="%-5p | %C{2} - %m"/ charset="UTF-8">-->
+            <PatternLayout pattern="%-5p | %C{2} - %m" charset="UTF-8"/>
         </Console>
+
+        <File name="FILE" fileName="target/test.log">
+            <PatternLayout pattern="%-5p | %C{2} - %m" charset="UTF-8"/>
+        </File>                  
     </Appenders>
 
     <Loggers>
         <Logger name="de.prototypefund" level="info"/>
 
+       
         <Root level="info">
             <AppenderRef ref="STDOUT"/>
-            <!--<AppenderRef ref="FILE"/>-->
+            <AppenderRef ref="FILE"/>
         </Root>
     </Loggers>
 

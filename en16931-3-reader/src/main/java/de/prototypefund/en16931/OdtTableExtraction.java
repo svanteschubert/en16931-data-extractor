@@ -122,7 +122,7 @@ public class OdtTableExtraction {
         String absPath = odtFile.getAbsolutePath();
         String odtFileName = absPath.substring(absPath.lastIndexOf(File.separatorChar) + 1);
         String odtFilePath = absPath.substring(0, absPath.lastIndexOf(File.separatorChar) + 1);
-        LOG.info("\n*** Specification document: '" + odtFileName + "'\n\n\n");;
+        LOG.info("\n\n\n\n*** Specification document: '" + odtFileName + "'\n\n\n");;
         // traverse top level user objects
         OfficeTextElement root = odtDoc.getContentRoot();
         NodeList topChildren = root.getChildNodes();
