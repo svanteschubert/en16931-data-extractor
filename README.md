@@ -11,7 +11,7 @@ Some reasons behind from a bird perspective:
 2. graph: UBL XML W3C XML grammar (describes all allowed XML files of UBL) 
 3. graph: UN/CEFACT W3C XML grammar (describes all allowed XML files of UN/CEFACT)
 The syntax bindings - this tool is extracting - are contecting "graph 2" with "graph 1" and "graph 2" with "graph 3".
-In addition, aside of the grammar there are more restrictions upon the XML that W3C Schema is not able to express ([given by by ISO Schematron constraints](https://github.com/CenPC434/validation)), for instance an order date has to be earlier than the pay date.
+In addition, aside of the grammar there are more restrictions upon the XML that W3C Schema is not able to express ([given by ISO Schematron constraints](https://github.com/CenPC434/validation)), for instance an order date has to be earlier than the pay date.
 These schematron restrictions can be seen as additional relations upon the XML grammar graphs (graph 2 & graph 3). 
 It is planned to map those XML constraints later to the "Semantic Data model" level (graph 1). By this it could be validated if there are constraints only for UBL or UN/CEFACT and missing for the other XML.
 Also the same restrictions on the semantic graph might be reused for other older e-invoice formats to be mapped to the Semantic Data Model, in other words the validation artefacts could be easier reused.
