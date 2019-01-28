@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 The Apache Software Foundation.
+ * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@ package de.prototypefund.en16931.type;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -40,10 +42,12 @@ public enum MisMatchStructural implements MisMatch {
         }
     }
 
-    public static MisMatchStructural getByValue(String value) {
+    public static MisMatchStructural getByValue(String value, String semanticID) {
+        updateStatistic(value);
         MisMatchStructural s = mMatchMap.get(value);
+
         if (s == null) {
-            LoggerFactory.getLogger(MisMatchSemantic.class.getName()).error("There is no structural mismatch for '" + value + "'!\n");
+            LoggerFactory.getLogger(MisMatchSemantic.class.getName()).error("There is no structural mismatch for '" + value + "' used in Semantic object with ID '" + semanticID + "'!\n");
         }
         return s;
     }
@@ -60,5 +64,24 @@ public enum MisMatchStructural implements MisMatch {
 
     MisMatchStructural(String match) {
         this.mMatch = match;
+    }
+
+    private static SortedMap<String, Integer> statistic = null;
+
+    static private void updateStatistic(String value){
+        if(statistic == null){
+           statistic = new TreeMap<String, Integer>();
+        }
+        Integer occurances = statistic.get(value);
+        if(occurances == null){
+            occurances = 1;
+        }else{
+            occurances += 1;
+        }
+        statistic.put(value, occurances);
+    }
+
+    static SortedMap<String, Integer> getStatistic(){
+        return statistic;
     }
 }

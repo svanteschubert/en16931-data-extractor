@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2018 The Apache Software Foundation.
+ * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public class NodeXml extends NodeSyntax {
     }
 
     public void setType(String type) {
-        mType = Type.getByValue(type.replaceAll(LEADING_TRAILING_WHITESPACES, ""));
+        mType = Type.getByValue(type.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
     }
 
     public String getCardinality() {
@@ -53,7 +53,7 @@ public class NodeXml extends NodeSyntax {
     }
 
     public void setCardinalityXml(String cardinality) {
-        mCardinality = CardinalityXML.getByValue(cardinality.replaceAll(LEADING_TRAILING_WHITESPACES, ""));
+        mCardinality = CardinalityXML.getByValue(cardinality.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
     }
 
     protected StringBuilder addSpecificString(StringBuilder syntax) {

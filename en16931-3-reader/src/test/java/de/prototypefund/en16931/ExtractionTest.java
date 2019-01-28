@@ -20,6 +20,7 @@
  *********************************************************************** */
 package de.prototypefund.en16931;
 
+import de.prototypefund.en16931.type.Statistics;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +36,7 @@ public class ExtractionTest {
     public void collectSpecData() throws Exception {
         try {
             new OdtTableExtraction().collectSpecData(odtResource);
+            Statistics.log();
         } catch (Throwable t) {
             LoggerFactory.getLogger(ExtractionTest.class.getName()).error(t.getMessage(), t);
         }

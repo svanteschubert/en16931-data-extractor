@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 The Apache Software Foundation.
+ * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,25 +31,25 @@ public interface MisMatch {
     /**
      * Creates a single mismatch from its EN16931 value, e.g. "STR-1"
      */
-    public static MisMatch createMisMatch(String match) {
+    public static MisMatch createMisMatch(String match, String semanticID) {
         MisMatch misMatch = null;
         if (match != null && !match.isEmpty()) {
             String ID = match.substring(0, 3);
             switch (ID) {
                 case "CAR":
-                    misMatch = MisMatchCardinality.getByValue(match);
+                    misMatch = MisMatchCardinality.getByValue(match, semanticID);
                     break;
                 case "SEM":
-                    misMatch = MisMatchSemantic.getByValue(match);
+                    misMatch = MisMatchSemantic.getByValue(match, semanticID);
                     break;
                 case "STR":
-                    misMatch = MisMatchStructural.getByValue(match);
+                    misMatch = MisMatchStructural.getByValue(match, semanticID);
                     break;
                 case "SYN":
-                    misMatch = MisMatchDatatype.getByValue(match);
+                    misMatch = MisMatchDatatype.getByValue(match, semanticID);
                     break;
                 default:
-                    LoggerFactory.getLogger(MisMatch.class.getName()).error("There is no mismatch for '" + match + "'!\n");
+                    LoggerFactory.getLogger(MisMatch.class.getName()).error("There is no mismatch for '" + match + "' used in Semantic object with ID '" + semanticID + "'!\n");
             }
         }
         return misMatch;

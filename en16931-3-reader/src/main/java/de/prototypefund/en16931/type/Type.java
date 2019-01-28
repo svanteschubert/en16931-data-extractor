@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 The Apache Software Foundation.
+ * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,9 @@ package de.prototypefund.en16931.type;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -47,8 +50,14 @@ public enum Type {
         }
     }
 
-    public static Type getByValue(String value) {
-        return mTypeMap.get(value);
+    public static Type getByValue(String value, String semanticID) {
+        updateStatistic(value);
+        Type t = mTypeMap.get(value);
+
+        if (t == null) {
+            LoggerFactory.getLogger(Type.class.getName()).error("There is no type for '" + value + "' used in Semantic object with ID '" + semanticID + "'!\n");
+        }
+        return t;
     }
 
     private final String mType;
@@ -63,4 +72,24 @@ public enum Type {
     Type(String type) {
         this.mType = type;
     }
+
+    private static SortedMap<String, Integer> statistic = null;
+
+    static private void updateStatistic(String value){
+        if(statistic == null){
+           statistic = new TreeMap<String, Integer>();
+        }
+        Integer occurances = statistic.get(value);
+        if(occurances == null){
+            occurances = 1;
+        }else{
+            occurances += 1;
+        }
+        statistic.put(value, occurances);
+    }
+
+    static SortedMap<String, Integer> getStatistic(){
+        return statistic;
+    }
 }
+

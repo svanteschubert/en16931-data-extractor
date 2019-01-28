@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 The Apache Software Foundation.
+ * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,7 @@ public class NodeSemantic {
     private DataType mDataType = null;
     private String mDescription = null;
     private String mTableId = null;
+    private static final String mERROR_ID = "ID ALREADY TAKEN";
     Boolean mWARNING_FixAlreadyTaken = Boolean.FALSE;
     Boolean mWARNING_FixUnavailable = Boolean.FALSE;
 
@@ -71,10 +72,10 @@ public class NodeSemantic {
                 } else {
                     LOG.error("ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
                 }
-                if(id.contains("–")){
+                if (id.contains("–")) {
                     LOG.error("ERROR: ID of Semantic object was using a different hyphen '" + id + "'!\n");
-                    LOG.error("Now showing ID with correct hyphen as '*' and incorrect as '#': '" + id.replace("-", "*").replace("–", "#") + "'!\n\n");
-                    id = id.replace("–", "-"); // fixing hyphen problem so all ID are similar
+                    LOG.error("Now showing the ID, where the unicode character hyphen-minus is shown as '*' and the control-character 'START OF GUARDED AREA' shown as '+': '" + id.replace("-", "*").replace("–", "+") + "'!\n\n");
+                    id = id.replace("–", "-"); // fixing hyphen problem so all ID have similar structure
                 }
             } else {
                 LOG.error("ID of semantic object may not be empty!");
@@ -100,19 +101,20 @@ public class NodeSemantic {
                         LOG.error("\nERROR: Fix: '" + fix + "', already taken for semantic id '" + id + "'\n");
                         id = SpecificationFixes.getAlternativeID(id);
                         allSemanticNodes.put(id, this);
+                        mID = mERROR_ID;
                     }
                 } else {
                     SpecificationFixes.hasError = Boolean.TRUE;
                     mWARNING_FixUnavailable = Boolean.TRUE;
-                    LOG.info(" WARNING: *** Duplicated SemanticNode ID: " +s.getId() + "\n");
+                    LOG.info(" WARNING: *** Duplicated SemanticNode ID: " + s.getId() + "\n");
                     LOG.info("       within table: '" + mTableId + "'\n");
                     LOG.info("       with business Term: '" + s.getBusinessTerm() + "'\n");
-                    if(s.mDescription != null){
+                    if (s.mDescription != null) {
                         LOG.info("       with description: '" + s.mDescription + "'\n");
                     }
                     for (NodeSyntax x : s.syntaxRepresentations) {
                         LOG.info("             Syntax child: '" + x.getPath() + "'\n");
-                        if(x.getRules() != null){
+                        if (x.getRules() != null) {
                             LOG.info("             Rules: '" + x.getRules() + "'\n");
                         }
                         LOG.info(" NOTE: To avoid warning, add an exception to SpecificationFixes class!\n\n");
@@ -140,9 +142,9 @@ public class NodeSemantic {
     private void testID(String id) {
         String numberCandidate = id.substring(BUSINESS_TERM_PREFIX.length(), id.length());
         numberCandidate = numberCandidate.replace("-", "1").replace("–", "2"); // 16931-3-4 uses two different hyphen in its ID "BT-18–1"
-        try{
+        try {
             Integer.parseInt(numberCandidate);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             LOG.error("Semantic ID is not as as usual. Expected is a 'BT-' or 'BG-' with numbers and further '-', but the ID was '" + id + "'!");
         }
     }
@@ -174,7 +176,7 @@ public class NodeSemantic {
     }
 
     public void setCardinality(String c) {
-        mCardinality = CardinalityXML.getByValue(c);
+        mCardinality = CardinalityXML.getByValue(c, this.mID);
     }
 
     public CardinalityXML getCardinality() {
@@ -182,7 +184,7 @@ public class NodeSemantic {
     }
 
     public void setDataType(String dt) {
-        mDataType = DataType.getByValue(dt);
+        mDataType = DataType.getByValue(dt, this.mID);
     }
 
     public DataType getDataType() {
@@ -352,8 +354,6 @@ public class NodeSemantic {
         }
         LOG.error("\n\nThere are " + duplicates.size() + " duplications of syntax within semantic nodes!\n" + sb.toString());
     }
-
-
 
 //    Set<List<SemanticNode>> findDuplicates() {
 //        Set<List<SemanticNode>> duplicates = new HashSet<>();

@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2018 The Apache Software Foundation.
+ * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,13 +138,13 @@ public abstract class NodeSyntax {
                     mMisMatches = new MisMatch[count];
                 }
                 for (int i = 0; st.hasMoreElements(); i++) {
-                    mMisMatches[i] = MisMatch.createMisMatch(st.nextToken().replaceAll(LEADING_TRAILING_WHITESPACES, ""));
+                    mMisMatches[i] = MisMatch.createMisMatch(st.nextToken().replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
                 }
             } else {
                 if (mMisMatches == null) {
                     mMisMatches = new MisMatch[1];
                 }
-                mMisMatches[0] = MisMatch.createMisMatch(match.replaceAll(LEADING_TRAILING_WHITESPACES, ""));
+                mMisMatches[0] = MisMatch.createMisMatch(match.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
             }
         } catch (Throwable e) {
             LoggerFactory.getLogger(NodeSyntax.class.getName()).error(e.getMessage(), e);

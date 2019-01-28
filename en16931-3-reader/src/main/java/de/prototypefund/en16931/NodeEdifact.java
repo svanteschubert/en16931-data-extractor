@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2018 The Apache Software Foundation.
+ * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public class NodeEdifact extends NodeSyntax {
     }
 
     public void setCardinalityEdifact(String cardinality) {
-        mCardinality = CardinalityEdifact.getByValue(cardinality.replaceAll(LEADING_TRAILING_WHITESPACES, ""));
+        mCardinality = CardinalityEdifact.getByValue(cardinality.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
     }
 
     protected StringBuilder addSpecificString(StringBuilder syntax) {
