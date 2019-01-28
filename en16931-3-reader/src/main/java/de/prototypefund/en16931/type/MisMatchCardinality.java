@@ -46,7 +46,7 @@ public enum MisMatchCardinality implements MisMatch {
         updateStatistic(value);
         MisMatchCardinality c = mMatchMap.get(value);
         if (c == null) {
-            LoggerFactory.getLogger(MisMatchCardinality.class.getName()).error("There is no cardinality mismatch for '" + value + "' used in Semantic object with ID '" + semanticID + "'!\n");
+            LoggerFactory.getLogger(MisMatchCardinality.class.getName()).error("There is no cardinality mismatch for '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return c;
     }

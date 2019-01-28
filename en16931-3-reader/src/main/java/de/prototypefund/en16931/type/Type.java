@@ -55,7 +55,7 @@ public enum Type {
         Type t = mTypeMap.get(value);
 
         if (t == null) {
-            LoggerFactory.getLogger(Type.class.getName()).error("There is no type for '" + value + "' used in Semantic object with ID '" + semanticID + "'!\n");
+            LoggerFactory.getLogger(Type.class.getName()).error("It do not exist a  XML-related type of '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return t;
     }

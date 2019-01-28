@@ -44,7 +44,7 @@ public enum MisMatchDatatype implements MisMatch {
         updateStatistic(value);
         MisMatchDatatype d = mMatchMap.get(value);
         if (d == null) {
-            LoggerFactory.getLogger(MisMatchDatatype.class.getName()).error("There is no datatype mismatch for '" + value + "' used in Semantic object with ID '" + semanticID + "'!\n");
+            LoggerFactory.getLogger(MisMatchDatatype.class.getName()).error("There is no datatype mismatch for '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return d;
     }

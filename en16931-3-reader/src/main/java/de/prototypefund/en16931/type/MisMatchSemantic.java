@@ -45,7 +45,7 @@ public enum MisMatchSemantic implements MisMatch {
         updateStatistic(value);
         MisMatchSemantic s = mMatchMap.get(value);
         if (s == null) {
-            LoggerFactory.getLogger(MisMatchSemantic.class.getName()).error("There is no semantic mismatch for '" + value + "' used in Semantic object with ID '" + semanticID + "'!\n");
+            LoggerFactory.getLogger(MisMatchSemantic.class.getName()).error("There is no semantic mismatch for '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return s;
     }

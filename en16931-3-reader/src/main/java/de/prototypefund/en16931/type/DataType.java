@@ -69,7 +69,7 @@ public enum DataType {
         updateStatistic(value);
         DataType d = mTypeMap.get(value);
         if (d == null) {
-            LoggerFactory.getLogger(DataType.class.getName()).error("There is no data type for '" + value + "' used in Semantic object with ID '" + semanticID + "'!\n");
+           LoggerFactory.getLogger(Type.class.getName()).error("A data type being abbreviated '" + value + "' does not exist! Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return d;
     }

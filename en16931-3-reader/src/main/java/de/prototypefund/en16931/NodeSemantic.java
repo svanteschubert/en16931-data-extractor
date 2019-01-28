@@ -83,18 +83,21 @@ public class NodeSemantic {
             if (allSemanticNodes == null) {
                 allSemanticNodes = new TreeMap<>();
             }
+            // new semantic ID
             if (!allSemanticNodes.containsKey(id)) {
                 allSemanticNodes.put(id, this);
                 mID = id;
-            } else {
-                NodeSemantic s = allSemanticNodes.get(id);
+            } else { // duplicate sematic ID
                 Map<String, String> fixes = mAllFixes.get(mTableId);
                 if (fixes != null && fixes.containsKey(id)) {
+                    // found a fix for duplicate sematic ID
                     String fix = fixes.get(id);
-                    if (allSemanticNodes.containsKey(fix)) {
+                    // check if fix was already applied
+                    if (!allSemanticNodes.containsKey(fix)) {
                         allSemanticNodes.put(fix, this);
                         mID = fix;
                     } else {
+                        // fix was aleady applied
                         SpecificationFixes.hasError = Boolean.TRUE;
                         mWARNING_FixAlreadyTaken = Boolean.TRUE;
 
@@ -104,6 +107,7 @@ public class NodeSemantic {
                         mID = mERROR_ID;
                     }
                 } else {
+                    NodeSemantic s = allSemanticNodes.get(id);
                     SpecificationFixes.hasError = Boolean.TRUE;
                     mWARNING_FixUnavailable = Boolean.TRUE;
                     LOG.info(" WARNING: *** Duplicated SemanticNode ID: " + s.getId() + "\n");

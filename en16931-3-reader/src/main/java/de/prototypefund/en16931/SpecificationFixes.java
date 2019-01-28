@@ -101,10 +101,17 @@ class SpecificationFixes {
     static private void duplicatedIdErrors(NodeSemantic s) {
         //
         if (s.mWARNING_FixUnavailable || s.mWARNING_FixAlreadyTaken) {
-            LOG.info("WARNING: Duplicated SemanticNode ID: '" + s.getId() + "'\n");
-            LOG.info("       Semantic Node ID: '" + s.getId() + "'\n");
-            LOG.info("       Business Term: '" + s.getBusinessTerm() + "'\n\n");
-
+            String id = s.getId();
+            String bt = s.getBusinessTerm();
+            if (bt != null || id != null) {
+                LOG.info("WARNING: Duplicated SemanticNode ID:\n");
+                if (id != null) {
+                    LOG.info("       Semantic Node ID: '" + id + "'\n");
+                }
+                if (bt != null) {
+                    LOG.info("       Business Term: '" + bt + "'\n\n");
+                }
+            }
         }
     }
 
