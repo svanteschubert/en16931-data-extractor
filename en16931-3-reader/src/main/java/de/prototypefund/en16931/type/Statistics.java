@@ -42,9 +42,9 @@ public class Statistics {
 
    /** Logs for each data type its occurrences and resets the counter.
     Usually being called after parsing a table. */
-    static public void table() {
+    static public void table(String tableTitle) {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\n\n\n**** TABLE DATATYPE USAGE STATISTIC:\n");
+        sb.append("\n\n**** TABLE DATATYPE USAGE STATISTIC: ").append(tableTitle).append("\n");
         sb.append("----------------------------------------------------\n");
 
         SortedMap<String, Integer> m = DataType.getStatistic();
@@ -104,7 +104,7 @@ public class Statistics {
         }
 
         sb.append("----------------------------------------------------\n");
-        sb.append("****");
+        sb.append("****\n\n\n");
         LOG.info(sb.toString());
     }
 

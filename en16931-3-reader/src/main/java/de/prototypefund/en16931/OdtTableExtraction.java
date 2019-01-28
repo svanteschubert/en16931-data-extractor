@@ -172,7 +172,7 @@ public class OdtTableExtraction {
     }
 
     private void extractDataFromTable(TableTableElement tableElement, String fileName, String outputPath, String title) {
-        LOG.info("\n\nTable Heading: '" + title + "'\n");
+        LOG.debug("\n\nTable Heading: '" + title + "'\n");
         mTableId = title;
         OdfTable table = OdfTable.getInstance(tableElement);
 
@@ -186,10 +186,10 @@ public class OdtTableExtraction {
                 </table:table-cell>
          */
         int columnCount = table.getColumnCount();
-        LOG.info("ColumnCount is '" + columnCount + "'!\n");
+        LOG.debug("ColumnCount is '" + columnCount + "'!\n");
 
         if (table.getHeaderRowCount() != 1) {
-            LOG.info("Ignoring '" + title + "' as no header row was found!\n");
+            LOG.debug("Ignoring '" + title + "' as no header row was found!\n");
 
         } else if (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) {
             mIsXML = (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE);
@@ -201,6 +201,7 @@ public class OdtTableExtraction {
                     || ((columnCount == INFORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) && getCellContent(tc).equals(SYNTAX_TABLE_HEADINGS[0].getLabel())))) {
                 LOG.error("WRONG TABLE: '" + mTableId + "' + IS NOT A TABLE FOR DATA EXTRACTION!");
             } else {
+                LOG.info("\n\nTable Heading: '" + title + "'\n");
                 //*********
                 // CONTENT ROWS
                 //*********
@@ -333,7 +334,7 @@ public class OdtTableExtraction {
                 }
                 // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
-                Statistics.table();
+                Statistics.table(title);
                 clearAll();
             }
         }
