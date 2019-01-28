@@ -29,10 +29,7 @@ public class ExtractionTest {
          a directory containg several ODT specification documents,
         either relative to workign directory "en16831-3-reader" or
         to classpath "target/test-classes" */
-//    private static final String odtResource = "16931-3-3_example.odt";
-//    private static final String odtResource = "_corrigenda";
-    private static final String odtResource = "_16931-3-2";
-//    private static final String odtResource = "CEN_TS_16931-3-4_en.odt";
+    private static final String odtResource = "16931-3-3_example.odt";
 
     @Test
     public void collectSpecData() throws Exception {
