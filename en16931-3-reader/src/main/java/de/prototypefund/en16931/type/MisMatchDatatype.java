@@ -81,5 +81,11 @@ public enum MisMatchDatatype implements MisMatch {
     static SortedMap<String, Integer> getStatistic(){
         return statistic;
     }
+
+    static void clearStatistic(){
+        if(statistic != null){
+            statistic.clear();;
+        }
+    }
 }
 

@@ -91,5 +91,11 @@ public enum Type {
     static SortedMap<String, Integer> getStatistic(){
         return statistic;
     }
+
+    static void clearStatistic(){
+        if(statistic != null){
+            statistic.clear();;
+        }
+    }
 }
 

@@ -201,7 +201,7 @@ public class OdtTableExtraction {
                     || ((columnCount == INFORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) && getCellContent(tc).equals(SYNTAX_TABLE_HEADINGS[0].getLabel())))) {
                 LOG.error("WRONG TABLE: '" + mTableId + "' + IS NOT A TABLE FOR DATA EXTRACTION!");
             } else {
-                LOG.info("\n\nTable Heading: '" + title + "'\n");
+                LOG.info("\n\nTable Heading: '" + title + "'\n\n");
                 //*********
                 // CONTENT ROWS
                 //*********

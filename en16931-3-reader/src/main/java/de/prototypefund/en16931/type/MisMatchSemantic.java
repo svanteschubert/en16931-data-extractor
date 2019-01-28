@@ -82,4 +82,10 @@ public enum MisMatchSemantic implements MisMatch {
     static SortedMap<String, Integer> getStatistic(){
         return statistic;
     }
+
+    static void clearStatistic(){
+        if(statistic != null){
+            statistic.clear();;
+        }
+    }
 }

@@ -52,6 +52,7 @@ public class Statistics {
         if(m != null){
             mSemanticDataTypes.putAll(m);
             m.clear();
+            DataType.clearStatistic();
         }
 
         m = MisMatchCardinality.getStatistic();
@@ -59,6 +60,7 @@ public class Statistics {
         if(m != null){
             mMismatchCardinality.putAll(m);
             m.clear();
+            MisMatchCardinality.clearStatistic();
         }
 
         m = MisMatchDatatype.getStatistic();
@@ -66,6 +68,7 @@ public class Statistics {
         if(m != null){
             mMismatchDataTypes.putAll(m);
             m.clear();
+            MisMatchDatatype.clearStatistic();
         }
 
         m = MisMatchSemantic.getStatistic();
@@ -73,6 +76,7 @@ public class Statistics {
         if(m != null){
             mMismatchSemantic.putAll(m);
             m.clear();
+            MisMatchSemantic.clearStatistic();
         }
 
         m = MisMatchStructural.getStatistic();
@@ -80,6 +84,7 @@ public class Statistics {
         if(m != null){
             mMismatchStructural.putAll(m);
             m.clear();
+            MisMatchStructural.clearStatistic();
         }
 
         m = Type.getStatistic();
@@ -87,6 +92,7 @@ public class Statistics {
         if(m != null){
             mTypesOfXML.putAll(m);
             m.clear();
+            Type.clearStatistic();
         }
 
         m = CardinalityXML.getStatistic();
@@ -94,6 +100,7 @@ public class Statistics {
         if(m != null){
             mCardinalitesXML.putAll(m);
             m.clear();
+            CardinalityXML.clearStatistic();
         }
 
         m = CardinalityEdifact.getStatistic();
@@ -101,6 +108,7 @@ public class Statistics {
         if(m != null){
             mCardinalitesEDIFACT.putAll(m);
             m.clear();
+            CardinalityEdifact.clearStatistic();
         }
 
         sb.append("----------------------------------------------------\n");
