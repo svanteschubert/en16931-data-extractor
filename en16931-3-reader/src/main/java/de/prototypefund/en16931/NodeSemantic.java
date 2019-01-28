@@ -90,7 +90,7 @@ public class NodeSemantic {
                 Map<String, String> fixes = mAllFixes.get(mTableId);
                 if (fixes != null && fixes.containsKey(id)) {
                     String fix = fixes.get(id);
-                    if (!allSemanticNodes.containsKey(fix)) {
+                    if (allSemanticNodes.containsKey(fix)) {
                         allSemanticNodes.put(fix, this);
                         mID = fix;
                     } else {
