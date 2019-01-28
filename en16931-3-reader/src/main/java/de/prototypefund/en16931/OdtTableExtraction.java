@@ -158,7 +158,7 @@ public class OdtTableExtraction {
 
             } else if (child instanceof TableTableElement) {
                 if (hasPrecedingHeading || tableTitle != null && tableTitle.contains("Mapping")) {
-                    extractTableData(((TableTableElement) child), odtFileName, odtFilePath, tableTitle);
+                    extractDataFromTable(((TableTableElement) child), odtFileName, odtFilePath, tableTitle);
                 }
                 hasPrecedingHeading = Boolean.FALSE;
                 tableTitle = null;
@@ -171,7 +171,7 @@ public class OdtTableExtraction {
         }
     }
 
-    private void extractTableData(TableTableElement tableElement, String fileName, String outputPath, String title) {
+    private void extractDataFromTable(TableTableElement tableElement, String fileName, String outputPath, String title) {
         LOG.info("\n\nTable Heading: '" + title + "'\n");
         mTableId = title;
         OdfTable table = OdfTable.getInstance(tableElement);
@@ -333,7 +333,7 @@ public class OdtTableExtraction {
                 }
                 // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
-                Statistics.log();
+                Statistics.table();
                 clearAll();
             }
         }
