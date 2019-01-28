@@ -19,41 +19,48 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This enum defines the mismatch between of semantic. Exposing
- * discrepancies.
+ *
+ * This enum contains all possible types of the specification table
  */
-public enum DatatypeMisMatch implements MisMatch {
+public enum Type {
 
     /**
-     * Semantic MisMatches
+     * All Types * <code>
+     * — G = Aggregat
+     * — C = Verbund
+     * — E = Element
+     * — A = Attribut
+     * — S = Segment
+     * </code>
      */
-    DATATYPE_SMALLER("SYN-1"),
-    DATATYPE_WIDER("SYN-2"),
-    DATATYPE_NO_MATCH("SYN-3"),;
-    private static final Map<String, DatatypeMisMatch> mMatchMap = new HashMap<String, DatatypeMisMatch>();
+    AGGREGATE("G"),
+    COLLECTION("C"),
+    ELEMENT("E"),
+    ATTRIBUTE("A"),
+    SEGMENT("S");
+
+    private static final Map<String, Type> mTypeMap = new HashMap<String, Type>();
 
     static {
-        for (DatatypeMisMatch c : values()) {
-            mMatchMap.put(c.getValue(), c);
+        for (Type c : values()) {
+            mTypeMap.put(c.getValue(), c);
         }
     }
 
-    public static DatatypeMisMatch getByValue(String value) {
-        return mMatchMap.get(value);
+    public static Type getByValue(String value) {
+        return mTypeMap.get(value);
     }
 
-
-    private final String mMatch;
+    private final String mType;
 
     /**
-     * @return the match
+     * @return the xmlType
      */
-    @Override
     public String getValue() {
-        return mMatch;
+        return mType;
     }
 
-    DatatypeMisMatch(String match) {
-        this.mMatch = match;
+    Type(String type) {
+        this.mType = type;
     }
 }

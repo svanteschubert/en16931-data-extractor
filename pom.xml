@@ -68,8 +68,8 @@
     </dependencyManagement>
 
     <modules>
+        <module>odf-reader</module>    
         <module>en16931-3-reader</module>
-        <module>odf-reader</module>
     </modules>
 
     <name>Data Extractor for the European e-Invoice Specification (en16931)</name>

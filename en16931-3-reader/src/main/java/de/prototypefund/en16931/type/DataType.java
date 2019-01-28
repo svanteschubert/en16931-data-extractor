@@ -17,16 +17,17 @@ package de.prototypefund.en16931.type;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.LoggerFactory;
 
 /**
  *
- * This enum contains all possible data types of the semantic part of the table within the EN 16931 specification.
+ * This enum contains all possible data types of the semantic part of the table
+ * within the EN 16931 specification.
  */
 public enum DataType {
 
     /**
-     * Data Types
-     * <code>
+     * Data Types      <code>
      * — A = Betrag
      * — B = Binärobjekt
      * — C = Code
@@ -63,7 +64,11 @@ public enum DataType {
     }
 
     public static DataType getByValue(String value) {
-        return mTypeMap.get(value);
+        DataType d = mTypeMap.get(value);
+        if (d == null) {
+            LoggerFactory.getLogger(DataType.class.getName()).error("There is no data type for '" + value + "'!\n");
+        }
+        return d;
     }
 
     private final String mDataType;

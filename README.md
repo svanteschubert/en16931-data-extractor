@@ -58,6 +58,3 @@ After the JUnit tests there will be a test log file "target/test.log".
 5. The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
 6. Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example_informative.xml) and the ["normative SUBSET"](en16931-3-reader/src/site/16931-3-3_example_SUBSETnormative.xml) XML files. 
 ![In our example only the title is different between the two tables](en16931-3-reader/src/site/TotalCommanderComparison.png)
-
-## Possible Future Features
-1. Support of reading EDIFACT tables from 16931-3-4 using different column numbers.

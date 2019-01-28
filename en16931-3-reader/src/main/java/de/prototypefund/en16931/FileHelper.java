@@ -21,7 +21,7 @@
  *
  ***********************************************************************
  */
-package de.prototypefund.utils;
+package de.prototypefund.en16931;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -42,13 +42,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Test utility class providing resources for the test in- and output
+ * Internal helper class for loading and saving files.
  */
-public final class ResourceUtilities {
+final class FileHelper {
 
     private static final String PATH_FROM_OUTPUT_TO_INPUT = "../../src/test/resources/";
 
-    private ResourceUtilities() {
+    private FileHelper() {
     }
 
     /**
@@ -63,12 +63,12 @@ public final class ResourceUtilities {
     public static String getAbsolutePath(String relativeFilePath) throws FileNotFoundException {
         URI uri = null;
         try {
-            URL url = ResourceUtilities.class.getClassLoader().getResource(relativeFilePath);
+            URL url = FileHelper.class.getClassLoader().getResource(relativeFilePath);
             if(url != null){
                 uri = url.toURI();
             }
         } catch (URISyntaxException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (uri == null) {
             throw new FileNotFoundException("Could not find the file '" + relativeFilePath + "'!");
@@ -87,9 +87,9 @@ public final class ResourceUtilities {
      * relative path
      */
     public static URI getURI(String relativeFilePath) throws URISyntaxException {
-        String filePath = "file:" + ResourceUtilities.class.getClassLoader().getResource(relativeFilePath).getPath();
+        String filePath = "file:" + FileHelper.class.getClassLoader().getResource(relativeFilePath).getPath();
         return new URI(filePath);
-        //return ResourceUtilities.class.getClassLoader().getResource(relativeFilePath).toURI();
+        //return FileHelper.class.getClassLoader().getResource(relativeFilePath).toURI();
     }
 
     /**
@@ -114,7 +114,7 @@ public final class ResourceUtilities {
      * @return the absolute path of the test file
      */
     public static InputStream getTestResourceAsStream(String relativeFilePath) {
-        return ResourceUtilities.class.getClassLoader().getResourceAsStream(relativeFilePath);
+        return FileHelper.class.getClassLoader().getResourceAsStream(relativeFilePath);
     }
 
     /**
@@ -128,9 +128,9 @@ public final class ResourceUtilities {
     public static File newTestOutputFile(String relativeFilePath) {
         String filepath = null;
         try {
-            filepath = ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath() + relativeFilePath;
+            filepath = FileHelper.class.getClassLoader().getResource("").toURI().getPath() + relativeFilePath;
         } catch (URISyntaxException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new File(filepath);
     }
@@ -146,9 +146,9 @@ public final class ResourceUtilities {
     public static File getReferenceFile(String relativeFilePath) {
         String filepath = null;
         try {
-            filepath = ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath() + PATH_FROM_OUTPUT_TO_INPUT + relativeFilePath;
+            filepath = FileHelper.class.getClassLoader().getResource("").toURI().getPath() + PATH_FROM_OUTPUT_TO_INPUT + relativeFilePath;
         } catch (URISyntaxException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new File(filepath);
     }
@@ -160,9 +160,9 @@ public final class ResourceUtilities {
     public static String getTestOutputFolder() {
         String testFolder = null;
         try {
-            testFolder = ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath();
+            testFolder = FileHelper.class.getClassLoader().getResource("").toURI().getPath();
         } catch (URISyntaxException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return testFolder;
     }
@@ -173,9 +173,9 @@ public final class ResourceUtilities {
     public static File getTestReferenceFolder() {
         String filepath = null;
         try {
-            filepath = ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath() + PATH_FROM_OUTPUT_TO_INPUT;
+            filepath = FileHelper.class.getClassLoader().getResource("").toURI().getPath() + PATH_FROM_OUTPUT_TO_INPUT;
         } catch (URISyntaxException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new File(filepath);
     }
@@ -203,14 +203,14 @@ public final class ResourceUtilities {
             //out = new BufferedWriter(new FileWriter(file));
             out.write(inputData);
         } catch (IOException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (out != null) {
                     out.close();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return file.getAbsolutePath();
@@ -231,14 +231,14 @@ public final class ResourceUtilities {
             input.close();
             result = new String(fileData, "UTF-8");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 input.close();
             } catch (IOException ex) {
-                Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return result;
@@ -300,7 +300,7 @@ public final class ResourceUtilities {
     static final String EMPTY_AS_CAN_BE = "empty_as_can_be";
 //
 //    public static void main(String[] args) {
-//        normalizeFilesfromFolderToFolder(ResourceUtilities.getReferenceFile("regression-tests" + File.separatorChar + "2BeTransformed"), ResourceUtilities.getReferenceFile("regression-tests" + File.separatorChar + "2BeTransformed" + File.separatorChar + "Normalized"));
+//        normalizeFilesfromFolderToFolder(FileHelper.getReferenceFile("regression-tests" + File.separatorChar + "2BeTransformed"), FileHelper.getReferenceFile("regression-tests" + File.separatorChar + "2BeTransformed" + File.separatorChar + "Normalized"));
 //    }
 //
 //    public static void normalizeFilesfromFolderToFolder(final File sourceFolder, final File targetFolder) {
@@ -310,14 +310,14 @@ public final class ResourceUtilities {
 //                System.err.println("Opening Subdirectory: " + fileEntry.getName());
 //            } else if (fileEntry.getName().endsWith(".txt")) {
 //                System.err.println("Normalizing file: " + fileEntry.getName());
-//                jsonFileAsString = ResourceUtilities.loadFileAsString(fileEntry);
+//                jsonFileAsString = FileHelper.loadFileAsString(fileEntry);
 //                JSONObject jsonObject = null;
 //                try {
 //                    jsonObject = new JSONObject(new JSONTokener(jsonFileAsString));
-//                    ResourceUtilities.saveStringToFile(ResourceUtilities.newRefOutputFile(targetFolder, fileEntry.getName()), JsonOperationNormalizer.asString(jsonObject).replace(",{\"name\"", ",\n{\"name\""));
+//                    FileHelper.saveStringToFile(FileHelper.newRefOutputFile(targetFolder, fileEntry.getName()), JsonOperationNormalizer.asString(jsonObject).replace(",{\"name\"", ",\n{\"name\""));
 //                } catch (JSONException ex) {
 //                    System.err.println("Problem file: " + fileEntry.getName());
-//                    Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+//                    Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
 //                }
 //            }
 //        }

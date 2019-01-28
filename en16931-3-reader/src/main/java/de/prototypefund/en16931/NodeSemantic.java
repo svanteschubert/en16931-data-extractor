@@ -16,9 +16,8 @@
 package de.prototypefund.en16931;
 
 import static de.prototypefund.en16931.SpecificationFixes.mAllFixes;
-import de.prototypefund.en16931.type.Cardinality;
+import de.prototypefund.en16931.type.CardinalityXML;
 import de.prototypefund.en16931.type.DataType;
-import de.prototypefund.utils.ResourceUtilities;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -37,20 +36,20 @@ import org.slf4j.LoggerFactory;
  * Represents either a Business Group (BG) or Business Term (BT) from the
  * eInvoice EN16931 specification.
  */
-public class SemanticNode {
+public class NodeSemantic {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SemanticNode.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NodeSemantic.class);
     private static final String BUSINESS_GROUP_PREFIX = "BG-";
     private static final String BUSINESS_TERM_PREFIX = "BT-";
     private static final String ODT_SUFFIX = ".odt";
     static final String LEADING_TRAILING_WHITESPACES = "(^\\h*)|(\\h*$)";
     static final private String INVALID_FILE_CHARACTERS = "[\\\\/:*?\"<>|]";
     private Boolean isBusinessGroup = null;
-    static TreeMap<String, SemanticNode> allSemanticNodes = null;
-    List<XmlNode> xmlRepresentations = null;
+    static TreeMap<String, NodeSemantic> allSemanticNodes = null;
+    List<NodeSyntax> syntaxRepresentations = null;
     private String mID = null;
     private String mBusinessTerm = null;
-    private Cardinality mCardinality = null;
+    private CardinalityXML mCardinality = null;
     private Integer mLevel = null;
     private DataType mDataType = null;
     private String mDescription = null;
@@ -58,7 +57,7 @@ public class SemanticNode {
     Boolean mWARNING_FixAlreadyTaken = Boolean.FALSE;
     Boolean mWARNING_FixUnavailable = Boolean.FALSE;
 
-    public SemanticNode(String id, String tableId) {
+    public NodeSemantic(String id, String tableId) {
         try {
             mTableId = tableId;
             // check if ID is empty
@@ -72,6 +71,11 @@ public class SemanticNode {
                 } else {
                     LOG.error("ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
                 }
+                if(id.contains("–")){
+                    LOG.error("ERROR: ID of Semantic object was using a different hyphen '" + id + "'!\n");
+                    LOG.error("Now showing ID with correct hyphen as '*' and incorrect as '#': '" + id.replace("-", "*").replace("–", "#") + "'!\n\n");
+                    id = id.replace("–", "-"); // fixing hyphen problem so all ID are similar
+                }
             } else {
                 LOG.error("ID of semantic object may not be empty!");
             }
@@ -82,7 +86,7 @@ public class SemanticNode {
                 allSemanticNodes.put(id, this);
                 mID = id;
             } else {
-                SemanticNode s = allSemanticNodes.get(id);
+                NodeSemantic s = allSemanticNodes.get(id);
                 Map<String, String> fixes = mAllFixes.get(mTableId);
                 if (fixes != null && fixes.containsKey(id)) {
                     String fix = fixes.get(id);
@@ -103,10 +107,14 @@ public class SemanticNode {
                     LOG.info(" WARNING: *** Duplicated SemanticNode ID: " +s.getId() + "\n");
                     LOG.info("       within table: '" + mTableId + "'\n");
                     LOG.info("       with business Term: '" + s.getBusinessTerm() + "'\n");
-                    LOG.info("       with description: '" + s.mDescription + "'\n");
-                    for (XmlNode x : s.xmlRepresentations) {
-                        LOG.info("             XML child: '" + x.getXPath() + "'\n");
-                        LOG.info("             Rules: '" + x.getRules() + "'\n");
+                    if(s.mDescription != null){
+                        LOG.info("       with description: '" + s.mDescription + "'\n");
+                    }
+                    for (NodeSyntax x : s.syntaxRepresentations) {
+                        LOG.info("             Syntax child: '" + x.getPath() + "'\n");
+                        if(x.getRules() != null){
+                            LOG.info("             Rules: '" + x.getRules() + "'\n");
+                        }
                         LOG.info(" NOTE: To avoid warning, add an exception to SpecificationFixes class!\n\n");
                     }
 
@@ -120,18 +128,18 @@ public class SemanticNode {
                 PrintStream out2 = new PrintStream(out1);
                 t.printStackTrace(out2);
                 String message = out1.toString("UTF8");
-                LoggerFactory.getLogger(SemanticNode.class.getName()).error(message, t);
+                LoggerFactory.getLogger(NodeSemantic.class.getName()).error(message, t);
                 out1.close();
                 out2.close();
             } catch (IOException ex) {
-                LoggerFactory.getLogger(SemanticNode.class.getName()).error(null, ex);
+                LoggerFactory.getLogger(NodeSemantic.class.getName()).error(null, ex);
             }
         }
     }
 
     private void testID(String id) {
         String numberCandidate = id.substring(BUSINESS_TERM_PREFIX.length(), id.length());
-        numberCandidate = numberCandidate.replace('-', '1');
+        numberCandidate = numberCandidate.replace("-", "1").replace("–", "2"); // 16931-3-4 uses two different hyphen in its ID "BT-18–1"
         try{
             Integer.parseInt(numberCandidate);
         }catch(NumberFormatException e){
@@ -140,13 +148,13 @@ public class SemanticNode {
     }
 
     /**
-     * Adds an XML representation node of this semantic node
+     * Adds an syntax representation node of this semantic node
      */
-    public void addXMLRepresentation(XmlNode node) {
-        if (xmlRepresentations == null) {
-            xmlRepresentations = new ArrayList<XmlNode>(1);
+    public void addSyntaxRepresentation(NodeSyntax node) {
+        if (syntaxRepresentations == null) {
+            syntaxRepresentations = new ArrayList<NodeSyntax>(1);
         }
-        xmlRepresentations.add(node);
+        syntaxRepresentations.add(node);
     }
 
     public Boolean isBusinessGroup() {
@@ -166,10 +174,10 @@ public class SemanticNode {
     }
 
     public void setCardinality(String c) {
-        mCardinality = Cardinality.getByValue(c);
+        mCardinality = CardinalityXML.getByValue(c);
     }
 
-    public Cardinality getCardinality() {
+    public CardinalityXML getCardinality() {
         return mCardinality;
     }
 
@@ -225,8 +233,8 @@ public class SemanticNode {
                 xml.append(" datatype=\"" + mDataType + "\"");
             }
             xml.append(">\n");
-            if (xmlRepresentations != null) {
-                for (XmlNode xnode : xmlRepresentations) {
+            if (syntaxRepresentations != null) {
+                for (NodeSyntax xnode : syntaxRepresentations) {
                     xml.append(xnode.toString());
                     xml.append("\n");
                 }
@@ -258,8 +266,8 @@ public class SemanticNode {
                 xml.append(" datatype=\"" + mDataType + "\"");
             }
             xml.append(">\n");
-            if (xmlRepresentations != null) {
-                for (XmlNode xnode : xmlRepresentations) {
+            if (syntaxRepresentations != null) {
+                for (NodeSyntax xnode : syntaxRepresentations) {
                     xml.append(xnode.toSubString());
                     xml.append("\n");
                 }
@@ -291,9 +299,9 @@ public class SemanticNode {
 
             StringBuilder xml_Suffix = new StringBuilder();
 
-            Collection<SemanticNode> semanticNodes = this.allSemanticNodes.values();
+            Collection<NodeSemantic> semanticNodes = this.allSemanticNodes.values();
             int xmlCount = 0;
-            for (SemanticNode s : semanticNodes) {
+            for (NodeSemantic s : semanticNodes) {
                 if (s != null) {
                     if (isSubFile) {
                         xml_Suffix.append(s.toSubString()).append("\n");
@@ -303,46 +311,46 @@ public class SemanticNode {
                 } else {
                     LOG.error("ERROR DATA MODEL IS EMPTY!!");
                 }
-                if (s.xmlRepresentations != null) {
-                    xmlCount += s.xmlRepresentations.size();
+                if (s.syntaxRepresentations != null) {
+                    xmlCount += s.syntaxRepresentations.size();
                 }
             }
             xml_Suffix.append("</semantics>");
             StringBuilder xml_Prefix = new StringBuilder();
             int semanticCount = semanticNodes.size();
             xml_Prefix.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<semantics semantics=\"" + semanticCount + "\" xml=\"" + xmlCount + "\" file=\"" + fileName + "\" table=\"" + title + "\">\n");
-            String outputFilePath = ResourceUtilities.saveStringToFile(new File(outputPath + fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
+            String outputFilePath = FileHelper.saveStringToFile(new File(outputPath + fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
             LOG.info("Saving table model into XML file: " + outputFilePath + "\n");
         } catch (Throwable e) {
-            LoggerFactory.getLogger(SemanticNode.class.getName()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(NodeSemantic.class.getName()).error(e.getMessage(), e);
         }
     }
 
-    private Set<List<SemanticNode>> findDuplicates() {
-        Set<List<SemanticNode>> duplicates = new HashSet<>();
+    private Set<List<NodeSemantic>> findDuplicates() {
+        Set<List<NodeSemantic>> duplicates = new HashSet<>();
         // 1) XPath - collecting BG in List
-        for (List<XmlNode> l : XmlNode.duplicateXPathList.values()) {
-            List<SemanticNode> duplicateList = new ArrayList<SemanticNode>();
-            for (XmlNode x : l) {
+        for (List<NodeSyntax> l : NodeSyntax.duplicatePathList.values()) {
+            List<NodeSemantic> duplicateList = new ArrayList<NodeSemantic>();
+            for (NodeSyntax x : l) {
                 duplicateList.add(x.getSemanticNode());
             }
-            // remove duplicate SemanticNode lists by adding to Set
+            // remove duplicate NodeSemantic lists by adding to Set
             duplicates.add(duplicateList);
         }
         return duplicates;
     }
 
     void logDuplicateXPathErors() {
-        Set<List<SemanticNode>> duplicates = this.findDuplicates();
+        Set<List<NodeSemantic>> duplicates = this.findDuplicates();
         StringBuilder sb = new StringBuilder();
-        for (List<SemanticNode> l : duplicates) {
-            sb.append("The following group of Semantic Entities have the same XML Nodes:\n");
-            for (SemanticNode s : l) {
+        for (List<NodeSemantic> l : duplicates) {
+            sb.append("The following group of Semantic Entities have the same Syntax Nodes:\n");
+            for (NodeSemantic s : l) {
                 sb.append(s.toString() + "\n");
             }
             sb.append("\n\n");
         }
-        LOG.error("\n\nThere are " + duplicates.size() + " duplications of XML within semantic nodes!\n" + sb.toString());
+        LOG.error("\n\nThere are " + duplicates.size() + " duplications of syntax within semantic nodes!\n" + sb.toString());
     }
 
 
@@ -352,9 +360,9 @@ public class SemanticNode {
 //
 //        StringBuilder duplicateIdList = new StringBuilder();
 //        // 1) XPath - collecting BG in List
-//        for (List<XmlNode> l : XmlNode.duplicateXPathList.values()) {
+//        for (List<SyntaxNode> l : NodeSyntax.duplicatePathList.values()) {
 //            Set<String> duplicateLists = new HashSet<String>();
-//            for (XmlNode x : l) {
+//            for (NodeSyntax x : l) {
 //                // 2) SG Liste UNIQUE als STRING im SET zu machen
 //
 //                duplicateIdList.append(x.getSemanticNode().getId()).append(" ");

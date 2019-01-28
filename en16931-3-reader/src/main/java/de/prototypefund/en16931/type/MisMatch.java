@@ -15,9 +15,11 @@
  */
 package de.prototypefund.en16931.type;
 
+import org.slf4j.LoggerFactory;
+
 /**
- * Mismatch on either semantic, structure or cardinality level.
- * Exposing discrepancies.
+ * Mismatch on either semantic, structure or cardinality level. Exposing
+ * discrepancies.
  */
 public interface MisMatch {
 
@@ -26,24 +28,28 @@ public interface MisMatch {
      */
     String getValue();
 
-    /** Creates a single mismatch from its EN16931 value, e.g. "STR-1"*/
+    /**
+     * Creates a single mismatch from its EN16931 value, e.g. "STR-1"
+     */
     public static MisMatch createMisMatch(String match) {
         MisMatch misMatch = null;
-        if(match != null && !match.isEmpty() ){
+        if (match != null && !match.isEmpty()) {
             String ID = match.substring(0, 3);
-            switch(ID){
+            switch (ID) {
                 case "CAR":
-                    misMatch = CardinalityMisMatch.getByValue(match);
+                    misMatch = MisMatchCardinality.getByValue(match);
                     break;
                 case "SEM":
-                    misMatch = SemanticMisMatch.getByValue(match);
+                    misMatch = MisMatchSemantic.getByValue(match);
                     break;
                 case "STR":
-                    misMatch = StructuralMisMatch.getByValue(match);
+                    misMatch = MisMatchStructural.getByValue(match);
                     break;
                 case "SYN":
-                    misMatch = DatatypeMisMatch.getByValue(match);
+                    misMatch = MisMatchDatatype.getByValue(match);
                     break;
+                default:
+                    LoggerFactory.getLogger(MisMatch.class.getName()).error("There is no mismatch for '" + match + "'!\n");
             }
         }
         return misMatch;

@@ -17,31 +17,36 @@ package de.prototypefund.en16931.type;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.LoggerFactory;
 
 /**
- * This enum defines the mismatch between of semantic. Exposing
+ * This enum defines the mismatch between cardinalities. Exposing
  * discrepancies.
  */
-public enum StructuralMisMatch implements MisMatch {
+public enum MisMatchCardinality implements MisMatch {
 
     /**
-     * Structural MisMatches
+     * Cardinality MisMatches
      */
-    STRUCTURAL_MANY_TO_ONE("STR-1"), // Hierarchical order many to one
-    STRUCTURAL_ON_LOWER_LEVEL("STR-2"), // element on lower level
-    STRUCTURAL_DIFFERENT_GROUPING("STR-3"), // different grouping
-    STRUCTURAL_LESS_DETAIL("STR-4"), // less detail
-    STRUCTURAL_HIGHER_DETAIL("STR-5"); // higher detail
-    private static final Map<String, StructuralMisMatch> mMatchMap = new HashMap<String, StructuralMisMatch>();
+    CARDINALITY_MANDATORY("CAR-1"), // Hierarchical order many to one
+    CARDINALITY_OPTIONAL("CAR-2"), // element on lower level
+    CARDINALITY_MULTIPLE("CAR-3"), // different grouping
+    CARDINALITY_SINGLE("CAR-4"), // less detail
+    CARDINALITY_ELEMENT_MANDATORY("CAR-5"); // higher detail
+    private static final Map<String, MisMatchCardinality> mMatchMap = new HashMap<String, MisMatchCardinality>();
 
     static {
-        for (StructuralMisMatch c : values()) {
+        for (MisMatchCardinality c : values()) {
             mMatchMap.put(c.getValue(), c);
         }
     }
 
-    public static StructuralMisMatch getByValue(String value) {
-        return mMatchMap.get(value);
+    public static MisMatchCardinality getByValue(String value) {
+        MisMatchCardinality c = mMatchMap.get(value);
+        if (c == null) {
+            LoggerFactory.getLogger(MisMatchCardinality.class.getName()).error("There is no cardinality mismatch for '" + value + "'!\n");
+        }
+        return c;
     }
 
     private final String mMatch;
@@ -54,7 +59,7 @@ public enum StructuralMisMatch implements MisMatch {
         return mMatch;
     }
 
-    StructuralMisMatch(String match) {
+    MisMatchCardinality(String match) {
         this.mMatch = match;
     }
 }

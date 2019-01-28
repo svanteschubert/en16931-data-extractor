@@ -17,12 +17,12 @@ package de.prototypefund.en16931.type;
 
 import java.util.HashMap;
 import java.util.Map;
-import de.prototypefund.en16931.type.Cardinality;
+import org.slf4j.LoggerFactory;
 
 /**
- * This enum describes the Cardinality type being used in EN16931
+ * This enum describes the CardinalityXML type being used in EN16931
  */
-public enum Cardinality {
+public enum CardinalityXML {
 
     /**
      * Cardinalities
@@ -35,16 +35,20 @@ public enum Cardinality {
     ONE2MANY("1..n"),
     MANY2ONE("n..1"),
     MANY2MANY("n..n");
-    private static final Map<String, Cardinality> mCardMap = new HashMap<String, Cardinality>();
+    private static final Map<String, CardinalityXML> mCardMap = new HashMap<String, CardinalityXML>();
 
     static {
-        for (Cardinality c : values()) {
+        for (CardinalityXML c : values()) {
             mCardMap.put(c.getValue(), c);
         }
     }
 
-    public static Cardinality getByValue(String value) {
-        return mCardMap.get(value);
+    public static CardinalityXML getByValue(String value) {
+        CardinalityXML c = mCardMap.get(value);
+        if (c == null) {
+            LoggerFactory.getLogger(CardinalityXML.class.getName()).error("There is no cardinality for '" + value + "'!\n");
+        }
+        return c;
     }
 
     private final String mCardinality;
@@ -56,7 +60,7 @@ public enum Cardinality {
         return mCardinality;
     }
 
-    Cardinality(String cardinality) {
+    CardinalityXML(String cardinality) {
         this.mCardinality = cardinality;
     }
 }

@@ -21,6 +21,7 @@
 package de.prototypefund.en16931;
 
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 public class ExtractionTest {
 
@@ -28,10 +29,17 @@ public class ExtractionTest {
          a directory containg several ODT specification documents,
         either relative to workign directory "en16831-3-reader" or
         to classpath "target/test-classes" */
-    private static final String odtResource = "16931-3-3_example.odt";
+//    private static final String odtResource = "16931-3-3_example.odt";
+//    private static final String odtResource = "_corrigenda";
+    private static final String odtResource = "_16931-3-2";
+//    private static final String odtResource = "CEN_TS_16931-3-4_en.odt";
 
     @Test
     public void collectSpecData() throws Exception {
-        new OdtTableExtraction().collectSpecData(odtResource);
+        try {
+            new OdtTableExtraction().collectSpecData(odtResource);
+        } catch (Throwable t) {
+            LoggerFactory.getLogger(ExtractionTest.class.getName()).error(t.getMessage(), t);
+        }
     }
 }

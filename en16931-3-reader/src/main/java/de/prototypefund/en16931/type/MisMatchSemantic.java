@@ -17,12 +17,12 @@ package de.prototypefund.en16931.type;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.LoggerFactory;
 
 /**
- * This enum defines the mismatch between of semantic. Exposing
- * discrepancies.
+ * This enum defines the mismatch between of semantic. Exposing discrepancies.
  */
-public enum SemanticMisMatch implements MisMatch {
+public enum MisMatchSemantic implements MisMatch {
 
     /**
      * Semantic MisMatches
@@ -31,18 +31,21 @@ public enum SemanticMisMatch implements MisMatch {
     SEMANTIC_WIDER("SEM-2"),
     SEMANTIC_OVERLAP("SEM-3"),
     SEMANTIC_NO_MATCH("SEM-4"),;
-    private static final Map<String, SemanticMisMatch> mMatchMap = new HashMap<String, SemanticMisMatch>();
+    private static final Map<String, MisMatchSemantic> mMatchMap = new HashMap<String, MisMatchSemantic>();
 
     static {
-        for (SemanticMisMatch c : values()) {
+        for (MisMatchSemantic c : values()) {
             mMatchMap.put(c.getValue(), c);
         }
     }
 
-    public static SemanticMisMatch getByValue(String value) {
-        return mMatchMap.get(value);
+    public static MisMatchSemantic getByValue(String value) {
+        MisMatchSemantic s = mMatchMap.get(value);
+        if (s == null) {
+            LoggerFactory.getLogger(MisMatchSemantic.class.getName()).error("There is no semantic mismatch for '" + value + "'!\n");
+        }
+        return s;
     }
-
 
     private final String mMatch;
 
@@ -54,7 +57,7 @@ public enum SemanticMisMatch implements MisMatch {
         return mMatch;
     }
 
-    SemanticMisMatch(String match) {
+    MisMatchSemantic(String match) {
         this.mMatch = match;
     }
 }

@@ -27,9 +27,19 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-public class SpecificationFixes {
-
+/**
+ * In order to be able to generate software from the data model, there have to
+ * be no ambiguities in the model. In a such a model there are two restrictions:
+ * <ul>
+ * <li>Every semantic node has its own unique syntax nodes. (Or context
+ * information are being kept.)</li>
+ * <li>Every semantic node is unique in the Semantic Data Model. (Or context
+ * information are being kept.)</li>
+ * </ul>
+ * In cases, the specification does not provide this condition, it will be
+ * updated by this class.
+ */
+class SpecificationFixes {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpecificationFixes.class.getName());
     // Every table has its own fixes
@@ -46,12 +56,11 @@ public class SpecificationFixes {
     private static final String TABLE_NO5_HEADER_UBL_CREDIT_NOTE_INFORMATIVE_DE = "Tabelle 6 — Mapping der UBL Gutschriftsyntaxelemente auf das Semantische Modell";
     private static final String TABLE_HEADER_UBL_MAPPING_DES_RECHNUNGMODELLS_DE = "Mapping des Rechnungsmodells";
     private static final String TABLE_HEADER_UBL_MAPPING_DES_GUTSCHRIFTENMODELLS_DE = "Mapping des Gutschriftenmodells";
-    private static List<XmlNode> mXmlNodes = new ArrayList<XmlNode>(1);
-    private static List<SemanticNode> mSemanticNodes = new ArrayList<SemanticNode>(1);
+    private static List<NodeSyntax> mXmlNodes = new ArrayList<NodeSyntax>(1);
+    private static List<NodeSemantic> mSemanticNodes = new ArrayList<NodeSemantic>(1);
     static Boolean hasError = Boolean.FALSE;
     static final String ID_ERROR_MIDSTRING = "_DUPLICATED_ID_#";
     static Map<String, Integer> mDoubleIdCounter = new HashMap<>();
-
 
     static {
 
@@ -86,26 +95,15 @@ public class SpecificationFixes {
         mAllFixes.put(TABLE_HEADER_UBL_MAPPING_DES_GUTSCHRIFTENMODELLS_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
     }
 
-//
-//    static void addSemanticIdError(SemanticNode s) {
-//        mSemanticNodes.add(s);
-//        hasError = Boolean.TRUE;
-//    }
-//
-//    static void addSyntaxIdError(XmlNode x) {
-//        mXmlNodes.add(x);
-//        hasError = Boolean.TRUE;
-//    }
-
-    static void flushErrors(SemanticNode s){
+    static void flushErrors(NodeSemantic s) {
         duplicatedIdErrors(s);
 
         clear();
     }
 
-    static private void duplicatedIdErrors(SemanticNode s){
+    static private void duplicatedIdErrors(NodeSemantic s) {
         //
-        if(s.mWARNING_FixUnavailable || s.mWARNING_FixAlreadyTaken){
+        if (s.mWARNING_FixUnavailable || s.mWARNING_FixAlreadyTaken) {
             LOG.info("WARNING: Duplicated SemanticNode ID: '" + s.getId() + "'\n");
             LOG.info("       Semantic Node ID: '" + s.getId() + "'\n");
             LOG.info("       Business Term: '" + s.getBusinessTerm() + "'\n\n");
@@ -113,10 +111,10 @@ public class SpecificationFixes {
         }
     }
 
-    static String getAlternativeID(String doubledId){
+    static String getAlternativeID(String doubledId) {
         String alternativeId = null;
         Integer idCounter = mDoubleIdCounter.get(doubledId);
-        if(idCounter == null){
+        if (idCounter == null) {
             idCounter = 1;
         }
         // start with 2 and keep the first ID without number..
@@ -126,7 +124,7 @@ public class SpecificationFixes {
         return alternativeId;
     }
 
-    static private void clear(){
+    static private void clear() {
         mXmlNodes.clear();
         mSemanticNodes.clear();
         hasError = Boolean.FALSE;

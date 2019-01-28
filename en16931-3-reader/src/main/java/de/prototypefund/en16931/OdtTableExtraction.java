@@ -20,10 +20,13 @@
  *********************************************************************** */
 package de.prototypefund.en16931;
 
-import static de.prototypefund.en16931.SemanticNode.LEADING_TRAILING_WHITESPACES;
-import de.prototypefund.en16931.SemanticNode.SemanticHeading;
-import de.prototypefund.en16931.XmlNode.XmlHeading;
-import de.prototypefund.utils.ResourceUtilities;
+import static de.prototypefund.en16931.NodeSemantic.LEADING_TRAILING_WHITESPACES;
+import de.prototypefund.en16931.NodeSemantic.SemanticHeading;
+import de.prototypefund.en16931.NodeSyntax.SyntaxHeading;
+import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.CARD;
+import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.MATCH;
+import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.NAME;
+import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.RULES;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +45,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
+import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +55,6 @@ import org.w3c.dom.NodeList;
 public class OdtTableExtraction {
 
     private static final Logger LOG;
-
 
     // To ease the comparison of logs, there is a simplification of logging to one line without a date:
     static {
@@ -68,25 +70,33 @@ public class OdtTableExtraction {
 
     OdfTextDocument odtDoc;
     OdfTable odtTable;
-    SemanticHeading[] SEMANTIC_TABLE_HEADINGS = SemanticNode.SemanticHeading.values();
-    XmlHeading[] SYNTAX_TABLE_HEADINGS_FULL = XmlNode.XmlHeading.values();
+    SemanticHeading[] SEMANTIC_TABLE_HEADINGS = NodeSemantic.SemanticHeading.values();
+    SyntaxHeading[] SYNTAX_TABLE_HEADINGS = NodeSyntax.SyntaxHeading.values();
     private String mTableId = null;
-    private int NORMATIVE_TABLE_SIZE = 11;
-    private int INFORMATIVE_TABLE_SIZE = 8;
+    // XML tables
+    private static final int NORMATIVE_TABLE_SIZE = 11;
+    private static final int INFORMATIVE_TABLE_SIZE = 8;
+    // EDIFACT tables
+    private static final int NORMATIVE_EDIFACT_TABLE_SIZE = 10;
+    private static final int INFORMATIVE_EDIFACT_TABLE_SIZE = 9;
     private static final String ODT_SUFFIX = ".odt";
     private static final String WORKING_DIRECTORY = "user.dir";
+    private static Boolean mIsXML;
 
-    /** @param odtFileName the file name of the specification or a directory where specifications are any descendant documents! */
+    /**
+     * @param odtFileName the file name of the specification or a directory
+     * where specifications are any descendant documents!
+     */
     public void collectSpecData(String odtFileName) throws Exception {
         String absPath = null;
-        try{
-            absPath = ResourceUtilities.getAbsolutePath(odtFileName);
-        }catch(FileNotFoundException e){
+        try {
+            absPath = FileHelper.getAbsolutePath(odtFileName);
+        } catch (FileNotFoundException e) {
             // expected if file is not in Java classpath
         }
-        if(absPath == null){
+        if (absPath == null) {
             absPath = System.getProperty(WORKING_DIRECTORY);
-            if(!absPath.endsWith(File.separator)){
+            if (!absPath.endsWith(File.separator)) {
                 absPath += File.separator;
             }
             absPath += odtFileName;
@@ -94,29 +104,31 @@ public class OdtTableExtraction {
         collectSpecData(new File(absPath));
     }
 
-
-    /** If file is a directory searches within children and provides all found documents that have an '.odt' suffix to the data extractor. */
-    private void collectSpecData(File f) throws Exception{
-        if(f.isDirectory()){
+    /**
+     * If file is a directory searches within children and provides all found
+     * documents that have an '.odt' suffix to the data extractor.
+     */
+    private void collectSpecData(File f) throws Exception {
+        if (f.isDirectory()) {
             String absPath = f.getAbsolutePath();
             LOG.info("Extracting data from directory: " + absPath);
-            for(String childPath : f.list()){
+            for (String childPath : f.list()) {
                 collectSpecData(new File(absPath + File.separatorChar + childPath));
             }
-        }else{
+        } else {
             String absPath = f.getAbsolutePath();
-            if(absPath.endsWith(ODT_SUFFIX)){
+            if (absPath.endsWith(ODT_SUFFIX)) {
                 LOG.info("Extracting data from file: " + absPath);
                 extractData(f);
-            }else{
+            } else {
                 LOG.info("As without file suffix '.odt' ignoring: " + absPath);
             }
         }
     }
 
-
-
-    /** @param odtFile <code>File</code> representing the en16931 specification  */
+    /**
+     * @param odtFile <code>File</code> representing the en16931 specification
+     */
     private void extractData(File odtFile) throws Exception {
         odtDoc = OdfTextDocument.loadDocument(odtFile);
         String absPath = odtFile.getAbsolutePath();
@@ -140,22 +152,22 @@ public class OdtTableExtraction {
                 tableTitle = h.getTextContent();
                 hasPrecedingHeading = Boolean.TRUE;
 
-            // German version uses paragraphs instead of headings for informal tables
-            }else if (child instanceof TextPElement) {
+                // German version uses paragraphs instead of headings for informal tables
+            } else if (child instanceof TextPElement) {
 
                 tableTitle = null;
                 TextPElement p = ((TextPElement) child);
                 tableTitle = p.getTextContent();
 
-            }else if (child instanceof TableTableElement) {
-                if(hasPrecedingHeading || tableTitle != null && tableTitle.contains("Mapping")){
+            } else if (child instanceof TableTableElement) {
+                if (hasPrecedingHeading || tableTitle != null && tableTitle.contains("Mapping")) {
                     extractTableData(((TableTableElement) child), odtFileName, odtFilePath, tableTitle);
                 }
                 hasPrecedingHeading = Boolean.FALSE;
                 tableTitle = null;
 
                 // there shall be no other element between the preceding heading/paragraph (title) and the table
-            } else if (child instanceof OdfElement){
+            } else if (child instanceof OdfElement) {
                 hasPrecedingHeading = Boolean.FALSE;
                 tableTitle = null;
             }
@@ -177,131 +189,159 @@ public class OdtTableExtraction {
                 </table:table-cell>
          */
         int columnCount = table.getColumnCount();
-        LOG.info("ColumnCount is '" + columnCount + "!'\n");
+        LOG.info("ColumnCount is '" + columnCount + "'!\n");
 
         if (table.getHeaderRowCount() != 1) {
-            LOG.info("Ignoring '" + title + " as no header row was found!'\n");
+            LOG.info("Ignoring '" + title + "' as no header row was found!\n");
 
-        } else if (columnCount == INFORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_TABLE_SIZE) {
+        } else if (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) {
+            mIsXML = (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE);
             assert table.getHeaderColumnCount() == 0;
             OdfTableRow tr = table.getRowByIndex(0);
-            int cellCount = tr.getCellCount();
-            for (int i = 0; i < cellCount; i++) {
-                OdfTableCell tc = tr.getCellByIndex(i);
+            OdfTableCell tc = tr.getCellByIndex(0);
+            // final test: first cell conent of header row have to be correct!
+            if (!(((columnCount == NORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) && getCellContent(tc).equals(SEMANTIC_TABLE_HEADINGS[0].getLabel()))
+                    || ((columnCount == INFORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) && getCellContent(tc).equals(SYNTAX_TABLE_HEADINGS[0].getLabel())))) {
+                LOG.error("WRONG TABLE: '" + mTableId + "' + IS NOT A TABLE FOR DATA EXTRACTION!");
+            } else {
+                //*********
+                // CONTENT ROWS
+                //*********
+                int rowCount = table.getRowCount();
+                NodeSemantic semanticNode = null;
+                NodeSyntax syntaxNode = null;
+                // only required for the informative cell to remember the two Syntax contents, until Semantic was created
+                String informativeTable_CellContentOne = null;
+                String informativeTable_CellContentTwo = null;
+                String informativeTable_CellContentThree = null;
+                int syntax_header_length = 2; // the default, only EDIFACT has 3 columns
+                for (int r = 1; r < rowCount; r++) {
+                    tr = table.getRowByIndex(r);
+                    LOG.debug("\n**** NEW ROW ****");
+                    int cellCount = tr.getCellCount();
 
-                if (i == 0) {
-                    LOG.debug("Header: '" + getCellContent(tc) + "'");
-                    if (columnCount == NORMATIVE_TABLE_SIZE) {
-                        LOG.debug("label: '" + SEMANTIC_TABLE_HEADINGS[0].getLabel() + "'");
-                    } else {
-                        LOG.debug("label: '" + SYNTAX_TABLE_HEADINGS_FULL[0].getLabel() + "'");
-                    }
-                    if (!((columnCount == NORMATIVE_TABLE_SIZE && getCellContent(tc).equals(SEMANTIC_TABLE_HEADINGS[0].getLabel()))
-                            || (columnCount == INFORMATIVE_TABLE_SIZE && getCellContent(tc).equals(SYNTAX_TABLE_HEADINGS_FULL[0].getLabel())))) {
-                        i = cellCount; // end all loops
-                        LOG.error("WRONG TABLE: THIS IS NOT A TABLE FOR DATA EXTRACTION!!!");
-                        break;
-                    }
-                }
-            }
-            //*********
-            // CONTENT ROWS
-            //*********
-            int rowCount = table.getRowCount();
-            SemanticNode semanticNode = null;
-            XmlNode xmlNode = null;
-            // only required for the informative cell to remember the two Syntax contents, until Semantic was created
-            String informativeTable_CellContentOne = null;
-            String informativeTable_CellContentTwo = null;
-            for (int r = 1; r < rowCount; r++) {
-                tr = table.getRowByIndex(r);
-                LOG.debug("\n**** NEW ROW ****");
-                cellCount = tr.getCellCount();
+                    syntaxNode = null;
+                    for (int c = 0; c < cellCount; c++) {
+                        tc = tr.getCellByIndex(c);
+                        String cellContent = getCellContent(tc);
+                        String label = null;
+                        LOG.debug("**** NEW CELL ****");
+                        LOG.debug(label + ": " + cellContent);
 
-                xmlNode = null;
-                for (int c = 0; c < cellCount; c++) {
-                    OdfTableCell tc = tr.getCellByIndex(c);
-                    String cellContent = getCellContent(tc);
-                    String label = null;
-                    LOG.debug("**** NEW CELL ****");
-                    LOG.debug(label + ": " + cellContent);
-
-                    // First Part of Heading - Semantics
-                    if (columnCount == NORMATIVE_TABLE_SIZE) {
-                        if (c < SEMANTIC_TABLE_HEADINGS.length) {
-                            // For each Row:
-                            if (c == 0) {
-                                if (cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "").isEmpty()) {
-                                    LOG.debug("IS EMPTY!!!");
-                                } else {
-                                    // errorhandling of previous node
-                                    if (SpecificationFixes.hasError) {
-                                        SpecificationFixes.flushErrors(semanticNode);
-                                    }
-                                    semanticNode = new SemanticNode(cellContent, mTableId);
-                                }
-                            }
-                            label = mapSemantic(cellContent, c, semanticNode);
-
-                            // Second Part of Row - XML Syntax
-                        } else {
-                            // find the according type to this column from the header
-                            XmlHeading columnType = SYNTAX_TABLE_HEADINGS_FULL[c - SEMANTIC_TABLE_HEADINGS.length];
-                            if ((c - SEMANTIC_TABLE_HEADINGS.length) == 0) {
-                                xmlNode = new XmlNode(cellContent, semanticNode);
-                            }
-                            label = mapSyntax(cellContent, xmlNode, columnType);
-                        }
-                    } else {
-                        if (c < 2) {
-                            // For each Row:
-
-                            // find the according type to this column from the header
-                            if (c == 0) {
-                                // this time the syntax mapping has 3 columns less..
-                                informativeTable_CellContentOne = cellContent;
-                            }
-                            if (c == 1) {
-                                informativeTable_CellContentTwo = cellContent;
-                            }
-                       // Second Part of Row - Semantic Model
-                        } else {
-                            if (c == 2) {
-                                cellContent = cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "");
-                                // same semantic node, if there is NO ID or the previous ID
-                                if (cellContent.isEmpty()){ // semantic ID is empty
-                                    break; // just boilerplate
-                                }else { // semantic ID exist (might be not as the one before)
-                                    // in the informative table the IDs are defined not adjacent
-                                    semanticNode = SemanticNode.allSemanticNodes.get(cellContent);
-                                    if(semanticNode == null){
-                                        semanticNode = new SemanticNode(cellContent, mTableId);
+                        // First Part of Heading - Semantics
+                        if (columnCount == NORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) {
+                            if (c < SEMANTIC_TABLE_HEADINGS.length) {
+                                // For each Row:
+                                if (c == 0) {
+                                    if (cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "").isEmpty()) {
+                                        LOG.debug("IS EMPTY!!!");
+                                    } else {
+                                        // errorhandling of previous node
+                                        if (SpecificationFixes.hasError) {
+                                            SpecificationFixes.flushErrors(semanticNode);
+                                        }
+                                        semanticNode = new NodeSemantic(cellContent, mTableId);
                                     }
                                 }
+                                label = mapSemantic(cellContent, c, semanticNode);
+
+                                // Second Part of Row - Syntax
                             } else {
-                                label = mapSemantic(cellContent, c - 2, semanticNode);
+                                SyntaxHeading columnType = null;
+                                int i = c - SEMANTIC_TABLE_HEADINGS.length;
+                                if (i == 0) {
+                                    if (mIsXML) {
+                                        syntaxNode = new NodeXml(cellContent, semanticNode);
+                                    } else {
+                                        syntaxNode = new NodeEdifact(cellContent, semanticNode);
+                                    }
+                                } else {
+                                    if (columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) {
+                                        // we have to omit the syntax not available for EDIFACT, i.e. "Type"
+                                        if (i < 2) { // if it before "Name"
+                                            columnType = SYNTAX_TABLE_HEADINGS[i + 1]; // always skip "Type"
+                                        } else {
+                                            columnType = SYNTAX_TABLE_HEADINGS[i + 2]; // skip "Type" and "Name"
+                                        }
+                                    } else { // normative XML
+                                        // we have to omit the syntax not available for XML, i.e. "Name"
+                                        if (i < 3) {
+                                            columnType = SYNTAX_TABLE_HEADINGS[i];
+                                        } else {
+                                            columnType = SYNTAX_TABLE_HEADINGS[i + 1];
+                                        }
+                                    }
+                                    label = mapSyntax(cellContent, syntaxNode, columnType);
+                                }
                             }
-                            // Finally after all semantics have been added, add the syntax that was remembered from the start of the informative table
-                            if (c == cellCount - 1) {
-                                xmlNode = new XmlNode(informativeTable_CellContentOne, semanticNode);
-                                mapSyntax(informativeTable_CellContentTwo, xmlNode, SYNTAX_TABLE_HEADINGS_FULL[2]);
+                        } else { // informative table
+                            // in case of EDIFACT 3-4 there are 3 columns instead of 2
+                            if (columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) {
+                                syntax_header_length = 3;
+                            }
+
+                            if (c < syntax_header_length) {
+                                // For each Row:
+
+                                // find the according type to this column from the header
+                                if (c == 0) {
+                                    // this time the syntax mapping has 3 columns less..
+                                    informativeTable_CellContentOne = cellContent;
+                                } else if (c == 1) {
+                                    informativeTable_CellContentTwo = cellContent;
+                                } else if (c == 3) { // in case of EDIFACT part 3-4
+                                    informativeTable_CellContentThree = cellContent;
+                                }
+                                // Second Part of Row - Semantic Model
+                            } else {
+                                if (c == syntax_header_length) {
+                                    cellContent = cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "");
+                                    // same semantic node, if there is NO ID or the previous ID
+                                    if (cellContent.isEmpty()) { // semantic ID is empty
+                                        break; // just boilerplate
+                                    } else { // semantic ID exist (might be not as the one before)
+                                        // in the informative table the IDs are defined not adjacent
+                                        semanticNode = NodeSemantic.allSemanticNodes.get(cellContent);
+                                        if (semanticNode == null) {
+                                            semanticNode = new NodeSemantic(cellContent, mTableId);
+                                        }
+                                    }
+                                } else {
+                                    label = mapSemantic(cellContent, c - syntax_header_length, semanticNode);
+                                }
+                                // Finally after all semantics have been added, add the syntax that was remembered from the start of the informative table
+                                if (c == cellCount - 1) {
+                                    if (mIsXML) {
+                                        syntaxNode = new NodeXml(informativeTable_CellContentOne, semanticNode);
+                                    } else {
+                                        syntaxNode = new NodeEdifact(informativeTable_CellContentOne, semanticNode);
+                                    }
+
+                                    label = mapSyntax(informativeTable_CellContentTwo, syntaxNode, SYNTAX_TABLE_HEADINGS[2]);
+                                    if (!mIsXML) {
+                                        label = mapSyntax(informativeTable_CellContentThree, syntaxNode, SYNTAX_TABLE_HEADINGS[3]);
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
-            // dump the table model into an XML file
-            semanticNode.createXMLFile(fileName, outputPath, title);
-            if(columnCount == NORMATIVE_TABLE_SIZE){
-                semanticNode.createSubXMLFile(fileName, outputPath, title);
-            }
-            // log all duplicated XML nodes
+                // dump the table model into an XML file
+                semanticNode.createXMLFile(fileName, outputPath, title);
+                if (columnCount == NORMATIVE_TABLE_SIZE) {
+                    semanticNode.createSubXMLFile(fileName, outputPath, title);
+                }
+                if (columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) {
+                    semanticNode.createSubXMLFile(fileName, outputPath, title);
+                }
+                // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
-            clearAll();
+                clearAll();
+            }
         }
     }
 
-    private String mapSemantic(String cellContent, int c, SemanticNode semanticNode) {
+    private String mapSemantic(String cellContent, int c, NodeSemantic semanticNode) {
         SemanticHeading columnType_Semantic = SEMANTIC_TABLE_HEADINGS[c];
         String label = columnType_Semantic.getLabel();
         if (!cellContent.isEmpty()) {
@@ -328,26 +368,34 @@ public class OdtTableExtraction {
         return label;
     }
 
-    private String mapSyntax(String cellContent, XmlNode xmlNode, XmlHeading columnType) {
+    private String mapSyntax(String cellContent, NodeSyntax syntaxNode, SyntaxHeading columnType) {
         String label = columnType.getLabel();
-        cellContent = cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "");
-        if (!cellContent.isEmpty()) {
-            switch (columnType) {
-                case TYPE:
-                    xmlNode.setType(cellContent);
-                    break;
-                case CARD:
-                    xmlNode.setCardinality(cellContent);
-                    break;
-                case MATCH:
-                    xmlNode.setMisMatch(cellContent);
-                    break;
-                case RULES:
-                    xmlNode.setRules(cellContent);
-                    break;
+        if (cellContent != null) {
+            cellContent = cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "");
+            if (!cellContent.isEmpty()) {
+                switch (columnType) {
+                    case TYPE: // only for XML
+                        ((NodeXml) syntaxNode).setType(cellContent);
+                        break;
+                    case CARD:
+                        if (mIsXML) {
+                            ((NodeXml) syntaxNode).setCardinalityXml(cellContent);
+                        } else {
+                            ((NodeEdifact) syntaxNode).setCardinalityEdifact(cellContent);
+                        }
+                        break;
+                    case NAME: // only for EDIFACT
+                        ((NodeEdifact) syntaxNode).setName(cellContent);
+                        break;
+                    case MATCH:
+                        syntaxNode.setMisMatch(cellContent);
+                        break;
+                    case RULES:
+                        syntaxNode.setRules(cellContent);
+                        break;
+                }
             }
         }
-
         return label;
     }
 
@@ -357,11 +405,11 @@ public class OdtTableExtraction {
         StringBuilder sb = null;
         Node node = c.getFirstChild();
         while (node != null) {
-            if (node instanceof OdfTextParagraph) {
+            if (node instanceof TextParagraphElementBase) {
                 if (sb == null) {
                     sb = new StringBuilder();
                 }
-                OdfTextParagraph p = ((OdfTextParagraph) node);
+                TextParagraphElementBase p = ((TextParagraphElementBase) node);
                 sb.append(p.getTextContent());
             }
             node = node.getNextSibling();
@@ -374,26 +422,23 @@ public class OdtTableExtraction {
 
     static void clearAll() {
         try {
-            if(SemanticNode.allSemanticNodes != null){
-                Collection<SemanticNode> semanticNodes = SemanticNode.allSemanticNodes.values();
-                for (SemanticNode s : semanticNodes) {
-                    if(s.xmlRepresentations != null){
-                        s.xmlRepresentations.clear();
+            if (NodeSemantic.allSemanticNodes != null) {
+                Collection<NodeSemantic> semanticNodes = NodeSemantic.allSemanticNodes.values();
+                for (NodeSemantic s : semanticNodes) {
+                    if (s.syntaxRepresentations != null) {
+                        s.syntaxRepresentations.clear();
                     }
                 }
-                SemanticNode.allSemanticNodes.clear();
+                NodeSemantic.allSemanticNodes.clear();
             }
-            if(XmlNode.allXmlNodes != null){
-                XmlNode.allXmlNodes.clear();
+            if (NodeSyntax.allSyntaxNodes != null) {
+                NodeSyntax.allSyntaxNodes.clear();
             }
-            if(XmlNode.duplicateXPathList != null){
-                XmlNode.duplicateXPathList.clear();
+            if (NodeSyntax.duplicatePathList != null) {
+                NodeSyntax.duplicatePathList.clear();
             }
-
-
-
         } catch (Throwable e) {
-            LoggerFactory.getLogger(SemanticNode.class.getName()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(NodeSemantic.class.getName()).error(e.getMessage(), e);
         }
     }
 

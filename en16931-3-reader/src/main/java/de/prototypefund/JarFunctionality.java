@@ -26,11 +26,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Provides metadata about the library as build date, version number. Its
- * main() method is the start method of the library, enabling the access of
- * versioning methods from command line: "java -jar en16931-data-extractor-<VERSION_INFO>-jar-with-dependencies.jar".
+ * Provides functionality by calling the JAR file.
+ * This class adds metadata the the JAR manifest.
+ * Metadata such as the libraries build date, version number and its
+ * main() method as starting method of the library.
+ * Providing all info by calling the JAR, e.g. via command line:
+ * "java -jar en16931-data-extractor-<VERSION_INFO>-jar-with-dependencies.jar".
+ * Triggering the data extraction by:
+ * "java -jar en16931-data-extractor-<VERSION_INFO>-jar-with-dependencies.jar <DIRECTORY> | <SPECIFICATIONFILE>".
  */
-public class JarManifest {
+public class JarFunctionality {
 
     private static final String CURRENT_CLASS_RESOURCE_PATH = "de/prototypefund/JarManifest.class";
     private static final String INNER_JAR_MANIFEST_PATH = "META-INF/MANIFEST.MF";
@@ -52,30 +57,30 @@ public class JarManifest {
             PROJECT_BUILD_DATE = attr.getValue("Project-Built-Date");
 
         } catch (Exception e) {
-            Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(JarFunctionality.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     /** The problem is that in the test environment the class is NOT within the JAR, but in a class directory where no MANIFEST.MF exists..*/
     private static InputStream getManifestAsStream() {
-        String versionRef = JarManifest.class.getClassLoader().getResource(CURRENT_CLASS_RESOURCE_PATH).toString();
+        String versionRef = JarFunctionality.class.getClassLoader().getResource(CURRENT_CLASS_RESOURCE_PATH).toString();
         String manifestRef = versionRef.substring(0, versionRef.lastIndexOf(CURRENT_CLASS_RESOURCE_PATH)) + INNER_JAR_MANIFEST_PATH;
         URL manifestURL = null;
         InputStream in = null;
         try {
             manifestURL = new URL(manifestRef);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JarFunctionality.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             in = manifestURL.openStream();
         } catch (IOException ex) {
-            Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JarFunctionality.class.getName()).log(Level.SEVERE, null, ex);
         }
         return in;
     }
 
-    private JarManifest() {
+    private JarFunctionality() {
     }
 
 	/**
@@ -95,14 +100,14 @@ public class JarManifest {
             try {
                 new OdtTableExtraction().collectSpecData(args[0]);
             } catch (Exception ex) {
-                Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JarFunctionality.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else {
             for(String path : args){
                 try {
                     new OdtTableExtraction().collectSpecData(path);
                 } catch (Exception ex) {
-                    Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(JarFunctionality.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

@@ -17,31 +17,33 @@ package de.prototypefund.en16931.type;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.LoggerFactory;
 
 /**
- * This enum defines the mismatch between cardinalities. Exposing
- * discrepancies.
+ * This enum defines the mismatch between of semantic. Exposing discrepancies.
  */
-public enum CardinalityMisMatch implements MisMatch {
+public enum MisMatchDatatype implements MisMatch {
 
     /**
-     * Cardinality MisMatches
+     * Semantic MisMatches
      */
-    CARDINALITY_MANDATORY("CAR-1"), // Hierarchical order many to one
-    CARDINALITY_OPTIONAL("CAR-2"), // element on lower level
-    CARDINALITY_MULTIPLE("CAR-3"), // different grouping
-    CARDINALITY_SINGLE("CAR-4"), // less detail
-    CARDINALITY_ELEMENT_MANDATORY("CAR-5"); // higher detail
-    private static final Map<String, CardinalityMisMatch> mMatchMap = new HashMap<String, CardinalityMisMatch>();
+    DATATYPE_SMALLER("SYN-1"),
+    DATATYPE_WIDER("SYN-2"),
+    DATATYPE_NO_MATCH("SYN-3"),;
+    private static final Map<String, MisMatchDatatype> mMatchMap = new HashMap<String, MisMatchDatatype>();
 
     static {
-        for (CardinalityMisMatch c : values()) {
+        for (MisMatchDatatype c : values()) {
             mMatchMap.put(c.getValue(), c);
         }
     }
 
-    public static CardinalityMisMatch getByValue(String value) {
-        return mMatchMap.get(value);
+    public static MisMatchDatatype getByValue(String value) {
+        MisMatchDatatype d = mMatchMap.get(value);
+        if (d == null) {
+            LoggerFactory.getLogger(MisMatchDatatype.class.getName()).error("There is no datatype mismatch for '" + value + "'!\n");
+        }
+        return d;
     }
 
     private final String mMatch;
@@ -54,7 +56,7 @@ public enum CardinalityMisMatch implements MisMatch {
         return mMatch;
     }
 
-    CardinalityMisMatch(String match) {
+    MisMatchDatatype(String match) {
         this.mMatch = match;
     }
 }
