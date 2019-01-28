@@ -110,7 +110,7 @@
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <mainClass>de.prototypefund.JarManifest</mainClass>
+                            <mainClass>de.prototypefund.JarFunctionality</mainClass>
                         </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>
@@ -185,7 +185,7 @@
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <mainClass>de.prototypefund.JarManifest</mainClass>
+                            <mainClass>de.prototypefund.JarFunctionality</mainClass>
                         </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>

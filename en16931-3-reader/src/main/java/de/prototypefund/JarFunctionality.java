@@ -37,7 +37,7 @@ import java.util.logging.Logger;
  */
 public class JarFunctionality {
 
-    private static final String CURRENT_CLASS_RESOURCE_PATH = "de/prototypefund/JarManifest.class";
+    private static final String CURRENT_CLASS_RESOURCE_PATH = "de/prototypefund/JarFunctionality.class";
     private static final String INNER_JAR_MANIFEST_PATH = "META-INF/MANIFEST.MF";
     private static String PROJECT_NAME;
     private static String PROJECT_VERSION;
