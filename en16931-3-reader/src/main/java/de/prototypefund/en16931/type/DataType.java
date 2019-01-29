@@ -69,7 +69,7 @@ public enum DataType {
         updateStatistic(value);
         DataType d = mTypeMap.get(value);
         if (d == null) {
-           LoggerFactory.getLogger(Type.class.getName()).error("A data type being abbreviated '" + value + "' does not exist! Found in Semantic object with ID '" + semanticID + "'!\n");
+           LoggerFactory.getLogger(Type.class.getName()).error("The data type being abbreviated '" + value + "' does not exist! Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return d;
     }
@@ -105,7 +105,7 @@ public enum DataType {
     static SortedMap<String, Integer> getStatistic(){
         return statistic;
     }
-    
+
     static void clearStatistic(){
         if(statistic != null){
             statistic.clear();;

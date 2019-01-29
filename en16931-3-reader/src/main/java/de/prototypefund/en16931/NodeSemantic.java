@@ -260,7 +260,7 @@ public class NodeSemantic {
                 xml.append(" level=\"" + mLevel + "\"");
             }
             if (mCardinality != null) {
-                xml.append(" card=\"" + mCardinality + "\"");
+                xml.append(" card=\"" + mCardinality.getValue() + "\"");
             }
             if (mBusinessTerm != null) {
                 xml.append(" bt=\"" + mBusinessTerm + "\"");

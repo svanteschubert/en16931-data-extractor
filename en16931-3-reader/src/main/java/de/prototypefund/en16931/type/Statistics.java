@@ -36,7 +36,7 @@ public class Statistics {
     private static SortedMap<String, Integer> mMismatchSemantic = new TreeMap<String, Integer>();
     private static SortedMap<String, Integer> mMismatchStructural = new TreeMap<String, Integer>();
     private static SortedMap<String, Integer> mTypesOfXML = new TreeMap<String, Integer>();
-    private static SortedMap<String, Integer> mCardinalitesXML = new TreeMap<String, Integer>();
+    private static SortedMap<String, Integer> mCardinalites = new TreeMap<String, Integer>();
     private static SortedMap<String, Integer> mCardinalitesEDIFACT = new TreeMap<String, Integer>();
 
 
@@ -44,7 +44,7 @@ public class Statistics {
     Usually being called after parsing a table. */
     static public void table(String tableTitle) {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\n**** TABLE DATATYPE USAGE STATISTIC: ").append(tableTitle).append("\n");
+        sb.append("**** TABLE DATATYPE USAGE STATISTIC: ").append(tableTitle).append("\n");
         sb.append("----------------------------------------------------\n");
 
         SortedMap<String, Integer> m = DataType.getStatistic();
@@ -96,9 +96,9 @@ public class Statistics {
         }
 
         m = CardinalityXML.getStatistic();
-        log(sb.append("* Cardinalities used by XML"), m);
+        log(sb.append("* Cardinalities used by Semantic and XML"), m);
         if(m != null){
-            mCardinalitesXML.putAll(m);
+            mCardinalites.putAll(m);
             m.clear();
             CardinalityXML.clearStatistic();
         }
@@ -112,7 +112,7 @@ public class Statistics {
         }
 
         sb.append("----------------------------------------------------\n");
-        sb.append("****\n\n\n");
+        sb.append("\n\n\n");
         LOG.info(sb.toString());
     }
 
@@ -128,16 +128,15 @@ public class Statistics {
         log(sb.append("* Mismatch Semantic"), mMismatchSemantic);
         log(sb.append("* Mismatch Structural"), mMismatchStructural);
         log(sb.append("* Types of XML"), mTypesOfXML);
-        log(sb.append("* Cardinalities used by XML"), mCardinalitesXML);
+        log(sb.append("* Cardinalities used by Semantic and XML"), mCardinalites);
         log(sb.append("* Cardinalities used by EDIFACT"), mCardinalitesEDIFACT);
         sb.append("****************************************************\n");
-        sb.append("****");
         LOG.info(sb.toString());
     }
 
     static private void log(StringBuilder sb, SortedMap<String, Integer> statistic) {
         sb.append(": ");
-        if (statistic != null) {
+        if (statistic != null && !statistic.isEmpty()) {
             Set<String> keys = statistic.keySet();
             for (String key : keys) {
                 sb.append("\n\t");
