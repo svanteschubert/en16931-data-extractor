@@ -3,6 +3,9 @@
 Open sourced for the creators of the EU e-invoice specification to allow easier sanity checks of the data within the tables to improve the quality of the specification.
 Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specifcation (en16931)](https://invoice.fans/en/en16931-en/).
 
+## Background on the EU e-Invoice Specification (en16931)
+There is (a wonderful online introduction on en16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Explaining+the+eInvoicing+standard) given by the EU.
+
 ## Reason
 The goal of this tool is to extract the syntax-binding (mapping) between the XML formats and the Semantic Data Model. The bindings are required to generate source code for a software allowing to load/save both XML formats. In addition the software shall modify/create XML by an API based on the Semantic Data Model of en16931.
 Some reasons behind from a bird perspective: 
