@@ -40,7 +40,7 @@ More about the used class representation in the [JavaDoc](https://svanteschubert
 After the JUnit tests there will be a test log file "target/test.log".  
 
 ## Software Prerequisites
-1. [JDK 1.8 (at least)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+1. [JDK 1.8](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
 ## Data Extraction by Technical Writer

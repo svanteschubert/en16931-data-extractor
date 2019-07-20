@@ -24,7 +24,7 @@
   
 	<groupId>de.prototypefund</groupId>
 	<artifactId>en16931-data-extractor</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0-PRE-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>org.odftoolkit</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0-PRE-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

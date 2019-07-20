@@ -25,11 +25,12 @@
     <parent>
         <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-PRE-SNAPSHOT</version>
     </parent>
   
+    <groupId>org.odftoolkit</groupId>
     <artifactId>odfdom-java</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-PRE-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     
