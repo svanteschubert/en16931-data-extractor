@@ -73,7 +73,7 @@ public class StyleStyleElement extends OdfStyleBase {
      */
     public StyleStyleElement(OdfFileDom ownerDoc) {
         super(ownerDoc, ELEMENT_NAME);
-        mErrorHandler = ((OdfFileDom) this.ownerDocument).getDocument().getPackage().getErrorHandler();                    
+        mErrorHandler = ((OdfFileDom) this.ownerDocument).getDocument().getPackage().getErrorHandler();
     }
 
     /**
@@ -88,7 +88,7 @@ public class StyleStyleElement extends OdfStyleBase {
 
     /** Used for the validation of XML */
     ErrorHandler mErrorHandler;
-    
+
     /**
      * Receives the value of the ODFDOM attribute representation
      * <code>StyleAutoUpdateAttribute</code> , See {

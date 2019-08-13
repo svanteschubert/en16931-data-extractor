@@ -73,7 +73,7 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
 		setOdfAttribute(attr);
 		attr.setIntValue(textLevelValue.intValue());
 	}
-	
+
 	/**
 	 * Create child element {@odf.element style:list-level-properties}.
 	 *
@@ -84,5 +84,5 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
 		this.appendChild(styleListLevelProperties);
 		return styleListLevelProperties;
 	}
-	
+
 }

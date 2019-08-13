@@ -33,22 +33,22 @@ import org.w3c.dom.NodeList;
 
 /**
  * Convenient functionality for the parent ODF OpenDocument element
- * 
+ *
  */
 public class OdfPresentationNotes
 {
 	PresentationNotesElement maNoteElement;
-	private static Hashtable<PresentationNotesElement, OdfPresentationNotes> maNotesRepository = 
-		new Hashtable<PresentationNotesElement, OdfPresentationNotes>();	
-	
+	private static Hashtable<PresentationNotesElement, OdfPresentationNotes> maNotesRepository =
+		new Hashtable<PresentationNotesElement, OdfPresentationNotes>();
+
 	private OdfPresentationNotes( PresentationNotesElement noteElement )
 	{
 		maNoteElement = noteElement;
 	}
-	
+
 	/**
 	 * Return an instance of <code>PresentationNotesElement</code> which represents presentation notes page feature.
-	 * 
+	 *
 	 * @return an instance of <code>PresentationNotesElement</code>
 	 */
 	public PresentationNotesElement getOdfElement()
@@ -57,7 +57,7 @@ public class OdfPresentationNotes
 	}
 	/**
 	 * Get a presentation notes page instance by an instance of <code>PresentationNotesElement</code>.
-	 * 
+	 *
 	 * @param noteElement	an instance of <code>PresentationNotesElement</code>
 	 * @return an instance of <code>OdfPresentationNotes</code> that can represent <code>PresentationNotesElement</code>
 	 */
@@ -69,9 +69,9 @@ public class OdfPresentationNotes
 			OdfPresentationNotes newNotes = new OdfPresentationNotes(noteElement);
 			maNotesRepository.put(noteElement, newNotes);
 			return newNotes;
-		}	
+		}
 	}
-	
+
 	/**
 	 * insert some text to the notes page
 	 * @param text	the text that need to insert in the notes page

@@ -930,6 +930,7 @@ public class OdfTable {
      */
     public int getColumnCount() {
         int result = 0;
+
         //ToDo There can be groups (only in calc) and header rows and it should end with rows
         for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
             if (n instanceof TableTableColumnElement) {
@@ -2033,7 +2034,7 @@ public class OdfTable {
      * <p>
      * After you get a cell range with <code>getCellRangeByPosition</code>, you
      * can assign a name to this cell range with the method      <code>setCellRangeName<code> in class
-     * <code>OdfTableCellRange</code>. Then you will get a <b>named range</b>
+	 * <code>OdfTableCellRange</code>. Then you will get a <b>named range</b>
      * which can be represented by name. This method can be used to get a named
      * range.
      *

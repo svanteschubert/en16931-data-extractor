@@ -1,7 +1,0 @@
-{"operations":[
-{"name":"setDocumentAttributes","attrs":{"document":{"fileFormat":"odf"}}},
-{"name":"insertStyleSheet","type":"paragraph","styleId":"heading1","attrs":{"character":{"bold":true,"color":{"type":"rgb","value":"376092"},"fontSize":14},"paragraph":{"outlineLevel":0}},"parent":"default_paragraph_style","styleName":"heading 1"},
-{"name":"insertParagraph","start":[0]},
-{"name":"insertParagraph","start":[1]},
-{"name":"insertText","start":[1,0],"text":"heading"}
-]}

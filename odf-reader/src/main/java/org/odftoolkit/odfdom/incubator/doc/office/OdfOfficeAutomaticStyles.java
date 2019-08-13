@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.odftoolkit.odfdom.component.MapHelper;
+import org.odftoolkit.odfdom.changes.MapHelper;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;

@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -46,9 +46,9 @@ import org.w3c.dom.Node;
 /**
  * A TextSelection can describe a sub element in a mParagraph element or a mHeading element.
  * it is recognized by the container element(which type should be OdfTextParagraph or
- *  OdfTextHeadingt), the start index of the text content of the container element and 
+ *  OdfTextHeadingt), the start index of the text content of the container element and
  *  the text content of this selection.
- * 
+ *
   */
 public class TextSelection extends Selection {
 
@@ -63,7 +63,7 @@ public class TextSelection extends Selection {
 	 * @param text				the text content of this TextSelection
 	 * @param containerElement	the mParagraph element or mHeading element that contain this TextSelection
 	 * @param index				the start index of the text content of the container element
-	 * 
+	 *
 	 */
 	TextSelection(String text, OdfElement containerElement, int index) {
 		mMatchedText = text;
@@ -106,7 +106,7 @@ public class TextSelection extends Selection {
 	}
 
 	/**
-	 * Get the text content of this TextSelection 
+	 * Get the text content of this TextSelection
 	 * @return text	the text content
 	 */
 	public String getText() {
@@ -137,8 +137,8 @@ public class TextSelection extends Selection {
 	/**
 	 * Delete the selection from the document
 	 * the other matched selection in the same container element will be updated automatically
-	 * because the start index of the following selections will be changed when the previous 
-	 * selection has been deleted 
+	 * because the start index of the following selections will be changed when the previous
+	 * selection has been deleted
 	 * @throws InvalidNavigationException if the selection is unavailable.
 	 */
 	@Override
@@ -153,7 +153,7 @@ public class TextSelection extends Selection {
 	}
 
 	/**
-	 * Apply a style to the selection so that the text style of this selection 
+	 * Apply a style to the selection so that the text style of this selection
 	 * will append the specified style
 	 * @param style	the style can be from the current document or user defined
 	 * @throws InvalidNavigationException if the selection is unavailable.
@@ -284,7 +284,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Replace the text content of selection with a new string
-	 * 
+	 *
 	 * @param newText	the replace text String
 	 * @throws InvalidNavigationException if the selection is unavailable.
 	 */
@@ -363,7 +363,7 @@ public class TextSelection extends Selection {
 
 	/**
 	 * Add a hypertext reference to the selection
-	 * 
+	 *
 	 * @param url	the url of the hypertext reference
 	 * @throws InvalidNavigationException if the selection is unavailable.
 	 */
@@ -382,7 +382,7 @@ public class TextSelection extends Selection {
 	/*
 	 * add href for a range text of pNode from the 'fromindex' text, and the href will cover
 	 * 'leftLength' text
-	 * 
+	 *
 	 */
 	private void addHref(int fromindex, int leftLength, Node pNode, String href) {
 		if ((fromindex == 0) && (leftLength == 0)) {
@@ -642,7 +642,7 @@ public class TextSelection extends Selection {
 
 	/*
 	 * optimize the text element by deleting the empty text node
-	 * 
+	 *
 	 * @param element
 	 */
 	private void optimize(Node pNode) {
@@ -662,7 +662,7 @@ public class TextSelection extends Selection {
 			node = nextNode;
 		}
 	}
-	
+
 	/*
 	 * apply the styleMap to the toElement
 	 * reserve the style property of toElement if it is also exist in styleMap
@@ -762,7 +762,7 @@ public class TextSelection extends Selection {
 	 * the textSpan must be the child element of parentNode
 	 * this method is used to keep the style of text span when it has been insert into the parentNode
 	 * if we don't deal with the style, the inserted span will also have the style of parentNode
-	 * 
+	 *
 	 */
 	private void adjustStyle(Node parentNode, OdfTextSpan textSpan, Map<OdfStyleProperty, String> styleMap) {
 		if (parentNode instanceof OdfStylableElement) {

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.odftoolkit.odfdom.component.MapHelper;
+import org.odftoolkit.odfdom.changes.MapHelper;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.number.DataStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencyStyleElement;

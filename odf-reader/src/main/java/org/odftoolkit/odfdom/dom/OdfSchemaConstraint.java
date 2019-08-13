@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -38,12 +38,12 @@ public enum OdfSchemaConstraint implements ValidationConstraint {
 	DOCUMENT_WITHOUT_ODF_MIMETYPE("The ODF mimetype '%2$s' is invalid for the ODF XML Schema document%1$s!"),
 	/** At least \'content.xml' or 'styles.xml' have to be contained in the ODF XML Schema package.*/
 	DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML("At least 'content.xml' or 'styles.xml' have to be contained in the ODF XML Schema package%1$s!"),
-	/** The files \'content.xml' or 'styles.xml' must be parsed without error when existent in the ODF XML Schema package.*/		
+	/** The files \'content.xml' or 'styles.xml' must be parsed without error when existent in the ODF XML Schema package.*/
 	DOCUMENT_WITH_EXISTENT_BUT_UNREADABLE_CONTENT_OR_STYLES_XML("In an ODF document, the '%2$s' have to be readable, when existent!"),
 	/** The 'mimetype' file have to be contained in the ODF XML Schema package.*/
 	PACKAGE_SHALL_CONTAIN_MIMETYPE("The 'mimetype' file have to be contained in the ODF XML Schema package%1$s!"),
     /** The XML is not valid according to the ODF RelaxNG schema. */
-    DOCUMENT_XML_INVALID_ATTRIBUTE_VALUE("The XML is not valid according to the ODF RelaxNG schema. The value %1$s for the ODF attribute %2$s is invalid!");    
+    DOCUMENT_XML_INVALID_ATTRIBUTE_VALUE("The XML is not valid according to the ODF RelaxNG schema. The value %1$s for the ODF attribute %2$s is invalid!");
 	private final String mMessage;
 
 	/**

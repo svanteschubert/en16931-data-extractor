@@ -2,7 +2,7 @@ package org.odftoolkit.odfdom.dom.element.number;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.odftoolkit.odfdom.component.MapHelper;
+import org.odftoolkit.odfdom.changes.MapHelper;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
@@ -327,7 +327,7 @@ public abstract class DataStyleElement extends OdfElement{
         for (pos = 0; pos < numberToken.length()
                 && (ch = numberToken.charAt(pos)) != '.'; pos++) {
             if (ch == ',') {
-                number.setNumberGroupingAttribute(new Boolean(true));
+                number.setNumberGroupingAttribute(true);
             } else if (ch == '0') {
                 nDigits++;
             }

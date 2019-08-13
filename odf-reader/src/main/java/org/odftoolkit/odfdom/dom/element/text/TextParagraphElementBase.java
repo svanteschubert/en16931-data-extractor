@@ -28,7 +28,7 @@
  */
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.component.TextContainingElement;
+import org.odftoolkit.odfdom.changes.TextContainingElement;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCondStyleNameAttribute;

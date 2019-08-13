@@ -75,7 +75,7 @@ class StreamHelper {
         }
 		in.close();
 		out.close();
-		
+
         // free the references
         in = null;
         out = null;

@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
  * OdfTableCellRange represent a rang of cells that are adjacent with each other
  * <p>
  * OdfTableCellRange provides methods to get/set/modify the properties of cell range.
- * 
+ *
  */
 public class OdfTableCellRange {
 
@@ -325,7 +325,7 @@ public class OdfTableCellRange {
 				i += repeateNum - 1;
 			}
 		}
-		//x coordinate of last column right point 
+		//x coordinate of last column right point
 		list.add(length);
 		return list;
 	}
@@ -372,7 +372,7 @@ public class OdfTableCellRange {
 
 	/**
 	 * Get the name of the named cell range.
-	 * 
+	 *
 	 * @return the name of the cell range
 	 */
 	public String getCellRangeName() {
@@ -381,7 +381,7 @@ public class OdfTableCellRange {
 
 	/**
 	 * Set the name of the current cell range.
-	 * 
+	 *
 	 * @param cellRangeName	the name that need to set
 	 */
 	public void setCellRangeName(String cellRangeName) {
@@ -428,7 +428,7 @@ public class OdfTableCellRange {
 		return (mnEndColumn - mnStartColumn + 1);
 	}
 
-	/** 
+	/**
 	 * Returns a single cell that is positioned at specified column and row.
 	 * @param clmIndex	the column index of the cell inside the range.
 	 * @param rowIndex	the row index of the cell inside the range.
@@ -442,10 +442,10 @@ public class OdfTableCellRange {
 
 	/**
 	 * Check if the given column in is this cell range.
-	 * @param colIndex	
+	 * @param colIndex
 	 * 					the given column index
 	 * @return true if the given column index is in the current cell range
-	 * 
+	 *
 	 */
 	private boolean isColumnInCellRange(int colIndex) {
 		if (colIndex < mnStartColumn || colIndex > mnEndColumn) {
@@ -455,9 +455,9 @@ public class OdfTableCellRange {
 		}
 	}
 
-	/** 
+	/**
 	 * Returns a single cell that is positioned at specified cell address.
-	 * 
+	 *
 	 * @param address
 	 * 				the cell address of the cell inside the range.
 	 * @return

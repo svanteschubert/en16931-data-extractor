@@ -36,7 +36,7 @@ public class ExtractionTest {
     public void collectSpecData() throws Exception {
         try {
             new OdtTableExtraction().collectSpecData(odtResource);
-            Statistics.log();
+            Statistics.global();
         } catch (Throwable t) {
             LoggerFactory.getLogger(ExtractionTest.class.getName()).error(t.getMessage(), t);
         }

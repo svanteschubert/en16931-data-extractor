@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -46,7 +46,7 @@ import org.w3c.dom.NodeList;
  * A derived Navigation class used for navigate the mText content it is used to
  * search the document and find the matched style properties and would return
  * TextSelection instance
- * 
+ *
  */
 public class TextStyleNavigation extends Navigation {
 

@@ -37,16 +37,16 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.util.ResourceUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.odftoolkit.odfdom.component.Component;
-import org.odftoolkit.odfdom.component.JsonOperationProducer;
-import org.odftoolkit.odfdom.component.OdfOperationDocument;
-import org.odftoolkit.odfdom.component.PageArea;
-import static org.odftoolkit.odfdom.component.PageArea.FOOTER_DEFAULT;
-import static org.odftoolkit.odfdom.component.PageArea.FOOTER_EVEN;
-import static org.odftoolkit.odfdom.component.PageArea.FOOTER_FIRST;
-import static org.odftoolkit.odfdom.component.PageArea.HEADER_DEFAULT;
-import static org.odftoolkit.odfdom.component.PageArea.HEADER_EVEN;
-import static org.odftoolkit.odfdom.component.PageArea.HEADER_FIRST;
+import org.odftoolkit.odfdom.changes.Component;
+import org.odftoolkit.odfdom.changes.JsonOperationProducer;
+import org.odftoolkit.odfdom.changes.CollabTextDocument;
+import org.odftoolkit.odfdom.changes.PageArea;
+import static org.odftoolkit.odfdom.changes.PageArea.FOOTER_DEFAULT;
+import static org.odftoolkit.odfdom.changes.PageArea.FOOTER_EVEN;
+import static org.odftoolkit.odfdom.changes.PageArea.FOOTER_FIRST;
+import static org.odftoolkit.odfdom.changes.PageArea.HEADER_DEFAULT;
+import static org.odftoolkit.odfdom.changes.PageArea.HEADER_EVEN;
+import static org.odftoolkit.odfdom.changes.PageArea.HEADER_FIRST;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
@@ -187,7 +187,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         mJsonOperationQueue = queue;
     }
 
-    public JSONObject getOperations(OdfOperationDocument operationDoc)
+    public JSONObject getOperations(CollabTextDocument operationDoc)
     	throws SAXException, JSONException, IOException {
 
     	JSONObject ops = null;

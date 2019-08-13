@@ -263,7 +263,7 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
                 } else {
                     textBuffer += ch;
                 }
-                    
+
 			} else if (ch == '\'') {
 				endQuote = false;
 				i++;

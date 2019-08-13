@@ -49,7 +49,7 @@ public class TableTableColumnElement extends OdfStylableElement {
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "table-column");
 	private static final String VISIBLE = "visible";
 	private static final String COLLAPSE = "collapse";
-	
+
 	/**
 	 * Create the instance of <code>TableTableColumnElement</code>
 	 *
@@ -197,7 +197,7 @@ public class TableTableColumnElement extends OdfStylableElement {
 			visitor.visit(this);
 		}
 	}
-	
+
 	@Override
 	// ToDo: Move this to a intermediate class, e.g. ComponentRootElement
 	/**
@@ -211,20 +211,20 @@ public class TableTableColumnElement extends OdfStylableElement {
 		return repeated;
 	}
 
-	@Override	
+	@Override
 	// ToDo: Move this to a intermediate class, e.g. ComponentRootElement
 	/**
 	 * @return the component size of a heading, which is always 1
 	 */
 	public boolean isRepeatable() {
 		return true;
-	}	
-		
+	}
+
 	@Override
 	// ToDo: Move this to a intermediate class, e.g. ComponentRootElement
 	/** @return the component size of a heading, which is always 1 */
-	public void setRepetition(int repetition) {		
-		setTableNumberColumnsRepeatedAttribute(repetition);	
+	public void setRepetition(int repetition) {
+		setTableNumberColumnsRepeatedAttribute(repetition);
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class TableTableColumnElement extends OdfStylableElement {
 	@Override
 	public TableTableColumnElement split(int posStart) {
 		TableTableColumnElement newElement = this;
-		// 0 would not leave anything left on the left side		
+		// 0 would not leave anything left on the left side
 		if (posStart > 0) {
 			newElement = (TableTableColumnElement) this.cloneNode(true);
 			int repeated = getTableNumberColumnsRepeatedAttribute();
@@ -247,7 +247,7 @@ public class TableTableColumnElement extends OdfStylableElement {
 				} else {
 					this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
 				}
-				// any higher value one for repeated write out. 
+				// any higher value one for repeated write out.
 				// 1 is the default and has not to be written out
 				if (repeated - posStart > 1) {
 					newElement.setTableNumberColumnsRepeatedAttribute(repeated - posStart);
@@ -261,11 +261,11 @@ public class TableTableColumnElement extends OdfStylableElement {
 				parent.appendChild(newElement);
 			} else {
 				parent.insertBefore(newElement, nextElementSibling);
-			}			
+			}
 		}
-		return newElement;		
-	}	
-	
+		return newElement;
+	}
+
 
 	/** Changes the visibility of the @table:visibility attributes */
 	public void setVisiblity(Boolean show) {
@@ -281,5 +281,5 @@ public class TableTableColumnElement extends OdfStylableElement {
 				setAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "table:visibility", COLLAPSE);
 			}
 		}
-	}		
+	}
 }

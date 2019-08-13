@@ -53,7 +53,7 @@ public class TableTableRowElement extends OdfStylableElement {
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "table-row");
 	private static final String VISIBLE = "visible";
 	private static final String COLLAPSE = "collapse";
-	
+
 	/**
 	 * Create the instance of
 	 * <code>TableTableRowElement</code>
@@ -291,7 +291,7 @@ public class TableTableRowElement extends OdfStylableElement {
 	public boolean isComponentRoot() {
 		return true;
 	}
-	
+
 
 	/** Changes the visibility of the @table:visibility attributes */
 	public void setVisiblity(Boolean show) {
@@ -307,7 +307,7 @@ public class TableTableRowElement extends OdfStylableElement {
 				setAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "table:visibility", COLLAPSE);
 			}
 		}
-	}	
+	}
 
 	@Override
 	// ToDo: Move this to a intermediate class, e.g. ComponentRootElement
@@ -373,7 +373,7 @@ public class TableTableRowElement extends OdfStylableElement {
 				parent.appendChild(newElement);
 			} else {
 				parent.insertBefore(newElement, nextElementSibling);
-			}			
+			}
 		}
 		return newElement;
 	}

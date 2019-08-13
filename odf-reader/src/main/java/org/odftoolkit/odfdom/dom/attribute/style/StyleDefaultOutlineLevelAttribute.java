@@ -83,7 +83,7 @@ public class StyleDefaultOutlineLevelAttribute extends OdfAttribute {
 		} catch (NumberFormatException e) {
 			// TODO: validation handling/logging
 			throw (e);
-		}	
+		}
 	}
 
 	/**

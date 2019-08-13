@@ -27,7 +27,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 
 /**
  * Convenient functionality for the parent ODF OpenDocument element
- * 
+ *
  */
 public class OdfTextSpan extends TextSpanElement
 {
@@ -113,7 +113,7 @@ public class OdfTextSpan extends TextSpanElement
         }
 		return addContent(content);
 	}
-    
+
 	/**
 	 * Set a span to have the given styleName and add the given content.
      * If the style name is null or the null string, no style is added.

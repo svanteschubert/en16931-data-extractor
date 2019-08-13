@@ -290,7 +290,7 @@ public class OdfNumberStyle extends NumberNumberStyleElement {
                         number.setNumberMinIntegerDigitsAttribute(digitCount);
                     }
                     if(isGrouping){
-                        number.setNumberGroupingAttribute(new Boolean(true));
+                        number.setNumberGroupingAttribute(true);
                     }
                     if(exponentCount > 0){
                         number.setNumberMinExponentDigitsAttribute(exponentCount);
@@ -305,7 +305,7 @@ public class OdfNumberStyle extends NumberNumberStyleElement {
                         number.setNumberMinIntegerDigitsAttribute(digitCount);
                     }
                     if(isGrouping){
-                        number.setNumberGroupingAttribute(new Boolean(true));
+                        number.setNumberGroupingAttribute(true);
                     }
                     appendChild(number);
                 }

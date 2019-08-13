@@ -33,8 +33,8 @@ import org.apache.xerces.dom.ElementNSImpl;
 import org.apache.xerces.dom.NodeImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.json.JSONObject;
-import org.odftoolkit.odfdom.component.Component;
-import org.odftoolkit.odfdom.component.JsonOperationConsumer;
+import org.odftoolkit.odfdom.changes.Component;
+import org.odftoolkit.odfdom.changes.JsonOperationConsumer;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -1240,7 +1240,7 @@ abstract public class OdfElement extends ElementNSImpl {
             Logger.getLogger(OdfElement.class.getName()).warning("A negative index " + textPosStart + " was given to insert text into the paragraph!");
         }
         // start recrusion
-        ArrayList<Node> nodeContainer = new ArrayList(1);
+        ArrayList<Node> nodeContainer = new ArrayList<Node>(1);
         boolean withinTextContainer = this instanceof TextPElement || this instanceof TextHElement;
         TextContentTraverser.traverseSiblings(this.getFirstChild(), 0, textPosStart, textPosStart + 1, TextContentTraverser.Algorithm.RECEIVE, nodeContainer, withinTextContainer);
 
@@ -1356,7 +1356,7 @@ abstract public class OdfElement extends ElementNSImpl {
                 this.appendChild((Element) content);
             }
         } else {
-            List newData = new ArrayList(2);
+            List<Object> newData = new ArrayList<Object>(2);
             newData.add(content);
             int currentPos = TextContentTraverser.traverseSiblings(firstChild, 0, textPosStart, textPosStart, TextContentTraverser.Algorithm.INSERT, newData);
             if (newData.size() == 1) {

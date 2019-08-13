@@ -44,9 +44,6 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import org.json.JSONArray;
-import org.odftoolkit.odfdom.component.JsonOperationConsumer;
-import org.odftoolkit.odfdom.component.OdfOperationDocument;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -1135,12 +1132,6 @@ public abstract class OdfDocument extends OdfSchemaDocument {
             }
         }
         return prefix + freeIndex;
-    }
-
-    public int applyOperations(OdfOperationDocument operationDocument, JSONArray ops)
-    	throws Exception {
-
-    	return JsonOperationConsumer.applyOperations(operationDocument, ops);
     }
 
     protected void removeCachedView() {

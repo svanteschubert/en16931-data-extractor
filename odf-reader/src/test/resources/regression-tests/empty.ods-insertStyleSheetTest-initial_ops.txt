@@ -1,8 +1,0 @@
-{"operations":[{"name":"insertFontDescription","attrs":{"family":"Arial","familyGeneric":"swiss","pitch":"variable"},"fontName":"Arial"},
-{"name":"insertFontDescription","attrs":{"family":"Mangal","familyGeneric":"system","pitch":"variable"},"fontName":"Mangal"},
-{"name":"insertFontDescription","attrs":{"family":"'Microsoft YaHei'","familyGeneric":"system","pitch":"variable"},"fontName":"Microsoft YaHei"},
-{"name":"insertFontDescription","attrs":{"family":"'Segoe UI'","familyGeneric":"system","pitch":"variable"},"fontName":"Segoe UI"},
-{"name":"insertFontDescription","attrs":{"family":"Tahoma","familyGeneric":"system","pitch":"variable"},"fontName":"Tahoma"},
-{"name":"insertSheet","sheet":0,"sheetName":"Sheet1"},
-{"name":"insertRows","start":[0,0],"attrs":{"row":{"height":432}}},
-{"name":"insertCells","start":[0,0,0]}]}

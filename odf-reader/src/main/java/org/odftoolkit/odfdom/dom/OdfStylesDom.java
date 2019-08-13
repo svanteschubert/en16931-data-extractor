@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-import org.odftoolkit.odfdom.component.ChangesFileSaxHandler;
+import org.odftoolkit.odfdom.changes.ChangesFileSaxHandler;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAutomaticStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;

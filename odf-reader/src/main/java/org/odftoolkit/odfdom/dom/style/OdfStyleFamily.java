@@ -2633,7 +2633,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTableRowPropertiesElement.RowHeight,
 				StyleTableRowPropertiesElement.UseOptimalRowHeight,
 			});
-    
+
 	public final static OdfStyleFamily HeaderFooter = new OdfStyleFamily("headerfooter",
 			new OdfStyleProperty[]{
 				StyleHeaderFooterPropertiesElement.BackgroundColor,
@@ -2660,11 +2660,11 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleHeaderFooterPropertiesElement.BorderLineWidthTop,
 				StyleHeaderFooterPropertiesElement.DynamicSpacing,
 				StyleHeaderFooterPropertiesElement.Shadow,
-				StyleHeaderFooterPropertiesElement.Height,  
+				StyleHeaderFooterPropertiesElement.Height,
 			});
-    
+
 	public final static OdfStyleFamily Page = new OdfStyleFamily("page",
-			new OdfStyleProperty[]{              
+			new OdfStyleProperty[]{
 				StylePageLayoutPropertiesElement.BackgroundColor,
 				StylePageLayoutPropertiesElement.Border,
 				StylePageLayoutPropertiesElement.BorderBottom,
@@ -2715,9 +2715,9 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StylePageLayoutPropertiesElement.ScaleToPages,
 				StylePageLayoutPropertiesElement.Shadow,
 				StylePageLayoutPropertiesElement.TableCentering,
-				StylePageLayoutPropertiesElement.WritingMode,                
+				StylePageLayoutPropertiesElement.WritingMode,
 			});
-    
+
 	public final static OdfStyleFamily List = new OdfStyleFamily("list",
 			new OdfStyleProperty[]{
 				StyleChartPropertiesElement.AngleOffset,

@@ -185,7 +185,7 @@ public class OdfTextDocument extends OdfDocument {
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfTextDocument loadDocument(InputStream inputStream, Map<String, Object> configuration) throws Exception {
-		return (OdfTextDocument) OdfDocument.loadDocument(inputStream, configuration);
+ 		return (OdfTextDocument) OdfDocument.loadDocument(inputStream, configuration);
 	}
 
 	/**

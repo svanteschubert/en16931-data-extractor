@@ -1,9 +1,0 @@
-{"operations":[
-{"name":"noOp"},
-{"name":"insertFontDescription","attrs":{"family":"Courier","familyGeneric":"modern","pitch":"fixed"},"fontName":"Courier"},
-{"name":"insertParagraph","start":[0]},
-{"name":"insertText","start":[0,0],"text":"Courier"},
-{"name":"insertText","start":[0,7],"text":" "},
-{"name":"insertText","start":[0,8],"text":"subscript"},
-{"name":"setAttributes","start":[0,0],"end":[0,16],"attrs":{"character":{"fontName":"Courier"}}}
-]}

@@ -205,7 +205,7 @@ public class OdfPackage implements Closeable {
             if (errorHandlerProperty != null) {
                 if (errorHandlerProperty.equalsIgnoreCase("true")) {
                     mErrorHandler = new DefaultErrorHandler();
-                    Logger.getLogger(OdfPackage.class.getName()).info("Activated validation with default ErrorHandler!");
+                    Logger.getLogger(OdfPackage.class.getName()).config("Activated validation with default ErrorHandler!");
                 } else if (!errorHandlerProperty.equalsIgnoreCase("false")) {
                     try {
                         Class<?> cl = Class.forName(errorHandlerProperty);
