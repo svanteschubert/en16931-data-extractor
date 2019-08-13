@@ -25,12 +25,12 @@
     <parent>
         <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor</artifactId>
-        <version>1.0.0-SNAPSHOT-20190812</version>
+        <version>1.0.0-SNAPSHOT-20190813</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.odftoolkit</groupId>
     <artifactId>odfdom-java</artifactId>
-    <version>1.0.0-SNAPSHOT-20190812</version>
     <packaging>jar</packaging>
     
 
@@ -253,6 +253,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -288,20 +289,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>src/main/resources/**</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part1.html</exclude>
-                        <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part3.html</exclude>
-                        <exclude>src/codegen/resources/dom/*.rng</exclude>
-                        <exclude>src/codegen/resources/pkg/*.rng</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
