@@ -4,6 +4,9 @@
 # Log file
 *.log
 
+# IDE file
+nb-configuration.xml
+
 # BlueJ files
 *.ctxt
 
@@ -25,6 +28,7 @@ hs_err_pid*
 # build directories
 bin/
 target/
+target*/
 
 # backup files
 *~
