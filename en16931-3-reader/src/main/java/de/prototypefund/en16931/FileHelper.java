@@ -49,25 +49,28 @@ final class FileHelper {
      * The relative path of the test file will be resolved and the absolute will
      * be returned
      *
-     * @param relativeFilePath Path of the test resource relative to
+     * @param path Path of the test resource relative to
      * <code>src/test/resource/</code>.
      * @return the absolute path of the test file
      * @throws FileNotFoundException If the file could not be found
      */
-    public static String getAbsolutePath(String relativeFilePath) throws FileNotFoundException {
+    public static String getAbsolutePath(String path) throws FileNotFoundException {
+        String absPath = null;
         URI uri = null;
         try {
-            URL url = FileHelper.class.getClassLoader().getResource(relativeFilePath);
+            URL url = FileHelper.class.getClassLoader().getResource(path);
             if(url != null){
                 uri = url.toURI();
             }
         } catch (URISyntaxException ex) {
             Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (uri == null) {
-            throw new FileNotFoundException("Could not find the file '" + relativeFilePath + "'!");
+        if(uri != null){
+            absPath = uri.getPath();
+        }else {
+            absPath = path;
         }
-        return uri.getPath();
+        return absPath;
     }
 
     /**
