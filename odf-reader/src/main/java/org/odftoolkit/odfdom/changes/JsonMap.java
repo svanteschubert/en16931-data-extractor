@@ -30,13 +30,13 @@ public class JsonMap extends JSONObject implements Map {
     public Set<Entry<String,Object>> entrySet(){
         return super.entrySet();
     }
-    
+
     @Override
     public int size() {
         return super.length();
     }
 
-    @Override   
+    @Override
     public boolean containsKey(Object key) {
         return super.has(key.toString());
     }

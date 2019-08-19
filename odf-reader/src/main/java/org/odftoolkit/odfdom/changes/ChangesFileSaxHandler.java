@@ -1362,7 +1362,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                     if (image.hasAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href")) {
                         try {
                             String href = image.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
-                            imageProps.put("imageUrl", StringEscapeUtils.escapeJson(href));                            
+                            imageProps.put("imageUrl", StringEscapeUtils.escapeJson(href));
                             // if there is cropping from the frame, we need to do further calculation based on real graphic size
                             if (imageProps.has("cropRight") && (imageProps.has("height") || imageProps.has("width"))) {
                                 JsonOperationProducer.calculateCrops(image, href, imageProps);

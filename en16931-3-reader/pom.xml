@@ -22,9 +22,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
-	<groupId>de.prototypefund</groupId>
-	<artifactId>en16931-data-extractor</artifactId>
-	<version>20190814</version>
+    <groupId>de.prototypefund</groupId>
+    <artifactId>en16931-data-extractor</artifactId>
+    <version>20190816</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.odftoolkit</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>20190814</version>
+            <version>20190816</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -56,9 +56,9 @@
             <version>1.7.25</version>
         </dependency>  
         <dependency> 
-          <groupId>org.apache.logging.log4j</groupId>
-          <artifactId>log4j-slf4j-impl</artifactId>
-          <version>2.11.1</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.11.1</version>
         </dependency>       
         <!-- http://logging.apache.org/log4j/2.x/maven-artifacts.html -->
         <dependency>
@@ -290,10 +290,10 @@
         <url>https://www.prototypefund.de/</url>
     </organization>
     <scm>
-		<connection>scm:git:git://github.com/svanteschubert/en16931-data-extractor.git</connection>
-		<developerConnection>scm:git:git@github.com:svanteschubert/en16931-data-extractor.git</developerConnection>
-		<url>https://github.com/svanteschubert/en16931-data-extractor.git</url>		
-	</scm>
+        <connection>scm:git:git://github.com/svanteschubert/en16931-data-extractor.git</connection>
+        <developerConnection>scm:git:git@github.com:svanteschubert/en16931-data-extractor.git</developerConnection>
+        <url>https://github.com/svanteschubert/en16931-data-extractor.git</url>		
+    </scm>
     <profiles>
         <profile>
             <id>integration-test</id>

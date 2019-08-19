@@ -3093,7 +3093,7 @@ public class JsonOperationConsumer {
         if (imageProps.has("imageUrl")) {
             String href = imageProps.optString("imageUrl");
             if (href != null && !href.isEmpty()) {
-                imageElement.setXlinkHrefAttribute(StringEscapeUtils.unescapeJson(href));                
+                imageElement.setXlinkHrefAttribute(StringEscapeUtils.unescapeJson(href));
             }
         } else if (imageProps.has("imageData")) {
             String imageData = imageProps.optString("imageData");
@@ -4527,7 +4527,7 @@ public class JsonOperationConsumer {
                     if (value == null || value.equals(JSONObject.NULL)) {
                         propertiesElement.removeAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
                     } else {
-                        propertiesElement.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href", StringEscapeUtils.unescapeJson((String) value));						
+                        propertiesElement.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href", StringEscapeUtils.unescapeJson((String) value));
                     }
                 }
             }

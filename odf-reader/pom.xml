@@ -25,19 +25,19 @@
     <parent>
         <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor</artifactId>
-        <version>20190814</version>
+        <version>20190816</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.odftoolkit</groupId>
     <artifactId>odfdom-java</artifactId>
     <packaging>jar</packaging>
-    
+
 
     <name>ODFDOM</name>
     <description>
-        ODFDOM is an OpenDocument Format (ODF) framework. Its purpose 
-        is to provide an easy common way to create, access and 
+        ODFDOM is an OpenDocument Format (ODF) framework. Its purpose
+        is to provide an easy common way to create, access and
         manipulate ODF files, without requiring detailed knowledge of
         the ODF specification. It is designed to provide the ODF
         developer community with an easy lightwork programming API
@@ -69,7 +69,7 @@
             <groupId>xalan</groupId>
             <artifactId>serializer</artifactId>
             <version>2.7.2</version>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -114,13 +114,13 @@
             <artifactId>json</artifactId>
             <version>20180813</version><!-- soon on Maven: 20190722 -->
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/jul-to-slf4j 
+        <!-- https://mvnrepository.com/artifact/org.slf4j/jul-to-slf4j
         https://www.slf4j.org/legacy.html#jul-to-slf4j -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jul-to-slf4j</artifactId>
             <version>1.7.26</version>
-        </dependency>        
+        </dependency>
         <!-- http://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html -->
         <dependency>
             <groupId>org.slf4j</groupId>
