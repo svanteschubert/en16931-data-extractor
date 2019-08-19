@@ -8,15 +8,15 @@ There is [a wonderful online introduction for en16931](https://ec.europa.eu/cefd
 
 ## Reason
 The goal of this tool is to extract the syntax-binding (mapping) between the XML formats and the Semantic Data Model. The bindings are required to generate source code for a software allowing to load/save both XML formats. In addition the software shall modify/create XML by an API based on the Semantic Data Model of en16931.
-Some reasons behind from a bird perspective: 
+Some reasons behind from a bird perspective:
 <br/>There are three [graphs](https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg) within the EU specification:
-1. graph: Semantic Data Model (describes the user semantic both XML are being mapped upon) 
-2. graph: UBL XML W3C XML grammar (describes all allowed XML files of UBL) 
+1. graph: Semantic Data Model (describes the user semantic both XML are being mapped upon)
+2. graph: UBL XML W3C XML grammar (describes all allowed XML files of UBL)
 3. graph: UN/CEFACT W3C XML grammar (describes all allowed XML files of UN/CEFACT)
 
 The syntax bindings - this tool is extracting - are contecting "graph 2" with "graph 1" and "graph 2" with "graph 3".
 In addition, aside of the grammar there are more restrictions upon the XML that W3C Schema is not able to express ([given by ISO Schematron constraints](https://github.com/CenPC434/validation)), for instance an order date has to be earlier than the pay date.
-These schematron restrictions can be seen as additional relations upon the XML grammar graphs (graph 2 & graph 3). 
+These schematron restrictions can be seen as additional relations upon the XML grammar graphs (graph 2 & graph 3).
 It is planned to map those XML constraints later to the "Semantic Data model" level (graph 1). By this it could be validated if there are constraints only for UBL or UN/CEFACT and missing for the other XML.
 Also the same restrictions on the semantic graph might be reused for other older e-invoice formats to be mapped to the Semantic Data Model, in other words the validation artefacts could be easier reused.
 
@@ -33,11 +33,11 @@ The data of the above mapping tables is being read from the tables.
 The XML part (dark grey) is loaded as XMLNode object.
 The semantic part (light grey) is loaded as SemanticNode object.
 The data extractor saves the model of each table in its own XML file to ease reading the data.
-The own XML file consists of a sequence of semantic elements containing the XML syntax elements. 
+The own XML file consists of a sequence of semantic elements containing the XML syntax elements.
 The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making file comparison easier.
 The name of our own XML files is a combination of: "specification document name" + "table name" + ".xml"
 More about the used class representation in the [JavaDoc](https://svanteschubert.github.io/en16931-data-extractor/en16931-3-reader/docs/).
-After the JUnit tests there will be a test log file "target/test.log".  
+After the JUnit tests there will be a test log file "target/test.log".
 
 ## Software Prerequisites
 1. [>=JDK 9](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
@@ -59,5 +59,5 @@ After the JUnit tests there will be a test log file "target/test.log".
 
 ## Data Analysis
 5. The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
-6. Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example_informative.xml) and the ["normative SUBSET"](en16931-3-reader/src/site/16931-3-3_example_SUBSETnormative.xml) XML files. 
+6. Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example_informative.xml) and the ["normative SUBSET"](en16931-3-reader/src/site/16931-3-3_example_SUBSETnormative.xml) XML files.
 ![In our example only the title is different between the two tables](en16931-3-reader/src/site/TotalCommanderComparison.png)

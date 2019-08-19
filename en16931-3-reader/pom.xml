@@ -21,9 +21,16 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
+    <parent>
+        <groupId>de.prototypefund</groupId>
+        <artifactId>en16931-extractor</artifactId>
+        <version>20190817</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
     <groupId>de.prototypefund</groupId>
-    <artifactId>en16931-data-extractor</artifactId>
+    <artifactId>en16931-3-reader</artifactId>
     <version>20190817</version>
     <packaging>jar</packaging>
 
@@ -33,7 +40,7 @@
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>    
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
         <!--<maven.build.finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</maven.build.finalName>-->
     </properties>
 
@@ -54,12 +61,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
-        </dependency>  
-        <dependency> 
+        </dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.11.1</version>
-        </dependency>       
+        </dependency>
         <!-- http://logging.apache.org/log4j/2.x/maven-artifacts.html -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -82,7 +89,7 @@
             <version>1.21</version>
         </dependency>
     </dependencies>
-   
+
 
     <!-- Build Settings -->
     <build>
@@ -133,12 +140,12 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>				
+                <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
-                <configuration>                    
+                <configuration>
                     <systemPropertyVariables>
                         <project.version>${project.version}</project.version>
-                        <project.timestamp>${build.timestamp}</project.timestamp>                        
+                        <project.timestamp>${build.timestamp}</project.timestamp>
                         <skipTests>${skipTests}</skipTests>
                     </systemPropertyVariables>
                 </configuration>
@@ -147,17 +154,17 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.1</version>
-                <executions> 
+                <executions>
                     <execution>
                         <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
-                        </goals>                        
+                        </goals>
                         <configuration>
                             <doclint>none</doclint>
                             <additionalparam>${javadoc.opts}</additionalparam>
                         </configuration>
-                    </execution>          
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -209,7 +216,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>        
+            </plugin>
         </plugins>
     </build>
     <reporting>
@@ -266,19 +273,19 @@
     <!-- More Project Information -->
     <name>EU Specification Data Extractor (en16931)</name>
     <description>
-        This data extractor is the first step to automate the creation of 
+        This data extractor is the first step to automate the creation of
         software based on an European standard.
-        It extracts the table data from the en16931 e-invoice standard and 
+        It extracts the table data from the en16931 e-invoice standard and
         saves them in an XML file format for review and later regression tests.
-        The target audience are editors of the specification, 
+        The target audience are editors of the specification,
         which work with an office document.
-        Due to the history of the author of this software, the original used DOCX 
-        document has to be saved as ODT to be automatically accessed by the 
-        ODF Toolkit software. 
+        Due to the history of the author of this software, the original used DOCX
+        document has to be saved as ODT to be automatically accessed by the
+        ODF Toolkit software.
     </description>
     <url>https://prototypefund.de/project/papierloser-alltag/</url>
     <inceptionYear>2018</inceptionYear>
-    
+
     <licenses>
         <license>
             <name>Apache 2</name>
@@ -292,7 +299,7 @@
     <scm>
         <connection>scm:git:git://github.com/svanteschubert/en16931-data-extractor.git</connection>
         <developerConnection>scm:git:git@github.com:svanteschubert/en16931-data-extractor.git</developerConnection>
-        <url>https://github.com/svanteschubert/en16931-data-extractor.git</url>		
+        <url>https://github.com/svanteschubert/en16931-data-extractor.git</url>
     </scm>
     <profiles>
         <profile>
@@ -307,12 +314,12 @@
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>						
+                        <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.0</version>
                         <configuration>
                             <systemPropertyVariables>
                                 <project.version>${project.version}</project.version>
-                                <project.timestamp>${build.timestamp}</project.timestamp>                                
+                                <project.timestamp>${build.timestamp}</project.timestamp>
                             </systemPropertyVariables>
                             <skipTests>${skipTests}</skipTests>
                         </configuration>
@@ -321,7 +328,7 @@
             </build>
         </profile>
         <!-- Profile for deploying to the Sonatype repository, which
-        requires GPG signatures 
+        requires GPG signatures
         see
         https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
         https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven

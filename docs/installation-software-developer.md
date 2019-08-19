@@ -1,5 +1,5 @@
 # odftoolkit website
-ODFTOOLKIT Website: 
+ODFTOOLKIT Website:
 * https://github.com/tdf/odftoolkit/tree/master/docs
 * https://tdf.github.io/odftoolkit/docs/
 * https://odftoolkit.org

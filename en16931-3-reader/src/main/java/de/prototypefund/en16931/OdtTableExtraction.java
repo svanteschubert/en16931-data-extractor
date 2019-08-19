@@ -106,7 +106,7 @@ public class OdtTableExtraction {
      * documents that have an '.odt' suffix to the data extractor.
      */
     private void collectSpecData(File f) throws Exception {
-        String absPath = f.getAbsolutePath();        
+        String absPath = f.getAbsolutePath();
         if (f.isDirectory()) {
             LOG.info("Extracting data from directory: " + absPath);
             for (String childPath : f.list()) {
