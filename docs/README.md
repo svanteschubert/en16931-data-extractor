@@ -44,10 +44,10 @@ After the JUnit tests there will be a test log file "target/test.log".
 2. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
 ## Data Extraction by Technical Writer
-1. Download the JAR with all dependencies includes [en16931-data-extractor-20190817-jar-with-dependencies.jar](docs/en16931-data-extractor-20190817-jar-with-dependencies.jar)
-2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-20190817-jar-with-dependencies.jar](docs/en16931-data-extractor-20190817-jar-with-dependencies.jar)"
+1. Download the JAR with all dependencies includes [en16931-data-extractor-20190818-jar-with-dependencies.jar](docs/en16931-data-extractor-20190818-jar-with-dependencies.jar)
+2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-20190818-jar-with-dependencies.jar](docs/en16931-data-extractor-20190818-jar-with-dependencies.jar)"
 3. Safe the DOCX documents of en16931-3 to ODT
-4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-20190817-jar-with-dependencies.jar](docs/en16931-data-extractor-20190817-jar-with-dependencies.jar) your-specification.odt or your-directory"
+4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-20190818-jar-with-dependencies.jar](docs/en16931-data-extractor-20190818-jar-with-dependencies.jar) your-specification.odt or your-directory"
 
 ## Data Extraction by Software Developer
 1. Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom) NOTE: This might take about 15min.</br>
