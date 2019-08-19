@@ -36,7 +36,7 @@ The data extractor saves the model of each table in its own XML file to ease rea
 The own XML file consists of a sequence of semantic elements containing the XML syntax elements.
 The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making file comparison easier.
 The name of our own XML files is a combination of: "specification document name" + "table name" + ".xml"
-More about the used class representation in the [JavaDoc](https://svanteschubert.github.io/en16931-data-extractor/en16931-3-reader/docs/).
+More about the used class representation in the [JavaDoc](docs/apidocs/index.html).
 After the JUnit tests there will be a test log file "target/test.log".
 
 ## Software Prerequisites
