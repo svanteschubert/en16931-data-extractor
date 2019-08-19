@@ -7,6 +7,12 @@
 # IDE file
 nb-configuration.xml
 
+# VSCode files
+.project
+.settings/
+.classpath
+.factorypath
+
 # BlueJ files
 *.ctxt
 
