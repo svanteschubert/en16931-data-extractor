@@ -30,7 +30,7 @@
     </parent>
 
     <groupId>org.odftoolkit</groupId>
-    <artifactId>odfdom-java</artifactId>
+    <artifactId>odf-reader</artifactId>
     <packaging>jar</packaging>
 
 

@@ -167,6 +167,73 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin><!-- copying the JAR (with all dependencies) into the DOCS directory -->
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-to-DOCS</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>${project.basedir}/../docs</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/target</directory>
+                                    <includes>
+                                        <include>en16931-3-reader-${project.version}-jar-with-dependencies.jar</include>
+                                    </includes>
+                                </resource>
+                                <resource>
+                                    <directory>${project.basedir}/../src/site/</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**.*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-to-ROOT</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>${project.basedir}/..</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/../src/site/</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>README.md</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/../docs</directory>
+                            <includes>
+                                <include>**/*.jar</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.1.0</version>
@@ -271,7 +338,7 @@
     </reporting>
 
     <!-- More Project Information -->
-    <name>EU Specification Data Extractor (en16931)</name>
+    <name>EU Specification Data Reader (en16931-3)</name>
     <description>
         This data extractor is the first step to automate the creation of
         software based on an European standard.
