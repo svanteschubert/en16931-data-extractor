@@ -120,7 +120,7 @@
                             <manifestSection>
                                 <name>en16931-data-extractor</name>
                                 <manifestEntries>
-                                    <Project-Name>${project.name}</Project-Name>
+                                    <Project-Name>${project.artifactId}</Project-Name>
                                     <Project-Version>${project.version}</Project-Version>
                                     <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
@@ -279,9 +279,9 @@
                         </manifestEntries>
                         <manifestSections>
                             <manifestSection>
-                                <name>${project.name}</name>
+                                <name>${project.artifactId}</name>
                                 <manifestEntries>
-                                    <Project-Name>${project.name}</Project-Name>
+                                    <Project-Name>${project.artifactId}</Project-Name>
                                     <Project-Version>${project.version}</Project-Version>
                                     <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
