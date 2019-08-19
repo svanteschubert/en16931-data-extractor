@@ -181,17 +181,36 @@
                         <configuration>
                             <outputDirectory>${project.basedir}/../docs</outputDirectory>
                             <resources>
-                                <resource>
+                                <resource> <!-- copy latest JAR -->
                                     <directory>${project.basedir}/target</directory>
                                     <includes>
                                         <include>${project.build.finalName}-jar-with-dependencies.jar</include>
                                     </includes>
                                 </resource>
-                                <resource>
+                                <resource> <!-- copy documentation (using latest version) -->
                                     <directory>${project.basedir}/../src/site/</directory>
                                     <filtering>true</filtering>
                                     <includes>
-                                        <include>**/*.*</include>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-JavaDoc-to-DOCS</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>${project.basedir}/../docs/apidocs</outputDirectory>
+                            <resources>
+                                <resource> <!-- copy javadoc -->
+                                    <directory>${project.basedir}/target/apidocs</directory>
+                                    <includes>
+                                        <include>**/*</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -207,7 +226,7 @@
                         <configuration>
                             <outputDirectory>${project.basedir}/..</outputDirectory>
                             <resources>
-                                <resource>
+                                <resource> <!-- copy README.md (using latest version) -->
                                     <directory>${project.basedir}/../src/site/</directory>
                                     <filtering>true</filtering>
                                     <includes>
@@ -227,7 +246,7 @@
                         <fileset>
                             <directory>${project.basedir}/../docs</directory>
                             <includes>
-                                <include>**/*.jar</include>
+                                <include>**/*</include>
                             </includes>
                             <followSymlinks>false</followSymlinks>
                         </fileset>

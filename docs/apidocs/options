@@ -1,0 +1,25 @@
+-classpath
+'C:/Users/Niemand/.m2/repository/org/odftoolkit/odfdom-java/20190817/odfdom-java-20190817.jar;C:/Users/Niemand/.m2/repository/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar;C:/Users/Niemand/.m2/repository/xerces/xercesImpl/2.12.0/xercesImpl-2.12.0.jar;C:/Users/Niemand/.m2/repository/xalan/serializer/2.7.2/serializer-2.7.2.jar;C:/Users/Niemand/.m2/repository/org/apache/jena/jena-core/3.9.0/jena-core-3.9.0.jar;C:/Users/Niemand/.m2/repository/org/apache/jena/jena-iri/3.9.0/jena-iri-3.9.0.jar;C:/Users/Niemand/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar;C:/Users/Niemand/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar;C:/Users/Niemand/.m2/repository/org/apache/jena/jena-base/3.9.0/jena-base-3.9.0.jar;C:/Users/Niemand/.m2/repository/org/apache/jena/jena-shaded-guava/3.9.0/jena-shaded-guava-3.9.0.jar;C:/Users/Niemand/.m2/repository/org/apache/commons/commons-csv/1.5/commons-csv-1.5.jar;C:/Users/Niemand/.m2/repository/commons-io/commons-io/2.6/commons-io-2.6.jar;C:/Users/Niemand/.m2/repository/org/apache/commons/commons-compress/1.17/commons-compress-1.17.jar;C:/Users/Niemand/.m2/repository/com/github/andrewoma/dexx/collection/0.7/collection-0.7.jar;C:/Users/Niemand/.m2/repository/org/apache/jena/jena-core/3.9.0/jena-core-3.9.0-tests.jar;C:/Users/Niemand/.m2/repository/net/rootdev/java-rdfa/0.4.2/java-rdfa-0.4.2.jar;C:/Users/Niemand/.m2/repository/commons-validator/commons-validator/1.6/commons-validator-1.6.jar;C:/Users/Niemand/.m2/repository/commons-beanutils/commons-beanutils/1.9.2/commons-beanutils-1.9.2.jar;C:/Users/Niemand/.m2/repository/commons-digester/commons-digester/1.8.1/commons-digester-1.8.1.jar;C:/Users/Niemand/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar;C:/Users/Niemand/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar;C:/Users/Niemand/.m2/repository/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar;C:/Users/Niemand/.m2/repository/org/apache/commons/commons-text/1.7/commons-text-1.7.jar;C:/Users/Niemand/.m2/repository/org/json/json/20180813/json-20180813.jar;C:/Users/Niemand/.m2/repository/org/slf4j/jul-to-slf4j/1.7.26/jul-to-slf4j-1.7.26.jar;C:/Users/Niemand/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar;C:/Users/Niemand/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.11.1/log4j-slf4j-impl-2.11.1.jar;C:/Users/Niemand/.m2/repository/org/apache/logging/log4j/log4j-api/2.11.1/log4j-api-2.11.1.jar;C:/Users/Niemand/.m2/repository/org/apache/logging/log4j/log4j-core/2.11.1/log4j-core-2.11.1.jar;C:/Users/Niemand/.m2/repository/org/openjdk/jmh/jmh-core/1.21/jmh-core-1.21.jar;C:/Users/Niemand/.m2/repository/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar;C:/Users/Niemand/.m2/repository/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar;C:/Users/Niemand/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.21/jmh-generator-annprocess-1.21.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'E:/GitHub/en16931-data-extractor/en16931-3-reader/src/main/java;E:/GitHub/en16931-data-extractor/en16931-3-reader/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2018&#x2013;2019 <a href="https://www.prototypefund.de/">The Prototype Fund</a>. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'E:/GitHub/en16931-data-extractor/en16931-3-reader/target/apidocs'
+-docencoding
+'UTF-8'
+-Xdoclint:none
+-doctitle
+'EU Specification Data Reader (en16931-3) 20190817 API'
+-linkoffline
+'https://docs.oracle.com/javase/9/docs/api' 'E:/GitHub/en16931-data-extractor/en16931-3-reader/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'EU Specification Data Reader (en16931-3) 20190817 API'
