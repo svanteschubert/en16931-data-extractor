@@ -24,7 +24,7 @@
   
     <groupId>de.prototypefund</groupId>
     <artifactId>en16931-data-extractor</artifactId>
-    <version>20190816</version>
+    <version>20190817</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.odftoolkit</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>20190816</version>
+            <version>20190817</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
