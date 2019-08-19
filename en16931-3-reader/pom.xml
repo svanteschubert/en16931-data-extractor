@@ -24,20 +24,20 @@
 
     <parent>
         <groupId>de.prototypefund</groupId>
-        <artifactId>en16931-extractor</artifactId>
-        <version>20190817</version>
+        <artifactId>en16931-extractor-base</artifactId>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>de.prototypefund</groupId>
-    <artifactId>en16931-3-reader</artifactId>
-    <version>20190817</version>
+    <artifactId>en16931-data-extractor</artifactId>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <properties>
         <jdk.version>9</jdk.version>
         <skipTests>false</skipTests>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.odftoolkit</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>20190817</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -120,7 +120,7 @@
                             <manifestSection>
                                 <name>en16931-data-extractor</name>
                                 <manifestEntries>
-                                    <Project-Name>en16931-data-extractor</Project-Name>
+                                    <Project-Name>${project.name}</Project-Name>
                                     <Project-Version>${project.version}</Project-Version>
                                     <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
@@ -184,7 +184,7 @@
                                 <resource>
                                     <directory>${project.basedir}/target</directory>
                                     <includes>
-                                        <include>en16931-3-reader-${project.version}-jar-with-dependencies.jar</include>
+                                        <include>${project.build.finalName}-jar-with-dependencies.jar</include>
                                     </includes>
                                 </resource>
                                 <resource>
@@ -260,9 +260,9 @@
                         </manifestEntries>
                         <manifestSections>
                             <manifestSection>
-                                <name>en16931-data-extractor</name>
+                                <name>${project.name}</name>
                                 <manifestEntries>
-                                    <Project-Name>en16931-data-extractor</Project-Name>
+                                    <Project-Name>${project.name}</Project-Name>
                                     <Project-Version>${project.version}</Project-Version>
                                     <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
@@ -293,7 +293,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <doctitle>en16931-data-extractor</doctitle>
+                    <doctitle>${project.name}</doctitle>
                     <minmemory>512m</minmemory>
                     <maxmemory>1024m</maxmemory>
                     <links>

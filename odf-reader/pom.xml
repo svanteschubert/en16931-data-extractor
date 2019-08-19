@@ -24,8 +24,8 @@
 
     <parent>
         <groupId>de.prototypefund</groupId>
-        <artifactId>en16931-extractor</artifactId>
-        <version>20190817</version>
+        <artifactId>en16931-extractor-base</artifactId>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
