@@ -24,7 +24,7 @@ Also the same restrictions on the semantic graph might be reused for other older
 The EU e-invoice specification demands the support of two XML file formats [OASIS UBL 1.2](http://docs.oasis-open.org/ubl/UBL-2.1.html) and [UN/CEFACT XML Industry Invoice D16B](https://www.unece.org/cefact/xml_schemas/index).
 In its 3rd, part the EU specification binds the XML syntax to the EU e-invoice semantic. For each syntax exist a document with at least two mapping table.
 The first normative table (see "Table 2" below) describe the syntax binding from the semantic (light grey) to XML (dark grey), the second informative table (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
-![Two example tables for UN/CEFACT](en16931-3-reader/src/site/3-3-both-tables.png)
+![Two example tables for UN/CEFACT](docs/resources/3-3-both-tables.png)
 The informative table does not add any new information. It starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
 In theory, the comparison of both tables should provide the same data.
 
@@ -44,10 +44,10 @@ After the JUnit tests there will be a test log file "target/test.log".
 2. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
 ## Data Extraction by Technical Writer
-1. Download the JAR with all dependencies includes [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
-2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)"
+1. Download the JAR with all dependencies includes [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
+2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)"
 3. Safe the DOCX documents of en16931-3 to ODT
-4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](en16931-3-reader/src/site/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) your-specification.odt or your-directory"
+4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) your-specification.odt or your-directory"
 
 ## Data Extraction by Software Developer
 1. Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom) NOTE: This might take about 15min.</br>
@@ -59,5 +59,5 @@ After the JUnit tests there will be a test log file "target/test.log".
 
 ## Data Analysis
 5. The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
-6. Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](en16931-3-reader/src/site/16931-3-3_example_informative.xml) and the ["normative SUBSET"](en16931-3-reader/src/site/16931-3-3_example_SUBSETnormative.xml) XML files.
-![In our example only the title is different between the two tables](en16931-3-reader/src/site/TotalCommanderComparison.png)
+6. Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
+![In our example only the title is different between the two tables](docs/resources/TotalCommanderComparison.png)
