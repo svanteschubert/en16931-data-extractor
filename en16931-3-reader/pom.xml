@@ -47,7 +47,7 @@
     <dependencies>
         <dependency>
             <groupId>org.odftoolkit</groupId>
-            <artifactId>odfdom-java</artifactId>
+            <artifactId>odf-reader</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

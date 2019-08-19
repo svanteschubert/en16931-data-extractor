@@ -29,7 +29,7 @@
     <properties>
         <jdk.version>9</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>20190817</revision>
+        <revision>20190818</revision>
     </properties>
 
     <dependencyManagement>
