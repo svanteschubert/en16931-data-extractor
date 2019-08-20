@@ -17,7 +17,7 @@ The Data Extractor for the European e-Invoice Specification (en16931) consists o
 2. The EN16931 reader, which uses ODFDOM to find the tables an get accesss to the data of every cell of each table row.
 
 ## Deployment
-1. The revision number is being set in the root [pom.xml](https://github.com/svanteschubert/en16931-data-extractor/blob/master/pom.xml).
+1. The revision number - usually the date - is being set in the root [pom.xml](https://github.com/svanteschubert/en16931-data-extractor/blob/master/pom.xml).
 2. [JavaDoc](https://svanteschubert.github.io/en16931-data-extractor/docs/apidocs/) and JAR are being copied from Maven's 'target' build directory into GitHubs 'docs' directory and become downloadable from the [project's GitHub website](https://svanteschubert.github.io/en16931-data-extractor/docs/)
 3. Documentation files are in the [Maven specific src/site directory from the base project](https://github.com/svanteschubert/en16931-data-extractor/tree/master/src/site). The actual version number and JAR naming are being exchanged automatically during copy via Maven's resouce plugin.
 
