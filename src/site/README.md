@@ -55,7 +55,7 @@ NOTE: There is an [own chapter for software developers about the software](docs/
 ## Data Extraction by Technical Writer
 1. Download the JAR with all dependencies includes [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
 2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)"
-3. Safe the DOCX documents of en16931-3 to ODT (tested with LibreOffice 6.2.5.2)
+3. Save the CEN DOCX documents of en16931-3 to ODT (tested with LibreOffice 6.2.5.2)
 4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) your-specification.odt (or your-directory)"
 
 ## Data Analysis

@@ -35,6 +35,10 @@ import org.slf4j.LoggerFactory;
  * </ul>
  * In cases, the specification does not provide this condition, it will be
  * updated by this class.
+ *
+ * IMPORTANT:
+ *  Known errors will no longer be hidden by this class!
+ *  To get rid of the errors the EN16931-3 documents always have to be fixed!
  */
 class SpecificationFixes {
 
@@ -69,12 +73,12 @@ class SpecificationFixes {
         //
         //	BG-7 /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty
         //	BG-8 /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress
-        mFixes_By_Table.put("BG-5", "BG-4");
-        mAllFixes.put(TABLE_NO2_HEADER_CII_NORMATIVE, mFixes_By_Table); // Every table has its own fixes!
-        mAllFixes.put(TABLE_NO3_HEADER_CII_INFORMATIVE, mFixes_By_Table); // Every table has its own fixes!
-        mFixes_By_Table.put("BG-5", "BG-4");
-        mAllFixes.put(TABLE_NO2_HEADER_CII_NORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
-        mAllFixes.put(TABLE_NO3_HEADER_CII_INFORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
+//        mFixes_By_Table.put("BG-5", "BG-4");
+//        mAllFixes.put(TABLE_NO2_HEADER_CII_NORMATIVE, mFixes_By_Table); // Every table has its own fixes!
+//        mAllFixes.put(TABLE_NO3_HEADER_CII_INFORMATIVE, mFixes_By_Table); // Every table has its own fixes!
+//        mFixes_By_Table.put("BG-5", "BG-4");
+//        mAllFixes.put(TABLE_NO2_HEADER_CII_NORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
+//        mAllFixes.put(TABLE_NO3_HEADER_CII_INFORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
 
         // **** FIXES ****
         // 16931-3-2 - Duplicate semantic ID
@@ -83,13 +87,13 @@ class SpecificationFixes {
         //	BT-90  /Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID
         //	BT-90  /Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID
         //
-        mFixes_By_Table.put("BT-90", "BT-90-Payee");
-        mAllFixes.put(TABLE_NO3_HEADER_UBL_INVOICE_NORMATIVE, mFixes_By_Table); // Every table has its own fixes!
-        mAllFixes.put(TABLE_NO5_HEADER_UBL_INVOICE_INFORMATIVE, mFixes_By_Table); // Every table has its own fixes!
-        mAllFixes.put(TABLE_NO5_HEADER_UBL_CREDIT_NOTE_NORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
-        mAllFixes.put(TABLE_NO5_HEADER_UBL_CREDIT_NOTE_INFORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
-        mAllFixes.put(TABLE_HEADER_UBL_MAPPING_DES_RECHNUNGMODELLS_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
-        mAllFixes.put(TABLE_HEADER_UBL_MAPPING_DES_GUTSCHRIFTENMODELLS_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
+//        mFixes_By_Table.put("BT-90", "BT-90-Payee");
+//        mAllFixes.put(TABLE_NO3_HEADER_UBL_INVOICE_NORMATIVE, mFixes_By_Table); // Every table has its own fixes!
+//        mAllFixes.put(TABLE_NO5_HEADER_UBL_INVOICE_INFORMATIVE, mFixes_By_Table); // Every table has its own fixes!
+//        mAllFixes.put(TABLE_NO5_HEADER_UBL_CREDIT_NOTE_NORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
+//        mAllFixes.put(TABLE_NO5_HEADER_UBL_CREDIT_NOTE_INFORMATIVE_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
+//        mAllFixes.put(TABLE_HEADER_UBL_MAPPING_DES_RECHNUNGMODELLS_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
+//        mAllFixes.put(TABLE_HEADER_UBL_MAPPING_DES_GUTSCHRIFTENMODELLS_DE, mFixes_By_Table); // Every table has its own fixes - here for German translation
     }
 
     static void flushErrors(NodeSemantic s) {

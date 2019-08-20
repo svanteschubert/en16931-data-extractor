@@ -73,9 +73,14 @@ public class NodeSemantic {
                     LOG.error("ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
                 }
                 if (id.contains("–")) {
-                    LOG.warn("ERROR: ID of Semantic object was using a different hyphen '" + id + "'!\n");
+                    LOG.warn("WARNING: ID of Semantic object was using a different hyphen '" + id + "'!\n");
                     LOG.warn("Now showing the ID, where the unicode character hyphen-minus is shown as '*' and the control-character 'START OF GUARDED AREA' shown as '+': '" + id.replace("-", "*").replace("–", "+") + "'!\n\n");
                     id = id.replace("–", "-"); // fixing hyphen problem so all ID have similar structure
+                } else if (!id.contains("–") && id.contains("-")) {
+                    int count = countChar(id,'-');
+                    if(count > 1){
+                        LOG.info("INFO: ID of Semantic object was using two identical hyphen of '" + id + "'!\n");
+                    }
                 }
             } else {
                 LOG.error("ID of semantic object may not be empty!");
@@ -110,7 +115,7 @@ public class NodeSemantic {
                     NodeSemantic s = allSemanticNodes.get(id);
                     SpecificationFixes.hasError = Boolean.TRUE;
                     mWARNING_FixUnavailable = Boolean.TRUE;
-                    LOG.info(" WARNING: *** Duplicated SemanticNode ID: " + s.getId() + "\n");
+                    LOG.error(" ERROR: *** Duplicated SemanticNode ID: " + s.getId() + "\n");
                     LOG.info("       within table: '" + mTableId + "'\n");
                     LOG.info("       with business Term: '" + s.getBusinessTerm() + "'\n");
                     if (s.mDescription != null) {
@@ -121,7 +126,6 @@ public class NodeSemantic {
                         if (x.getRules() != null) {
                             LOG.info("             Rules: '" + x.getRules() + "'\n");
                         }
-                        LOG.info(" NOTE: To avoid warning, add an exception to SpecificationFixes class!\n\n");
                     }
 
                     id = SpecificationFixes.getAlternativeID(id);
@@ -431,5 +435,16 @@ public class NodeSemantic {
         SemanticHeading(String label) {
             this.mLabel = label;
         }
+    }
+
+    private int countChar(String str, char c) {
+        int count = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == c) {
+                count++;
+            }
+        }
+        return count;
     }
 }
