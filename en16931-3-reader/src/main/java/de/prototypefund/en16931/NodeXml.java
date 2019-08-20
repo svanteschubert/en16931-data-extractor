@@ -17,7 +17,8 @@
 package de.prototypefund.en16931;
 
 import static de.prototypefund.en16931.NodeSemantic.LEADING_TRAILING_WHITESPACES;
-import de.prototypefund.en16931.type.CardinalityXML;
+import de.prototypefund.en16931.type.CardinalityXml;
+import de.prototypefund.en16931.type.SyntaxType;
 import de.prototypefund.en16931.type.Type;
 
 /**
@@ -25,8 +26,8 @@ import de.prototypefund.en16931.type.Type;
  */
 public class NodeXml extends NodeSyntax {
 
-    private Type mType; // not used for EDIFACT
-    private CardinalityXML mCardinality;
+    protected Type mType; // not used for EDIFACT
+    private CardinalityXml mCardinality;
 
     public NodeXml(String path, NodeSemantic semanticParent) {
         super(path, semanticParent, Boolean.TRUE);
@@ -37,7 +38,7 @@ public class NodeXml extends NodeSyntax {
     }
 
     public void setType(String type) {
-        mType = Type.getByValue(type.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
+        mType = SyntaxType.getByValue(type.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
     }
 
     public String getCardinality() {
@@ -48,12 +49,12 @@ public class NodeXml extends NodeSyntax {
         return c;
     }
 
-    public CardinalityXML getCardinalityXml() {
+    public CardinalityXml getCardinalityXml() {
         return mCardinality;
     }
 
     public void setCardinalityXml(String cardinality) {
-        mCardinality = CardinalityXML.getByValue(cardinality.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
+        mCardinality = CardinalityXml.getByValue(cardinality.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
     }
 
     protected StringBuilder addSpecificString(StringBuilder syntax) {

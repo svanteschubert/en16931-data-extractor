@@ -1,5 +1,4 @@
 /*
- * Copyright 2019 Svante Schubert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,87 +14,14 @@
  */
 package de.prototypefund.en16931.type;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import org.slf4j.LoggerFactory;
-
 /**
- *
- * This enum contains all possible types of the specification table
+ * Abstraction of Type enumerations
  */
-public enum Type {
+public interface Type {
 
     /**
-     * All Types * <code>
-     * — G = Aggregat
-     * — C = Verbund
-     * — E = Element
-     * — A = Attribut
-     * — S = Segment
-     * </code>
+     * @return the Type
      */
-    AGGREGATE("G"),
-    COLLECTION("C"),
-    ELEMENT("E"),
-    ATTRIBUTE("A"),
-    SEGMENT("S");
+    String getValue();
 
-    private static final Map<String, Type> mTypeMap = new HashMap<String, Type>();
-
-    static {
-        for (Type c : values()) {
-            mTypeMap.put(c.getValue(), c);
-        }
-    }
-
-    public static Type getByValue(String value, String semanticID) {
-        updateStatistic(value);
-        Type t = mTypeMap.get(value);
-
-        if (t == null) {
-            LoggerFactory.getLogger(Type.class.getName()).error("It do not exist a XML-related type of '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
-        }
-        return t;
-    }
-
-    private final String mType;
-
-    /**
-     * @return the xmlType
-     */
-    public String getValue() {
-        return mType;
-    }
-
-    Type(String type) {
-        this.mType = type;
-    }
-
-    private static SortedMap<String, Integer> statistic = null;
-
-    static private void updateStatistic(String value){
-        if(statistic == null){
-           statistic = new TreeMap<String, Integer>();
-        }
-        Integer occurances = statistic.get(value);
-        if(occurances == null){
-            occurances = 1;
-        }else{
-            occurances += 1;
-        }
-        statistic.put(value, occurances);
-    }
-
-    static SortedMap<String, Integer> getStatistic(){
-        return statistic;
-    }
-
-    static void clearStatistic(){
-        if(statistic != null){
-            statistic.clear();;
-        }
-    }
 }
-

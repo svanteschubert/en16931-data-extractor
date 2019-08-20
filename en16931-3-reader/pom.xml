@@ -221,7 +221,7 @@
                         <configuration>
                             <outputDirectory>${project.basedir}/..</outputDirectory>
                             <resources>
-                                <resource> <!-- copy README.md (using latest version) -->
+                                <resource> <!-- copy README.md, *.md (using latest version) -->
                                     <directory>${project.basedir}/../src/site/</directory>
                                     <filtering>true</filtering>
                                     <includes>

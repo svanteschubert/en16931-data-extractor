@@ -16,8 +16,8 @@
 package de.prototypefund.en16931;
 
 import static de.prototypefund.en16931.SpecificationFixes.mAllFixes;
-import de.prototypefund.en16931.type.CardinalityXML;
-import de.prototypefund.en16931.type.DataType;
+import de.prototypefund.en16931.type.CardinalityXml;
+import de.prototypefund.en16931.type.SemanticDataType;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -49,9 +49,9 @@ public class NodeSemantic {
     List<NodeSyntax> syntaxRepresentations = null;
     private String mID = null;
     private String mBusinessTerm = null;
-    private CardinalityXML mCardinality = null;
+    private CardinalityXml mCardinality = null;
     private Integer mLevel = null;
-    private DataType mDataType = null;
+    private SemanticDataType mDataType = null;
     private String mDescription = null;
     private String mTableId = null;
     private static final String mERROR_ID = "ID ALREADY TAKEN";
@@ -73,8 +73,8 @@ public class NodeSemantic {
                     LOG.error("ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
                 }
                 if (id.contains("–")) {
-                    LOG.error("ERROR: ID of Semantic object was using a different hyphen '" + id + "'!\n");
-                    LOG.error("Now showing the ID, where the unicode character hyphen-minus is shown as '*' and the control-character 'START OF GUARDED AREA' shown as '+': '" + id.replace("-", "*").replace("–", "+") + "'!\n\n");
+                    LOG.warn("ERROR: ID of Semantic object was using a different hyphen '" + id + "'!\n");
+                    LOG.warn("Now showing the ID, where the unicode character hyphen-minus is shown as '*' and the control-character 'START OF GUARDED AREA' shown as '+': '" + id.replace("-", "*").replace("–", "+") + "'!\n\n");
                     id = id.replace("–", "-"); // fixing hyphen problem so all ID have similar structure
                 }
             } else {
@@ -180,18 +180,18 @@ public class NodeSemantic {
     }
 
     public void setCardinality(String c) {
-        mCardinality = CardinalityXML.getByValue(c, this.mID);
+        mCardinality = CardinalityXml.getByValue(c, this.mID);
     }
 
-    public CardinalityXML getCardinality() {
+    public CardinalityXml getCardinality() {
         return mCardinality;
     }
 
     public void setDataType(String dt) {
-        mDataType = DataType.getByValue(dt, this.mID);
+        mDataType = SemanticDataType.getByValue(dt, this.mID);
     }
 
-    public DataType getDataType() {
+    public SemanticDataType getDataType() {
         return mDataType;
     }
 

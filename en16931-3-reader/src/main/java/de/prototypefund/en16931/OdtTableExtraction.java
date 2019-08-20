@@ -23,7 +23,7 @@ import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.CARD;
 import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.MATCH;
 import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.NAME;
 import static de.prototypefund.en16931.NodeSyntax.SyntaxHeading.RULES;
-import de.prototypefund.en16931.type.Statistics;
+import de.prototypefund.en16931.type.TypeStatistic;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -79,6 +79,7 @@ public class OdtTableExtraction {
     private static final String ODT_SUFFIX = ".odt";
     private static final String WORKING_DIRECTORY = "user.dir";
     private static Boolean mIsXML;
+    private static Boolean mIsUBL;
 
     /**
      * @param odtFileName the file name of the specification or a directory
@@ -192,6 +193,13 @@ public class OdtTableExtraction {
 
         } else if (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) {
             mIsXML = (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE);
+            if(mIsXML){
+                if(title.contains("UBL")){
+                    mIsUBL = Boolean.TRUE;
+                }else{
+                    mIsUBL = Boolean.FALSE;
+                }
+            }
             assert table.getHeaderColumnCount() == 0;
             OdfTableRow tr = table.getRowByIndex(0);
             OdfTableCell tc = tr.getCellByIndex(0);
@@ -248,7 +256,11 @@ public class OdtTableExtraction {
                                 int i = c - SEMANTIC_TABLE_HEADINGS.length;
                                 if (i == 0) {
                                     if (mIsXML) {
-                                        syntaxNode = new NodeXml(cellContent, semanticNode);
+                                        if(mIsUBL){
+                                            syntaxNode = new NodeUblXml(cellContent, semanticNode);
+                                        }else{
+                                            syntaxNode = new NodeXml(cellContent, semanticNode);
+                                        }
                                     } else {
                                         syntaxNode = new NodeEdifact(cellContent, semanticNode);
                                     }
@@ -333,7 +345,7 @@ public class OdtTableExtraction {
                 }
                 // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
-                Statistics.table(title);
+                TypeStatistic.table(title);
                 clearAll();
             }
         }
