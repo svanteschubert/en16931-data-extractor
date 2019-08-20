@@ -5,10 +5,10 @@
 2. Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom)</br>
    NOTE: This ODF library will become the 1.0.0 version of the [ODF Toolkit from "The Document Foundation"](https://github.com/tdf/odftoolkit), but copied as yet no Maven artifacts are available for download.
 
-## Running as test
+## Running as Test (e.g. debug)
 1. Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from original DOCX to OpenDocument Text format (ODT) format into the folder en16931-3-reader/src/test/resources
 2. Provide its name in the test file: en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
-3. Call via command line 'mvn install' in the 'en16931-3-reader' folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/nb90/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).</br>
+3. Call via command line 'mvn install' in the 'en16931-3-reader' folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).</br>
    You may also find the new JAR in the "target" directory and use it as explained to the "technical writer" before.
 
 ## Architecture
