@@ -238,7 +238,7 @@ public abstract class NodeSyntax {
                 syntax.append(" mismatches=\"");
                 for (int i = 0; mMisMatches.length > i; i++) {
                     if (mMisMatches[i] == null) {
-                        LOG.info("INVALID CONTENT: See 'Match' column of Semantic ID '" + this.getSemanticNode().getId() + "'!\n");
+                        LOG.error("INVALID CONTENT: See 'Match' column of Semantic ID '" + this.getSemanticNode().getId() + "'!\n");
                         syntax.append("ERROR!\"");
                         break;
                     }

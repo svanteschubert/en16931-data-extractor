@@ -241,10 +241,11 @@ public class OdtTableExtraction {
                                     if (cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "").isEmpty()) {
                                         LOG.debug("IS EMPTY!!!");
                                     } else {
-                                        // errorhandling of previous node
-                                        if (SpecificationFixes.hasError) {
-                                            SpecificationFixes.flushErrors(semanticNode);
-                                        }
+// duplicated output - errors are no longer being hidden
+//                                        // errorhandling of previous node
+//                                        if (SpecificationFixes.hasError) {
+//                                            SpecificationFixes.flushErrors(semanticNode);
+//                                        }
                                         semanticNode = new NodeSemantic(cellContent, mTableId);
                                     }
                                 }
