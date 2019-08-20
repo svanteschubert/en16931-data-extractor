@@ -40,8 +40,12 @@ More about the used class representation in the [JavaDoc](docs/apidocs/index.htm
 After the JUnit tests there will be a test log file "target/test.log".
 
 ## Software Prerequisites
+### Running
+1. [>=JDK 9](https://jdk.java.net/12/)
+### Building
 1. [>=JDK 9](https://jdk.java.net/12/)
 2. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
+There is an [own chapter for software developers about the software](software.md).
 
 ## Data Extraction by Technical Writer
 1. Download the JAR with all dependencies includes [en16931-data-extractor-20190818-jar-with-dependencies.jar](docs/en16931-data-extractor-20190818-jar-with-dependencies.jar)
