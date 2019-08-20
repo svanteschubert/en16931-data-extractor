@@ -12,7 +12,7 @@
    You may also find the new JAR in the "target" directory and use it as explained to the "technical writer" before.
 
 ## Architecture
-The Data Extractor for the European e-Invoice Specification (en16931) exist of two modules:
+The Data Extractor for the European e-Invoice Specification (en16931) consists of two modules:
 1. The [ODFDOM library](https://tdf.github.io/odftoolkit/docs/odfdom/), which unzips the OpenDocument Text document, access the XML, i.e. the content.xml file.
 2. The EN16931 reader, which uses ODFDOM to find the tables an get accesss to the data of every cell of each table row.
 

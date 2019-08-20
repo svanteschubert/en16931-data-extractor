@@ -50,7 +50,7 @@ After the JUnit tests there will be a test log file "target/test.log".
 2. [GIT](https://git-scm.com/)
 3. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
-Note: There is an [own chapter for software developers about the software](docs/software.md).
+NOTE: There is an [own chapter for software developers about the software](docs/software.md).
 
 ## Data Extraction by Technical Writer
 1. Download the JAR with all dependencies includes [en16931-data-extractor-20190819-jar-with-dependencies.jar](docs/en16931-data-extractor-20190819-jar-with-dependencies.jar)
