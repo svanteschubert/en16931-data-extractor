@@ -7,8 +7,9 @@ Build as part of the [PrototypeFund project "paperless"](https://prototypefund.d
 There is [a wonderful online introduction for en16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Compliance+with+eInvoicing+standard) given by the EU.
 
 ## Reason
-The goal of this tool is to extract the syntax-binding (mapping) between the XML formats and the Semantic Data Model. The bindings are required to generate source code for a software allowing to load/save both XML formats. In addition the software shall modify/create XML by an API based on the Semantic Data Model of en16931.
-Some reasons behind from a bird perspective:
+The specification EN16931 is meant to build e-invoice software, but it is tedious and error prone to read the manually copy the PDF (or paper) specification.
+The goal of this tool is to extract the main data, the so called syntax-binding (mapping) between the XML formats and the Semantic Data Model from more structured office documents. The bindings are for instance required to generate source code for a software allowing to load/save both XML formats. In addition our future software shall modify/create XML by an API based on the Semantic Data Model of en16931.
+Some reasoning behind from a developers bird perspective:
 <br/>There are three [graphs](https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg) within the EU specification:
 1. graph: Semantic Data Model (describes the user semantic both XML are being mapped upon)
 2. graph: UBL XML W3C XML grammar (describes all allowed XML files of UBL)
