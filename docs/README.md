@@ -41,27 +41,20 @@ After the JUnit tests there will be a test log file "target/test.log".
 
 ## Software Prerequisites
 
-### Running
-1. [>=JDK 9](https://jdk.java.net/12/)
+### Running (everybody, e.g. CEN Technical Writer)
+1. [>=JRE 9](https://jdk.java.net/12/)
 
-### Building
+### Building (developers)
 1. [>=JDK 9](https://jdk.java.net/12/)
-2. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
+2. [GIT](https://git-scm.com/)
+3. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 There is an [own chapter for software developers about the software](docs/software.md).
 
 ## Data Extraction by Technical Writer
-1. Download the JAR with all dependencies includes [en16931-data-extractor-20190818-jar-with-dependencies.jar](docs/en16931-data-extractor-20190818-jar-with-dependencies.jar)
-2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-20190818-jar-with-dependencies.jar](docs/en16931-data-extractor-20190818-jar-with-dependencies.jar)"
+1. Download the JAR with all dependencies includes [en16931-data-extractor-20190819-jar-with-dependencies.jar](docs/en16931-data-extractor-20190819-jar-with-dependencies.jar)
+2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-20190819-jar-with-dependencies.jar](docs/en16931-data-extractor-20190819-jar-with-dependencies.jar)"
 3. Safe the DOCX documents of en16931-3 to ODT
-4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-20190818-jar-with-dependencies.jar](docs/en16931-data-extractor-20190818-jar-with-dependencies.jar) your-specification.odt or your-directory"
-
-## Data Extraction by Software Developer
-1. Call 'mvn install' in the root directory of the project once, to build the [ODF reader (ODFDOM library)](https://github.com/svanteschubert/odftoolkit/tree/odf-changes/odfdom) NOTE: This might take about 15min.</br>
-   NOTE: This ODF library will become the 1.0.0 version of the [ODF Toolkit from "The Document Foundation"](https://github.com/tdf/odftoolkit), but yet no Maven artifacts are available for download.
-2. Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from original DOCX to OpenDocument Text format (ODT) format into the folder en16931-3-reader/src/test/resources
-3. Provide its name in the test file: en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
-4. Call via command line 'mvn install' in the 'en16931-3-reader' folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/nb90/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).</br>
-   You may also find the new JAR in the "target" directory and use it as explained to the "technical writer" before.
+4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-20190819-jar-with-dependencies.jar](docs/en16931-data-extractor-20190819-jar-with-dependencies.jar) your-specification.odt or your-directory"
 
 ## Data Analysis
 5. The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
