@@ -6,7 +6,9 @@
    NOTE: This ODF library will become the 1.0.0 version of the [ODF Toolkit from "The Document Foundation"](https://github.com/tdf/odftoolkit), but copied as yet no Maven artifacts are available for download.
 
 ## Running as Test (e.g. debug)
-1. Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from original DOCX to OpenDocument Text format (ODT) format into the folder en16931-3-reader/src/test/resources
+1. Create a test document by saving either the UBL or UN/CEFACT 16931-3 specification from original DOCX to OpenDocument Text format (ODT) format into the folder en16931-3-reader/src/test/resources.
+(e.g. Using LibreOffice 6.2.5.2 of Ubuntu Disco via commandline:
+'libreoffice --headless --convert-to odt *.docx')
 2. Provide its name in the test file: en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
 3. Call via command line 'mvn install' in the 'en16931-3-reader' (or root) folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).</br>
    You may also find the new JAR in the "target" directory and use it as explained to the "technical writer" before.
