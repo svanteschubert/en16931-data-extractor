@@ -8,7 +8,7 @@ Build as part of the [PrototypeFund project "paperless"](https://prototypefund.d
 There is [a wonderful online introduction for EN16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Compliance+with+eInvoicing+standard) given by the EU.
 
 ### Reason for this Software
-The specification EN16931 is meant to build e-invoice software, but it is tedious and error prone to read the manually copy the PDF (or paper) specification.
+The specification EN16931 is meant to build e-invoice software, but it is tedious and error prone to read the PDF (or paper) specification and manually copy its data.
 The goal of this tool is to extract the main data, the so called syntax-binding (mapping) between the XML formats and the Semantic Data Model from more structured office documents. The bindings are for instance required to generate source code for a software allowing to load/save both XML formats. In addition our future software shall modify/create XML by an API based on the Semantic Data Model of EN16931.
 Some reasoning behind from a developers bird perspective:
 <br/>There are three [graphs](https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg) within the EU specification:
@@ -16,7 +16,7 @@ Some reasoning behind from a developers bird perspective:
 2. Graph: UBL XML - W3C XML grammar (describes all allowed XML files of UBL)
 3. Graph: UN/CEFACT CII XML - W3C XML grammar (describes all allowed XML files of UN/CEFACT)
 
-The syntax bindings - this tool is extracting - are contecting "graph 2" with "graph 1" and "graph 2" with "graph 3".
+The syntax bindings - that this tool is extracting - are contecting "graph 2" with "graph 1" and "graph 2" with "graph 3".
 In addition, aside of the grammar there are more restrictions upon the XML that W3C Schema is not able to express ([given by ISO Schematron constraints](https://github.com/CenPC434/validation)), for instance an order date has to be earlier than the pay date.
 These schematron restrictions can be seen as additional relations upon the XML grammar graphs (graph 2 & graph 3).
 It is planned to map those XML constraints later to the "Semantic Data model" level (graph 1). By this it could be validated if there are constraints only for UBL or UN/CEFACT and missing for the other XML.
