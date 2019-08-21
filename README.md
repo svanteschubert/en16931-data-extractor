@@ -1,15 +1,15 @@
-# Data Extractor for the European e-Invoice Specification (en16931)
+# Data Extractor for the European e-Invoice Specification (EN16931)
 ## Summary
 Open sourced for the creators of the EU e-invoice specification to allow easier sanity checks of the data within the tables to improve the quality of the specification.
-Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specifcation (en16931)](https://invoice.fans/en/en16931-en/).
+Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specifcation (EN16931)](https://invoice.fans/en/EN16931-en/).
 
 ## Background
-### The EU e-Invoice Specification (en16931)
-There is [a wonderful online introduction for en16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Compliance+with+eInvoicing+standard) given by the EU.
+### The EU e-Invoice Specification (EN16931)
+There is [a wonderful online introduction for EN16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Compliance+with+eInvoicing+standard) given by the EU.
 
 ### Reason for this Software
 The specification EN16931 is meant to build e-invoice software, but it is tedious and error prone to read the manually copy the PDF (or paper) specification.
-The goal of this tool is to extract the main data, the so called syntax-binding (mapping) between the XML formats and the Semantic Data Model from more structured office documents. The bindings are for instance required to generate source code for a software allowing to load/save both XML formats. In addition our future software shall modify/create XML by an API based on the Semantic Data Model of en16931.
+The goal of this tool is to extract the main data, the so called syntax-binding (mapping) between the XML formats and the Semantic Data Model from more structured office documents. The bindings are for instance required to generate source code for a software allowing to load/save both XML formats. In addition our future software shall modify/create XML by an API based on the Semantic Data Model of EN16931.
 Some reasoning behind from a developers bird perspective:
 <br/>There are three [graphs](https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg) within the EU specification:
 1. Graph: Semantic Data Model (describes the user semantic both XML are being mapped upon)
@@ -59,10 +59,10 @@ There is an [own chapter for software developers about the software](docs/softwa
 
 ## Usage
 ### Extracting the Data
-1. Download the JAR with all dependencies includes [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)
-2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)__"
-3. Save the CEN DOCX documents of en16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
-4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) <your-specification.odt> (or <your-directory>)__"
+1. Download the JAR with all dependencies includes [EN16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)
+2. To see version information via command-line call:<br/>"__java -jar [EN16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)__"
+3. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
+4. To extract data from the specification via command-line call:<br/>"__java -jar [EN16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) <your-specification.odt> (or <your-directory>)__"
 
 ### Data Analysis
 - The extracted data can be found as XML files aside the input documents.
