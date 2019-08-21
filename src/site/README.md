@@ -24,11 +24,14 @@ Also the same restrictions on the semantic graph might be reused for other older
 
 ## Specification EN16931-3: Details on Syntax Binding
 The EU e-invoice specification demands the support of two XML file formats [OASIS UBL 1.2](http://docs.oasis-open.org/ubl/UBL-2.1.html) and [UN/CEFACT XML Industry Invoice D16B](https://www.unece.org/cefact/xml_schemas/index).
-In its 3rd, part the EU specification binds the XML syntax to the EU e-invoice semantic. For each syntax exist a document with at least two mapping table.
-The first normative table (see "Table 2" below) describe the syntax binding from the semantic (light grey) to XML (dark grey), the second informative table (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
+In its 3rd part (EN16931-3) the EU specification binds the XML syntax with the EU e-invoice semantic. For each syntax exist a document, which contains at least two mapping table.
+1. The first "normative table" (see "Table 2" below) describe the syntax binding from the semantic (light grey) to XML (dark grey),
+2. the second "informative table" (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
 ![Two example tables for UN/CEFACT](docs/resources/3-3-both-tables.png)
 The informative table does not add any new information. It starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
-In theory, the comparison of both tables should provide the same data.
+
+*NOTE:*
+In theory, both tables should provide the same data.
 
 ## Software: EN16931 Data Extractor
 The data extractor reads the office doucment and the containing mapping tables.
