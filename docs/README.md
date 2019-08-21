@@ -51,7 +51,8 @@ The name of our own XML files is a combination of: "specification document name"
 2. [GIT](https://git-scm.com/)
 3. [Apache Maven](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
-NOTE: There is an [own chapter for software developers about the software](docs/software.md).
+*NOTE:*
+There is an [own chapter for software developers about the software](docs/software.md).
 
 ## Usage
 ### Extracting the Data
