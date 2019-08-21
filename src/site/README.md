@@ -59,10 +59,10 @@ There is an [own chapter for software developers about the software](docs/softwa
 
 ## Usage
 ### Extracting the Data
-1. Download the JAR with all dependencies includes [EN16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
-2. To see version information via command-line call:<br/>"__java -jar [EN16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)__"
+1. Download the JAR with all dependencies includes [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
+2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)__"
 3. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
-4. To extract data from the specification via command-line call:<br/>"__java -jar [EN16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) <your-specification.odt> (or <your-directory>)__"
+4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) <your-specification.odt> (or <your-directory>)__"
 
 ### Data Analysis
 - The extracted data can be found as XML files aside the input documents.
