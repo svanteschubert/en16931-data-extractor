@@ -1,7 +1,7 @@
 # Data Extractor for the European e-Invoice Specification (EN16931)
 ## Summary
 Open sourced for the creators of the EU e-invoice specification to allow easier sanity checks of the data within the tables to improve the quality of the specification.
-Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specifcation (EN16931)](https://invoice.fans/en/EN16931-en/).
+Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specification (EN16931)](https://invoice.fans/en/EN16931-en/).
 
 ## Background
 ### The EU e-Invoice Specification (EN16931)
@@ -36,8 +36,8 @@ In theory, both tables should provide the same data.
 ## Software: EN16931 Data Extractor
 The data extractor reads the office doucment and the containing mapping tables.
 For each table it is splitting:
-- The XML part (dark grey)
-- The semantic part (light grey)
+- The __XML part (dark grey)__
+- The __semantic part (light grey)__
 The extracted data model of each table is saved in its own XML format to ease reading and allow testing the data set.
 The new XML structure is straight forward: Just a list of the semantic entities, each containing the corresponding XML elements as their children.
 
