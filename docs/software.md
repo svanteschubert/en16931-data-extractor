@@ -12,11 +12,13 @@
 2. Provide its name in the test file: en16931-3-reader/src/test/java/de/prototypefund/en16931/ExtractionTest.java
 3. Call via command line 'mvn install' in the 'en16931-3-reader' (or root) folder (or use an IDE like [Netbeans](https://netbeans.apache.org/download/), [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)).</br>
    You may also find the new JAR in the "target" directory and use it as explained to the "technical writer" before.
+   After the JUnit tests there will be a test log file "target/test.log".
 
 ## Architecture
 The Data Extractor for the European e-Invoice Specification (en16931) consists of two modules:
 1. The [ODFDOM library](https://tdf.github.io/odftoolkit/docs/odfdom/), which unzips the OpenDocument Text document, access the XML, i.e. the content.xml file.
 2. The EN16931 reader, which uses ODFDOM to find the tables an get accesss to the data of every cell of each table row.
+You may find an overview over the Java classes in the [JavaDoc](docs/apidocs/index.html).
 
 ## Deployment
 1. The revision number - usually the date - is being set in the root [pom.xml](https://github.com/svanteschubert/en16931-data-extractor/blob/master/pom.xml).

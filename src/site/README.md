@@ -34,11 +34,9 @@ The data of the above mapping tables is being read from the tables.
 The XML part (dark grey) is loaded as XMLNode object.
 The semantic part (light grey) is loaded as SemanticNode object.
 The data extractor saves the model of each table in its own XML file to ease reading the data.
-The own XML file consists of a sequence of semantic elements containing the XML syntax elements.
-The normative tables is being saved twice, once with all information and a second time as subset equal to the informative table, making file comparison easier.
+The own XML file consists of a sequence of semantic elements containing the XML syntax elements as their XML children.
+To ease comparison of a normative table with it's (hopefully identically) informative table twin, which has fewer XML columns, the normative table is being saved twice, once with all information and a second time as a subset equal to the informative table infoset, making file comparison easier.
 The name of our own XML files is a combination of: "specification document name" + "table name" + ".xml"
-More about the used class representation in the [JavaDoc](docs/apidocs/index.html).
-After the JUnit tests there will be a test log file "target/test.log".
 
 ## Software Prerequisites
 
@@ -55,7 +53,7 @@ NOTE: There is an [own chapter for software developers about the software](docs/
 ## Data Extraction by Technical Writer
 1. Download the JAR with all dependencies includes [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
 2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)__"
-3. Save the CEN DOCX documents of en16931-3 to ODT (tested with LibreOffice 6.2.5.2)
+3. Save the CEN DOCX documents of en16931-3 to ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
 4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) your-specification.odt (or your-directory)__"
 
 ## Data Analysis
