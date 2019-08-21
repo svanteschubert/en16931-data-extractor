@@ -50,7 +50,7 @@ The name of our own XML files is a combination of: "specification document name"
 
 NOTE: There is an [own chapter for software developers about the software](docs/software.md).
 
-## Data Extraction by Technical Writer
+## Usage: Extracting the Data
 1. Download the JAR with all dependencies includes [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)
 2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)__"
 3. Save the CEN DOCX documents of en16931-3 to ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
