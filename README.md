@@ -34,12 +34,12 @@ The informative table does not add any new information. It starts with the XML p
 In theory, both tables should provide the same data.
 
 ## Software: EN16931 Data Extractor
-The data extractor reads the office doucment and the containing mapping tables.
-For each table it is splitting:
-- The __XML part (dark grey)__
-- The __semantic part (light grey)__
-The extracted data model of each table is saved in its own XML format to ease reading and allow testing the data set.
-The new XML structure is straight forward: Just a list of the semantic entities, each containing the corresponding XML elements as their children.
+The data extractor is a simple Java tool that can be called from comamnd line. It reads from one or more office documents of EN16931-3 the containing syntax binding (or mapping) tables.
+For each table, each row is being split into the:
+- __XML part (dark grey)__
+- __semantic part (light grey)__
+The data of each table is being saved in an own XML format to ease reading and testing the data set.
+This new XML structure is straight forward: A list of semantic entities, each containing the corresponding XML elements as their children.
 
 *NOTE:*
 To ease comparison of a "normative table" from the specification with it's (hopefully identically) "informative table" twin, which has fewer XML columns, the normative table is being saved twice, once with all information and a second time as a subset equal to the informative table infoset, making file comparison easier.
@@ -62,7 +62,7 @@ There is an [own chapter for software developers about the software](docs/softwa
 1. Download the JAR with all dependencies includes [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)
 2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)__"
 3. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
-4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) <your-specification.odt> or <your-directory>__"
+4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) your-specification.odt (or your-directory)__"
 
 ### Data Analysis
 - The extracted data can be found as XML files aside the input documents.
