@@ -59,6 +59,6 @@ NOTE: There is an [own chapter for software developers about the software](docs/
 4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) your-specification.odt (or your-directory)__"
 
 ## Data Analysis
-5. The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
-6. Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
+- The extracted data can be found as XML files aside the input documents.
+- Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
 ![In our example only the title is different between the two tables](docs/resources/TotalCommanderComparison.png)
