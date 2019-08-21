@@ -6,7 +6,7 @@ Build as part of the [PrototypeFund project "paperless"](https://prototypefund.d
 ## Background on the EU e-Invoice Specification (en16931)
 There is [a wonderful online introduction for en16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Compliance+with+eInvoicing+standard) given by the EU.
 
-## Reason
+## Reason for this Software
 The specification EN16931 is meant to build e-invoice software, but it is tedious and error prone to read the manually copy the PDF (or paper) specification.
 The goal of this tool is to extract the main data, the so called syntax-binding (mapping) between the XML formats and the Semantic Data Model from more structured office documents. The bindings are for instance required to generate source code for a software allowing to load/save both XML formats. In addition our future software shall modify/create XML by an API based on the Semantic Data Model of en16931.
 Some reasoning behind from a developers bird perspective:
@@ -54,9 +54,9 @@ NOTE: There is an [own chapter for software developers about the software](docs/
 
 ## Data Extraction by Technical Writer
 1. Download the JAR with all dependencies includes [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)
-2. To see version information via command-line call:<br/>"java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)"
+2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)__"
 3. Save the CEN DOCX documents of en16931-3 to ODT (tested with LibreOffice 6.2.5.2)
-4. To extract data from the specification via command-line call:<br/>"java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) your-specification.odt (or your-directory)"
+4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) your-specification.odt (or your-directory)__"
 
 ## Data Analysis
 5. The extracted data can be found as XML files aside the input documents (the example ODT is in the folder en16931-3-reader/target/test-classes).
