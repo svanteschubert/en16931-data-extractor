@@ -43,7 +43,6 @@ To ease comparison of a "normative table" from the specification with it's (hope
 The name of our own XML files is a combination of: "specification document name" + "table name" + ".xml"
 
 ## Software Prerequisites
-
 ### Running (everybody, e.g. CEN Technical Writer)
 1. [>=JRE 9](https://jdk.java.net/12/)
 
@@ -54,13 +53,14 @@ The name of our own XML files is a combination of: "specification document name"
 
 NOTE: There is an [own chapter for software developers about the software](docs/software.md).
 
-## Usage: Extracting the Data
+## Usage
+### Extracting the Data
 1. Download the JAR with all dependencies includes [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)
 2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar)__"
 3. Save the CEN DOCX documents of en16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
-4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) your-specification.odt (or your-directory)__"
+4. To extract data from the specification via command-line call:<br/>"__java -jar [en16931-data-extractor-20190821-jar-with-dependencies.jar](docs/en16931-data-extractor-20190821-jar-with-dependencies.jar) <your-specification.odt> (or <your-directory>)__"
 
-## Data Analysis
+### Data Analysis
 - The extracted data can be found as XML files aside the input documents.
 - Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
 ![In our example only the title is different between the two tables](docs/resources/TotalCommanderComparison.png)
