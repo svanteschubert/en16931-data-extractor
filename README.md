@@ -37,7 +37,7 @@ In theory, both tables should provide the same data.
 The data extractor is a simple Java tool that can be called from comamnd line. It reads from one or more office documents of EN16931-3 the containing syntax binding (or mapping) tables.
 For each table, each row is being split into the:
 - __XML part (dark grey)__
-- __semantic part (light grey)__
+- __Semantic part (light grey)__
 
 The data of each table is being saved in an own XML format to ease reading and testing the data set.
 This new XML structure is straight forward: A list of semantic entities, each containing the corresponding XML elements as their children.
