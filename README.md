@@ -60,5 +60,5 @@ NOTE: There is an [own chapter for software developers about the software](docs/
 
 ## Data Analysis
 - The extracted data can be found as XML files aside the input documents.
-- Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to find any differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
+- Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
 ![In our example only the title is different between the two tables](docs/resources/TotalCommanderComparison.png)
