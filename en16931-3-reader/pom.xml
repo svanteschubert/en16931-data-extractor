@@ -57,8 +57,8 @@
             <scope>test</scope>
         </dependency>
         <!-- http://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
-        NOTE: SLF4J and LOG4J dependencies are given directly in pom.xml
-            DO NOT CHOOSE MANUALLY! -->
+    NOTE: SLF4J and LOG4J dependencies are given directly in pom.xml
+        DO NOT CHOOSE MANUALLY! -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j18-impl</artifactId>
@@ -95,9 +95,8 @@
                                 <manifestEntries>
                                     <Project-Name>${project.artifactId}</Project-Name>
                                     <Project-Version>${project.version}</Project-Version>
-                                    <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
+                                    <Project-Website>https://github.com/svanteschubert/en16931-data-extractor/</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
-                                    <Multi-Release>true</Multi-Release>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
@@ -243,32 +242,35 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                     <archive>
                         <index>true</index>
                         <manifest>
                             <mainClass>de.prototypefund.JarFunctionality</mainClass>
                         </manifest>
+                        <manifestEntries>
+                            <Multi-Release>true</Multi-Release>
+                        </manifestEntries>
                         <manifestSections>
                             <manifestSection>
-                                <name>${project.artifactId}</name>
+                                <name>en16931-data-extractor</name>
                                 <manifestEntries>
                                     <Project-Name>${project.artifactId}</Project-Name>
                                     <Project-Version>${project.version}</Project-Version>
-                                    <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
+                                    <Project-Website>https://github.com/svanteschubert/en16931-data-extractor/</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
-                                    <Multi-Release>true</Multi-Release>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+
                 </configuration>
                 <executions>
                     <execution>
-                        <id>single</id>
-                        <phase>package</phase>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
                         <goals>
                             <goal>single</goal>
                         </goals>
