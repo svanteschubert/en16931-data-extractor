@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
+<Configuration status="info">
 
     <Appenders>
         <!--<File name="FILE" fileName="logfile.log" append="true">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n"/>
         </File>-->
-        <Console name="STDOUT" target="SYSTEM_OUT">
+        <Console name="myConsole" target="SYSTEM_OUT">
         	<!--
         		INFO  | [main] en16931.ExtractionTest (ExtractionTest.java:85) - SPECIFICATION DOCUMENT: '16931-3-3_changesAccepted-NUR AB TABELLEN'
             <PatternLayout pattern="%-5p | [%t] %C{2} (%F:%L) - %m%n"/>
-            <PatternLayout pattern="%-5p | %C{2} - %m"/ charset="UTF-8">-->
-            <PatternLayout pattern="%-5p | %C{2} - %m" charset="UTF-8"/>
+            <PatternLayout pattern="%-5p | %C{2} - %m"/ charset="UTF-8">
+            <PatternLayout pattern="%-5p | %C{2} - %m" charset="UTF-8"/>-->
+            <PatternLayout pattern="%-5p | %m" charset="UTF-8"/>
         </Console>
 
-        <File name="FILE" fileName="target/test.log">
+        <File name="myFile" fileName="target/test.log">
             <PatternLayout pattern="%-5p | %C{2} - %m" charset="UTF-8"/>
         </File>
     </Appenders>
 
     <Loggers>
         <Logger name="de.prototypefund" level="info"/>
-
-
         <Root level="info">
-            <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="FILE"/>
+            <AppenderRef ref="myConsole"/>
+            <AppenderRef ref="myFile"/>
         </Root>
     </Loggers>
 

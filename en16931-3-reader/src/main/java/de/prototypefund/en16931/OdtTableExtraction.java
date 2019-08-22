@@ -109,29 +109,29 @@ public class OdtTableExtraction {
     private void collectSpecData(File f) throws Exception {
         String absPath = f.getAbsolutePath();
         if (f.isDirectory()) {
-            LOG.info("Extracting data from directory: " + absPath);
+            LOG.debug("Extracting data from directory: " + absPath + "\n");
             for (String childPath : f.list()) {
                 collectSpecData(new File(absPath + File.separator + childPath));
             }
         } else {
             if (absPath.endsWith(ODT_SUFFIX)) {
-                LOG.info("Extracting data from file: " + absPath);
+                LOG.debug("Extracting data from file: " + absPath + "\n");
                 extractData(f);
             } else {
-                LOG.info("As without file suffix '.odt' ignoring: " + absPath);
+                LOG.debug("As without file suffix '.odt' ignoring: " + absPath + "\n");
             }
         }
     }
 
     /**
-     * @param odtFile <code>File</code> representing the en16931 specification
+     * @param odtFile <code>File</code> representing the EN16931 specification
      */
     private void extractData(File odtFile) throws Exception {
         odtDoc = OdfTextDocument.loadDocument(odtFile);
         String absPath = odtFile.getAbsolutePath();
         String odtFileName = absPath.substring(absPath.lastIndexOf(File.separatorChar) + 1);
         String odtFilePath = absPath.substring(0, absPath.lastIndexOf(File.separatorChar) + 1);
-        LOG.info("\n\n\n\n*** Specification document: '" + odtFileName + "'\n\n\n");;
+        LOG.info("\n\n*** Specification document: '" + odtFileName + "'\n\n");;
         // traverse top level user objects
         OfficeTextElement root = odtDoc.getContentRoot();
         NodeList topChildren = root.getChildNodes();
@@ -172,7 +172,7 @@ public class OdtTableExtraction {
     }
 
     private void extractDataFromTable(TableTableElement tableElement, String fileName, String outputPath, String title) {
-        LOG.debug("\n\nTable Heading: '" + title + "'\n");
+        LOG.debug("Table Heading: '" + title + "'\n");
         mTableId = title;
         OdfTable table = OdfTable.getInstance(tableElement);
 
@@ -206,9 +206,9 @@ public class OdtTableExtraction {
             // final test: first cell conent of header row have to be correct!
             if (!(((columnCount == NORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) && getCellContent(tc).equals(SEMANTIC_TABLE_HEADINGS[0].getLabel()))
                     || ((columnCount == INFORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) && getCellContent(tc).equals(SYNTAX_TABLE_HEADINGS[0].getLabel())))) {
-                LOG.error("WRONG TABLE: '" + mTableId + "' + IS NOT A TABLE FOR DATA EXTRACTION!");
+                LOG.error("ERROR: WRONG TABLE: '" + mTableId + "' + IS NOT A TABLE FOR DATA EXTRACTION!");
             } else {
-                LOG.info("\n\nTable Heading: '" + title + "'\n\n");
+                LOG.info("Table Heading: '" + title + "'\n\n");
                 //*********
                 // CONTENT ROWS
                 //*********
@@ -449,7 +449,7 @@ public class OdtTableExtraction {
                 NodeSyntax.duplicatePathList.clear();
             }
         } catch (Throwable e) {
-            LoggerFactory.getLogger(NodeSemantic.class.getName()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + e.getMessage(), e);
         }
     }
 

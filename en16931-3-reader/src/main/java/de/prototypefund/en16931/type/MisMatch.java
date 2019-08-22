@@ -49,7 +49,7 @@ public interface MisMatch {
                     misMatch = MisMatchDatatype.getByValue(match, semanticID);
                     break;
                 default:
-                    LoggerFactory.getLogger(MisMatch.class.getName()).error("There is no mismatch for '" + match + "' used in Semantic object with ID '" + semanticID + "'!\n");
+                    LoggerFactory.getLogger(MisMatch.class.getName()).error("ERROR: There is no mismatch for '" + match + "' used in Semantic object with ID '" + semanticID + "'!\n");
             }
         }
         return misMatch;

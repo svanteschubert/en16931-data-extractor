@@ -56,32 +56,13 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!-- http://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
+        <!-- http://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
+        NOTE: SLF4J and LOG4J dependencies are given directly in pom.xml
+            DO NOT CHOOSE MANUALLY! -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.11.1</version>
-        </dependency>
-        <!-- http://logging.apache.org/log4j/2.x/maven-artifacts.html -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.0-jre</version>
+            <artifactId>log4j-slf4j18-impl</artifactId>
+            <version>2.12.1</version>
         </dependency>
     </dependencies>
 
@@ -108,9 +89,6 @@
                         <manifest>
                             <mainClass>de.prototypefund.JarFunctionality</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <version>${project.version}</version>
-                        </manifestEntries>
                         <manifestSections>
                             <manifestSection>
                                 <name>en16931-data-extractor</name>
@@ -119,6 +97,7 @@
                                     <Project-Version>${project.version}</Project-Version>
                                     <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
+                                    <Multi-Release>true</Multi-Release>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
@@ -269,9 +248,6 @@
                         <manifest>
                             <mainClass>de.prototypefund.JarFunctionality</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <version>${project.version}</version>
-                        </manifestEntries>
                         <manifestSections>
                             <manifestSection>
                                 <name>${project.artifactId}</name>
@@ -280,6 +256,7 @@
                                     <Project-Version>${project.version}</Project-Version>
                                     <Project-Website>https://github.com/svanteschubert/en16931-data-extractor</Project-Website>
                                     <Project-Built-Date>${build.timestamp}</Project-Built-Date>
+                                    <Multi-Release>true</Multi-Release>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>

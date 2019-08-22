@@ -67,7 +67,7 @@ public enum UblDataType implements Type {
         updateStatistic(value);
         UblDataType d = mTypeMap.get(value);
         if (d == null) {
-           LoggerFactory.getLogger(SyntaxType.class.getName()).error("The UBL XML data type being abbreviated '" + value + "' does not exist! Found in UBL object with ID '" + ublID + "'!\n");
+           LoggerFactory.getLogger(SyntaxType.class.getName()).error("ERROR: The UBL XML data type being abbreviated '" + value + "' does not exist! Found in UBL object with ID '" + ublID + "'!\n");
         }
         return d;
     }

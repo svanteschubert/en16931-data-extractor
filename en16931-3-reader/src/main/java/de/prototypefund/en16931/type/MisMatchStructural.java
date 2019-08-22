@@ -47,7 +47,7 @@ public enum MisMatchStructural implements MisMatch {
         MisMatchStructural s = mMatchMap.get(value);
 
         if (s == null) {
-            LoggerFactory.getLogger(MisMatchSemantic.class.getName()).error("There is no structural mismatch for '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
+            LoggerFactory.getLogger(MisMatchSemantic.class.getName()).error("ERROR: There is no structural mismatch for '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return s;
     }

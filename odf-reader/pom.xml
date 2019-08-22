@@ -114,35 +114,6 @@
             <artifactId>json</artifactId>
             <version>20180813</version><!-- soon on Maven: 20190722 -->
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/jul-to-slf4j
-        https://www.slf4j.org/legacy.html#jul-to-slf4j -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.26</version>
-        </dependency>
-        <!-- http://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.26</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.12.0</version>
-        </dependency>
-        <!-- http://logging.apache.org/log4j/2.x/maven-artifacts.html -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.12.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.12.0</version>
-        </dependency>
     </dependencies>
 
     <properties>
@@ -197,9 +168,6 @@
                         <manifest>
                             <mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <version>${project.version}</version>
-                        </manifestEntries>
                         <manifestSections>
                             <manifestSection>
                                 <name>ODFDOM</name>
@@ -209,6 +177,7 @@
                                     <ODFDOM-Website>${project.url}</ODFDOM-Website>
                                     <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
                                     <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                    <Multi-Release>true</Multi-Release>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
@@ -260,9 +229,6 @@
                         <manifest>
                             <mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <version>${project.version}</version>
-                        </manifestEntries>
                         <manifestSections>
                             <manifestSection>
                                 <name>ODFDOM</name>
@@ -272,6 +238,7 @@
                                     <ODFDOM-Website>${project.url}</ODFDOM-Website>
                                     <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
                                     <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                    <Multi-Release>true</Multi-Release>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>

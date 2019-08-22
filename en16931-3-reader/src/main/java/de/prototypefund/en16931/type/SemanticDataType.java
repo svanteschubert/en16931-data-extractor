@@ -69,7 +69,7 @@ public enum SemanticDataType implements Type {
         updateStatistic(value);
         SemanticDataType d = mTypeMap.get(value);
         if (d == null) {
-           LoggerFactory.getLogger(SemanticDataType.class.getName()).error("The semantic data type being abbreviated '" + value + "' does not exist! Found in Semantic object with ID '" + semanticID + "'!\n");
+           LoggerFactory.getLogger(SemanticDataType.class.getName()).error("ERROR: The semantic data type being abbreviated '" + value + "' does not exist! Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return d;
     }

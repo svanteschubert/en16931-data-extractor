@@ -115,7 +115,7 @@ public abstract class NodeSyntax {
 
             }
         } catch (Throwable t) {
-            LOG.error("Problem in SyntaxNode creation!", t);
+            LOG.error("ERROR: Problem in SyntaxNode creation!", t);
         }
     }
 
@@ -147,7 +147,7 @@ public abstract class NodeSyntax {
                 mMisMatches[0] = MisMatch.createMisMatch(match.replaceAll(LEADING_TRAILING_WHITESPACES, ""), this.getSemanticNode().getId());
             }
         } catch (Throwable e) {
-            LoggerFactory.getLogger(NodeSyntax.class.getName()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(NodeSyntax.class.getName()).error("ERROR: " + e.getMessage(), e);
         }
     }
 
@@ -238,7 +238,7 @@ public abstract class NodeSyntax {
                 syntax.append(" mismatches=\"");
                 for (int i = 0; mMisMatches.length > i; i++) {
                     if (mMisMatches[i] == null) {
-                        LOG.error("INVALID CONTENT: See 'Match' column of Semantic ID '" + this.getSemanticNode().getId() + "'!\n");
+                        LOG.error("ERROR: INVALID CONTENT: See 'Match' column of Semantic ID '" + this.getSemanticNode().getId() + "'!\n");
                         syntax.append("ERROR!\"");
                         break;
                     }
@@ -261,7 +261,7 @@ public abstract class NodeSyntax {
                 syntax.append("/>");
             }
         } catch (Throwable e) {
-            LoggerFactory.getLogger(NodeXml.class.getName()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(NodeXml.class.getName()).error("ERROR: " + e.getMessage(), e);
         }
         return syntax.toString();
     }
@@ -281,7 +281,7 @@ public abstract class NodeSyntax {
             syntax.append("/>");
 
         } catch (Throwable e) {
-            LoggerFactory.getLogger(NodeXml.class.getName()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(NodeXml.class.getName()).error("ERROR: " + e.getMessage(), e);
         }
         return syntax.toString();
     }

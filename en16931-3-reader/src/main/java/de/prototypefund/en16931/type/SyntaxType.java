@@ -55,7 +55,7 @@ public enum SyntaxType implements Type {
         SyntaxType t = mTypeMap.get(value);
 
         if (t == null) {
-            LoggerFactory.getLogger(SyntaxType.class.getName()).error("It do not exist a syntax type of '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
+            LoggerFactory.getLogger(SyntaxType.class.getName()).error("ERROR: It do not exist a syntax type of '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return t;
     }

@@ -70,7 +70,7 @@ public class NodeSemantic {
                     isBusinessGroup = Boolean.TRUE;
                     testID(id);
                 } else {
-                    LOG.error("ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
+                    LOG.error("ERROR: ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
                 }
                 if (id.contains("–")) {
                     LOG.warn("WARNING: ID of Semantic object was using a different hyphen '" + id + "'!\n");
@@ -83,7 +83,7 @@ public class NodeSemantic {
                     }
                 }
             } else {
-                LOG.error("ID of semantic object may not be empty!");
+                LOG.error("ERROR: ID of semantic object may not be empty!");
             }
             if (allSemanticNodes == null) {
                 allSemanticNodes = new TreeMap<>();
@@ -115,7 +115,7 @@ public class NodeSemantic {
                     NodeSemantic s = allSemanticNodes.get(id);
                     SpecificationFixes.hasError = Boolean.TRUE;
                     mWARNING_FixUnavailable = Boolean.TRUE;
-                    LOG.error(" ERROR: *** Duplicated SemanticNode ID: " + s.getId() + "\n");
+                    LOG.error("ERROR: *** Duplicated SemanticNode ID: " + s.getId() + "\n");
                     LOG.info("       within table: '" + mTableId + "'\n");
                     LOG.info("       with business Term: '" + s.getBusinessTerm() + "'\n");
                     if (s.mDescription != null) {
@@ -138,7 +138,7 @@ public class NodeSemantic {
                 PrintStream out2 = new PrintStream(out1);
                 t.printStackTrace(out2);
                 String message = out1.toString("UTF8");
-                LoggerFactory.getLogger(NodeSemantic.class.getName()).error(message, t);
+                LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + message, t);
                 out1.close();
                 out2.close();
             } catch (IOException ex) {
@@ -153,7 +153,7 @@ public class NodeSemantic {
         try {
             Integer.parseInt(numberCandidate);
         } catch (NumberFormatException e) {
-            LOG.error("Semantic ID is not as as usual. Expected is a 'BT-' or 'BG-' with numbers and further '-', but the ID was '" + id + "'!");
+            LOG.error("ERROR: Semantic ID is not as as usual. Expected is a 'BT-' or 'BG-' with numbers and further '-', but the ID was '" + id + "'!");
         }
     }
 
@@ -319,7 +319,7 @@ public class NodeSemantic {
                         xml_Suffix.append(s.toString()).append("\n");
                     }
                 } else {
-                    LOG.error("ERROR DATA MODEL IS EMPTY!!");
+                    LOG.error("ERROR: DATA MODEL IS EMPTY!!");
                 }
                 if (s.syntaxRepresentations != null) {
                     xmlCount += s.syntaxRepresentations.size();
@@ -332,7 +332,7 @@ public class NodeSemantic {
             String outputFilePath = FileHelper.saveStringToFile(new File(outputPath + fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
             LOG.info("Saving table model into XML file: " + outputFilePath + "\n");
         } catch (Throwable e) {
-            LoggerFactory.getLogger(NodeSemantic.class.getName()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + e.getMessage(), e);
         }
     }
 
@@ -360,7 +360,7 @@ public class NodeSemantic {
             }
             sb.append("\n\n");
         }
-        LOG.error("\n\nThere are " + duplicates.size() + " duplications of syntax within semantic nodes!\n" + sb.toString());
+        LOG.error("\n\nERROR: There are " + duplicates.size() + " duplications of syntax within semantic nodes!\n" + sb.toString());
     }
 
 //    Set<List<SemanticNode>> findDuplicates() {

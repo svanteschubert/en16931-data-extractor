@@ -49,7 +49,7 @@ public enum CardinalityXml {
         updateStatistic(value);
         CardinalityXml c = mCardMap.get(value);
         if (c == null) {
-            LoggerFactory.getLogger(CardinalityXml.class.getName()).error("There is no cardinality for '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
+            LoggerFactory.getLogger(CardinalityXml.class.getName()).error("ERROR: There is no cardinality for '" + value + "'. Found in Semantic object with ID '" + semanticID + "'!\n");
         }
         return c;
     }

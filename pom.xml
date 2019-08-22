@@ -29,7 +29,9 @@
     <properties>
         <jdk.version>9</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>20190821</revision>
+        <revision>20190822</revision>
+        <maven.compiler.source>9</maven.compiler.source>
+        <maven.compiler.target>9</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
