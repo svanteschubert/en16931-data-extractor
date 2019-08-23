@@ -48,7 +48,7 @@ The name of our own XML files is a combination of: "specification document name"
 
 ## Software Prerequisites
 ### Running (everybody, e.g. CEN Technical Writer)
-- [>= JDK 9 (JRE are no longer available)](https://jdk.java.net/12/)
+- [>= JDK 9](https://jdk.java.net/12/)
 
 ### Building (developers)
 - [>= JDK 9](https://jdk.java.net/12/)
