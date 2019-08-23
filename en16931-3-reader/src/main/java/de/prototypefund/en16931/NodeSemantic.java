@@ -339,7 +339,7 @@ public class NodeSemantic {
             int semanticCount = semanticNodes.size();
             xml_Prefix.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<semantics semantics=\"" + semanticCount + "\" xml=\"" + xmlCount + "\" file=\"" + fileName + "\" table=\"" + title + "\">\n");
             String outputFilePath = FileHelper.saveStringToFile(new File(outputPath + fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
-            LOG.info("Saving extracted syntax binding into file:\n\t" + outputFilePath + "\n");
+            LOG.info("\nSaving extracted syntax binding into file:\n\t" + outputFilePath + "\n");
         } catch (Throwable e) {
             LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + e.getMessage(), e);
         }
@@ -348,19 +348,19 @@ public class NodeSemantic {
     public void showSemanticIDAnomalies() {
         if (mMultiHyphenDiff != null) {
             LOG.warn("WARNING: Semantic IDs are using different hyphen:\n");
-            LOG.warn("\tThe unicode character hyphen-minus is shown as '*', the control-character 'START OF GUARDED AREA' as '+':\n\t");
+            LOG.warn("\t\tThe unicode character hyphen-minus is shown as '*', the control-character 'START OF GUARDED AREA' as '+':\n\t\t");
                 for(String id : mMultiHyphenDiff){
                     LOG.info(id.replace("-", "*").replace("–", "+") + ", ");
                 }
             if (mMultiHyphenSame != null) {
-                LOG.info("\n\tIn addition, the following semantic IDs were using two identical hyphen:\n");
+                LOG.info("\n\t\tIn addition, the following semantic IDs were using two identical hyphen:\n");
                 for(String id : mMultiHyphenSame){
                     LOG.info(id + ", ");
                 }
                 mMultiHyphenSame.clear();
                 mMultiHyphenSame = null;
             } else {
-                LOG.info("\n\tNo Semantic ID was using two identical hyphen!\n\n");
+                LOG.info("\n\t\tNo Semantic ID was using two identical hyphen!\n\n");
             }
                 mMultiHyphenDiff.clear();
                 mMultiHyphenDiff = null;

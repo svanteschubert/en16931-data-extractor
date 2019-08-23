@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * This enum describes CII XML & EDIFACT syntax types as used in the syntax binding tables.
+ * This enum describes CII XML &amp; EDIFACT syntax types as used in the syntax binding tables.
  */
 public enum SyntaxType implements Type {
 
