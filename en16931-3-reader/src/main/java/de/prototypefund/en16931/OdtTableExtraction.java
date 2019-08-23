@@ -168,7 +168,7 @@ public class OdtTableExtraction {
         }
         LOG.info("\n*********"
                 + "********* Specification document: '" + odtFileName + "'\n"
-                + "****************************************************************\n");
+                + "****************************************************************\n\n");
     }
 
     private void extractDataFromTable(TableTableElement tableElement, String fileName, String outputPath, String title) {

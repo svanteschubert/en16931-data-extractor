@@ -17,7 +17,6 @@ package de.prototypefund.en16931;
 
 import static de.prototypefund.en16931.OdtTableExtraction.mMultiHyphenDiff;
 import static de.prototypefund.en16931.OdtTableExtraction.mMultiHyphenSame;
-import static de.prototypefund.en16931.SpecificationFixes.mAllFixes;
 import de.prototypefund.en16931.type.CardinalitySemantic;
 import de.prototypefund.en16931.type.SemanticDataType;
 import java.io.ByteArrayOutputStream;
@@ -101,45 +100,25 @@ public class NodeSemantic {
                 allSemanticNodes.put(id, this);
                 mID = id;
             } else { // duplicate sematic ID
-                Map<String, String> fixes = mAllFixes.get(mTableId);
-                if (fixes != null && fixes.containsKey(id)) {
-                    // found a fix for duplicate sematic ID
-                    String fix = fixes.get(id);
-                    // check if fix was already applied
-                    if (!allSemanticNodes.containsKey(fix)) {
-                        allSemanticNodes.put(fix, this);
-                        mID = fix;
-                    } else {
-                        // fix was aleady applied
-                        SpecificationFixes.hasError = Boolean.TRUE;
-                        mWARNING_FixAlreadyTaken = Boolean.TRUE;
-
-                        LOG.error("\nERROR: Fix: '" + fix + "', already taken for semantic id '" + id + "'\n");
-                        id = SpecificationFixes.getAlternativeID(id);
-                        allSemanticNodes.put(id, this);
-                        mID = mERROR_ID;
-                    }
-                } else {
-                    NodeSemantic s = allSemanticNodes.get(id);
-                    SpecificationFixes.hasError = Boolean.TRUE;
-                    mWARNING_FixUnavailable = Boolean.TRUE;
-                    LOG.error("ERROR: *** Duplicated SemanticNode ID: " + s.getId() + "\n");
-                    LOG.info("\t\twithin table: '" + mTableId + "'\n");
-                    LOG.info("\t\twith business Term: '" + s.getBusinessTerm() + "'\n");
-                    if (s.mDescription != null) {
-                        LOG.info("\t\twith description: '" + s.mDescription + "'\n");
-                    }
-                    for (NodeSyntax x : s.syntaxRepresentations) {
-                        LOG.info("\t\t\tSyntax child: '" + x.getPath() + "'\n");
-                        if (x.getRules() != null) {
-                            LOG.info("\t\t\tRules: '" + x.getRules() + "'\n");
-                        }
-                    }
-                    LOG.info("\n");
-
-                    id = SpecificationFixes.getAlternativeID(id);
-                    allSemanticNodes.put(id, this);
+                NodeSemantic s = allSemanticNodes.get(id);
+                SpecificationFixes.hasError = Boolean.TRUE;
+                mWARNING_FixUnavailable = Boolean.TRUE;
+                LOG.error("ERROR: Duplicated SemanticNode ID: " + s.getId() + "\n");
+                LOG.info("\t\twithin table: '" + mTableId + "'\n");
+                LOG.info("\t\twith business Term: '" + s.getBusinessTerm() + "'\n");
+                if (s.mDescription != null) {
+                    LOG.info("\t\twith description: '" + s.mDescription + "'\n");
                 }
+                for (NodeSyntax x : s.syntaxRepresentations) {
+                    LOG.info("\t\t\tSyntax child: '" + x.getPath() + "'\n");
+                    if (x.getRules() != null) {
+                        LOG.info("\t\t\tRules: '" + x.getRules() + "'\n");
+                    }
+                }
+                LOG.info("\n");
+
+                id = SpecificationFixes.getAlternativeID(id);
+                allSemanticNodes.put(id, this);
             }
         } catch (Throwable t) {
             try {
@@ -349,12 +328,12 @@ public class NodeSemantic {
         if (mMultiHyphenDiff != null) {
             LOG.warn("WARNING: Semantic IDs are using different hyphen characters:\n");
             LOG.warn("\t\tThe unicode character hyphen-minus is shown as '*', the control-character 'START OF GUARDED AREA' as '+':\n\t\t");
-                for(String id : mMultiHyphenDiff){
-                    LOG.info(id.replace("-", "*").replace("–", "+") + ", ");
-                }
+            for (String id : mMultiHyphenDiff) {
+                LOG.info(id.replace("-", "*").replace("–", "+") + ", ");
+            }
             if (mMultiHyphenSame != null) {
                 LOG.info("\n\t\tIn addition, the following semantic IDs were using two identical hyphen:\n");
-                for(String id : mMultiHyphenSame){
+                for (String id : mMultiHyphenSame) {
                     LOG.info(id + ", ");
                 }
                 mMultiHyphenSame.clear();
@@ -362,9 +341,9 @@ public class NodeSemantic {
             } else {
                 LOG.info("\n\t\tNo Semantic ID was using two identical hyphen!\n\n");
             }
-                mMultiHyphenDiff.clear();
-                mMultiHyphenDiff = null;
-        }else{
+            mMultiHyphenDiff.clear();
+            mMultiHyphenDiff = null;
+        } else {
             LOG.info("INFO: Semantic IDs are using correct hyphens.\n\n");
         }
     }
