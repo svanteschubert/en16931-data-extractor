@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import org.slf4j.Logger;
@@ -101,7 +100,6 @@ public class NodeSemantic {
                 mID = id;
             } else { // duplicate sematic ID
                 NodeSemantic s = allSemanticNodes.get(id);
-                SpecificationFixes.hasError = Boolean.TRUE;
                 mWARNING_FixUnavailable = Boolean.TRUE;
                 LOG.error("ERROR: Duplicated SemanticNode ID: " + s.getId() + "\n");
                 LOG.info("\t\twithin table: '" + mTableId + "'\n");
@@ -116,8 +114,6 @@ public class NodeSemantic {
                     }
                 }
                 LOG.info("\n");
-
-                id = SpecificationFixes.getAlternativeID(id);
                 allSemanticNodes.put(id, this);
             }
         } catch (Throwable t) {
