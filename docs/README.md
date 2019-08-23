@@ -48,12 +48,12 @@ The name of our own XML files is a combination of: "specification document name"
 
 ## Software Prerequisites
 ### Running (everybody, e.g. CEN Technical Writer)
-1. [>= JRE 9](https://jdk.java.net/12/)
+- [>= JRE 9](https://jdk.java.net/12/)
 
 ### Building (developers)
-1. [>= JDK 9](https://jdk.java.net/12/)
-2. [GIT](https://git-scm.com/)
-3. [>= Apache Maven 3.5](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
+- [>= JDK 9](https://jdk.java.net/12/)
+- [GIT](https://git-scm.com/)
+- [>= Apache Maven 3.5](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
 *NOTE:*
 There is an [own chapter for software developers about the software](docs/software.md).
