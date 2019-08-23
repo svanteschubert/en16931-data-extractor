@@ -16,7 +16,7 @@
 package de.prototypefund.en16931;
 
 import static de.prototypefund.en16931.SpecificationFixes.mAllFixes;
-import de.prototypefund.en16931.type.CardinalityXml;
+import de.prototypefund.en16931.type.CardinalitySemantic;
 import de.prototypefund.en16931.type.SemanticDataType;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,7 +49,7 @@ public class NodeSemantic {
     List<NodeSyntax> syntaxRepresentations = null;
     private String mID = null;
     private String mBusinessTerm = null;
-    private CardinalityXml mCardinality = null;
+    private CardinalitySemantic mCardinality = null;
     private Integer mLevel = null;
     private SemanticDataType mDataType = null;
     private String mDescription = null;
@@ -184,10 +184,10 @@ public class NodeSemantic {
     }
 
     public void setCardinality(String c) {
-        mCardinality = CardinalityXml.getByValue(c, this.mID);
+        mCardinality = CardinalitySemantic.getByValue(c, this.mID);
     }
 
-    public CardinalityXml getCardinality() {
+    public CardinalitySemantic getCardinality() {
         return mCardinality;
     }
 
@@ -330,7 +330,7 @@ public class NodeSemantic {
             int semanticCount = semanticNodes.size();
             xml_Prefix.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<semantics semantics=\"" + semanticCount + "\" xml=\"" + xmlCount + "\" file=\"" + fileName + "\" table=\"" + title + "\">\n");
             String outputFilePath = FileHelper.saveStringToFile(new File(outputPath + fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
-            LOG.info("Saving table model into XML file: " + outputFilePath + "\n");
+            LOG.info("Saving extracted syntax binding into file:\n\t" + outputFilePath + "\n");
         } catch (Throwable e) {
             LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + e.getMessage(), e);
         }

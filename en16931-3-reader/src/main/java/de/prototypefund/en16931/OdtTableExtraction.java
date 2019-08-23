@@ -53,18 +53,9 @@ public class OdtTableExtraction {
 
     private static final Logger LOG;
 
-    // To ease the comparison of logs, there is a simplification of logging to one line without a date:
     static {
-        // " [Mo Okt 15 21:39:48 MESZ 2018]"
-        // "%4$s: %5$s [%1$tc]%n"
-        // System.setProperty("java.util.logging.SimpleFormatter.format","%4$s: %5$s [%1$tc]%n");
-        // ": Mon Oct 15 22:01:36 CEST 2018SEVERE: "
-        // see https://docs.oracle.com/javase/7/docs/api/index.html?java/util/logging/SimpleFormatter.html
-        // System.setProperty("java.util.logging.SimpleFormatter.format","%4$s: %5$s: %1$s");
-        // System.setProperty("java.util.logging.SimpleFormatter.format","%p : %m");
         LOG = LoggerFactory.getLogger(OdtTableExtraction.class);
     }
-
     OdfTextDocument odtDoc;
     OdfTable odtTable;
     SemanticHeading[] SEMANTIC_TABLE_HEADINGS = NodeSemantic.SemanticHeading.values();
@@ -84,6 +75,7 @@ public class OdtTableExtraction {
     /**
      * @param odtFileName the file name of the specification or a directory
      * where specifications are any descendant documents!
+     * @throws java.lang.Exception
      */
     public void collectSpecData(String odtFileName) throws Exception {
         String absPath = null;
@@ -131,13 +123,15 @@ public class OdtTableExtraction {
         String absPath = odtFile.getAbsolutePath();
         String odtFileName = absPath.substring(absPath.lastIndexOf(File.separatorChar) + 1);
         String odtFilePath = absPath.substring(0, absPath.lastIndexOf(File.separatorChar) + 1);
-        LOG.info("\n\n*** Specification document: '" + odtFileName + "'\n\n");;
+        LOG.info("****************************************************************\n"
+                + "********* Specification document: '" + odtFileName + "'\n"
+                + "*********\n\n");
         // traverse top level user objects
         OfficeTextElement root = odtDoc.getContentRoot();
         NodeList topChildren = root.getChildNodes();
 
         int i = 0;
-        Node child = null;
+        Node child;
         String tableTitle = null;
         Boolean hasPrecedingHeading = Boolean.FALSE;
         for (i = 0; i < topChildren.getLength(); i++) {
@@ -169,6 +163,9 @@ public class OdtTableExtraction {
                 tableTitle = null;
             }
         }
+        LOG.info("\n*********"
+                + "********* Specification document: '" + odtFileName + "'\n"
+                + "****************************************************************\n");
     }
 
     private void extractDataFromTable(TableTableElement tableElement, String fileName, String outputPath, String title) {
@@ -193,10 +190,10 @@ public class OdtTableExtraction {
 
         } else if (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) {
             mIsXML = (columnCount == NORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_TABLE_SIZE);
-            if(mIsXML){
-                if(title.contains("UBL")){
+            if (mIsXML) {
+                if (title.contains("UBL")) {
                     mIsUBL = Boolean.TRUE;
-                }else{
+                } else {
                     mIsUBL = Boolean.FALSE;
                 }
             }
@@ -257,9 +254,9 @@ public class OdtTableExtraction {
                                 int i = c - SEMANTIC_TABLE_HEADINGS.length;
                                 if (i == 0) {
                                     if (mIsXML) {
-                                        if(mIsUBL){
+                                        if (mIsUBL) {
                                             syntaxNode = new NodeUblXml(cellContent, semanticNode);
-                                        }else{
+                                        } else {
                                             syntaxNode = new NodeXml(cellContent, semanticNode);
                                         }
                                     } else {
@@ -346,7 +343,7 @@ public class OdtTableExtraction {
                 }
                 // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
-                TypeStatistic.table(title);
+                TypeStatistic.table(title, mIsXML, mIsUBL);
                 clearAll();
             }
         }
