@@ -124,15 +124,15 @@ public class NodeSemantic {
                     SpecificationFixes.hasError = Boolean.TRUE;
                     mWARNING_FixUnavailable = Boolean.TRUE;
                     LOG.error("ERROR: *** Duplicated SemanticNode ID: " + s.getId() + "\n");
-                    LOG.info("       within table: '" + mTableId + "'\n");
-                    LOG.info("       with business Term: '" + s.getBusinessTerm() + "'\n");
+                    LOG.info("\t\twithin table: '" + mTableId + "'\n");
+                    LOG.info("\t\twith business Term: '" + s.getBusinessTerm() + "'\n");
                     if (s.mDescription != null) {
-                        LOG.info("       with description: '" + s.mDescription + "'\n");
+                        LOG.info("\t\twith description: '" + s.mDescription + "'\n");
                     }
                     for (NodeSyntax x : s.syntaxRepresentations) {
-                        LOG.info("             Syntax child: '" + x.getPath() + "'\n");
+                        LOG.info("\t\t\tSyntax child: '" + x.getPath() + "'\n");
                         if (x.getRules() != null) {
-                            LOG.info("             Rules: '" + x.getRules() + "'\n");
+                            LOG.info("\t\t\tRules: '" + x.getRules() + "'\n");
                         }
                     }
                     LOG.info("\n");
@@ -347,7 +347,7 @@ public class NodeSemantic {
 
     public void showSemanticIDAnomalies() {
         if (mMultiHyphenDiff != null) {
-            LOG.warn("WARNING: Semantic IDs are using different hyphen:\n");
+            LOG.warn("WARNING: Semantic IDs are using different hyphen characters:\n");
             LOG.warn("\t\tThe unicode character hyphen-minus is shown as '*', the control-character 'START OF GUARDED AREA' as '+':\n\t\t");
                 for(String id : mMultiHyphenDiff){
                     LOG.info(id.replace("-", "*").replace("–", "+") + ", ");

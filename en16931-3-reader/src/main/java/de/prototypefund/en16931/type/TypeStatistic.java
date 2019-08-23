@@ -52,7 +52,7 @@ public class TypeStatistic {
         sb.append("--------------------------------------------------------------------------------------------------------\n");
 
         SortedMap<String, Integer> m = SemanticDataType.getStatistic();
-        log(sb.append("* Semantic Data Type"), m);
+        log(sb.append("* Semantic Data Type (BT only)"), m);
         if (m != null) {
             mSemanticDataTypes.putAll(m);
             m.clear();
@@ -60,7 +60,7 @@ public class TypeStatistic {
         }
 
         m = CardinalitySemantic.getStatistic();
-        log(sb.append("* Cardinalities used by Semantic"), m);
+        log(sb.append("* Cardinalities used by Semantic (BT & BG)"), m);
         if (m != null) {
             mCardinalitesSemantic.putAll(m);
             m.clear();
@@ -103,7 +103,7 @@ public class TypeStatistic {
 
         if (isUBL) {
             m = UblDataType.getStatistic();
-            log(sb.append("* Types of UBL XML"), m);
+            log(sb.append("* Types of UBL XML (BT only)"), m);
             if (m != null) {
                 mTypesOfUblXml.putAll(m);
                 m.clear();
@@ -111,9 +111,9 @@ public class TypeStatistic {
             }
         } else {
             if (isXML) {
-                log(sb.append("* Types of CII XML Syntax"), m);
+                log(sb.append("* Types of CII XML Syntax (BT only)"), m);
             } else {
-                log(sb.append("* Types of EDIFACT Syntax"), m);
+                log(sb.append("* Types of EDIFACT Syntax (BT only)"), m);
             }
             if (m != null) {
                 mTypesOfXml.putAll(m);
@@ -124,9 +124,9 @@ public class TypeStatistic {
 
         m = CardinalityXml.getStatistic();
         if (isUBL) {
-            log(sb.append("* Cardinalities used by UBL XML"), m);
+            log(sb.append("* Cardinalities used by UBL XML (BT & BG)"), m);
         } else {
-            log(sb.append("* Cardinalities used by CII XML"), m);
+            log(sb.append("* Cardinalities used by CII XML (BT & BG)"), m);
         }
         if (m != null) {
             mCardinalites.putAll(m);

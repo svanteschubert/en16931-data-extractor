@@ -209,7 +209,7 @@ public class OdtTableExtraction {
                 LOG.error("ERROR: WRONG TABLE: '" + mTableId + "' + IS NOT A TABLE FOR DATA EXTRACTION!");
             } else {
             	LOG.info("\n--------------------------------------------------------------------------------------------------------\n");
-                LOG.info("Table Heading: '" + title + "'\n");
+                LOG.info("Table Heading:\n\t" + title + "\n");
                 LOG.info("--------------------------------------------------------------------------------------------------------\n\n");
                 //*********
                 // CONTENT ROWS
@@ -243,11 +243,6 @@ public class OdtTableExtraction {
                                     if (cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "").isEmpty()) {
                                         LOG.debug("IS EMPTY!!!");
                                     } else {
-// duplicated output - errors are no longer being hidden
-//                                        // errorhandling of previous node
-//                                        if (SpecificationFixes.hasError) {
-//                                            SpecificationFixes.flushErrors(semanticNode);
-//                                        }
                                         semanticNode = new NodeSemantic(cellContent, mTableId);
                                     }
                                 }
@@ -340,7 +335,6 @@ public class OdtTableExtraction {
                 }
                 // anomalies of each semantic ID had been collected, to show once all..
                 semanticNode.showSemanticIDAnomalies();
-                semanticNode.createXMLFile(fileName, outputPath, title);
                 // dump the table model into an XML file
                 semanticNode.createXMLFile(fileName, outputPath, title);
                 if (columnCount == NORMATIVE_TABLE_SIZE) {
