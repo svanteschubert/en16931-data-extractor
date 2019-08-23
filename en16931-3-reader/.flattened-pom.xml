@@ -142,6 +142,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
+                            <source>8</source>
                             <doclint>none</doclint>
                             <additionalparam>${javadoc.opts}</additionalparam>
                         </configuration>
