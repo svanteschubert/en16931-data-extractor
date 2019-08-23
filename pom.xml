@@ -108,15 +108,40 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.ec4j.maven</groupId>
                 <artifactId>editorconfig-maven-plugin</artifactId>
                 <version>0.0.10</version>
                 <executions>
                     <execution>
-                        <id>check</id>
+                        <id>whitespace</id>
                         <phase>verify</phase>
                         <goals>
-                            <goal>check</goal>
+                            <goal>format</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -127,8 +152,8 @@
                     <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
                     <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
                     <!-- You can exclude further files from processing: -->
-                        <!--<excludes><exclude>src/main/**/*.whatever</exclude></excludes>-->
-                   <!-- All files are included by default:
+                    <!--<excludes><exclude>src/main/**/*.whatever</exclude></excludes>-->
+                    <!-- All files are included by default:
                     <includes>
                         <include>**</include>
                     </includes>-->

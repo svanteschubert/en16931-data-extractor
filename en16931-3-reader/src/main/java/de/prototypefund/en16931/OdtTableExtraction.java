@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
@@ -71,7 +72,9 @@ public class OdtTableExtraction {
     private static final String WORKING_DIRECTORY = "user.dir";
     private static Boolean mIsXML;
     private static Boolean mIsUBL;
-
+    // used by NodeSemantics to collect info on Semantic ID problem using different hyphens
+    static List<String> mMultiHyphenDiff = null;
+    static List<String> mMultiHyphenSame = null;
     /**
      * @param odtFileName the file name of the specification or a directory
      * where specifications are any descendant documents!
@@ -333,6 +336,9 @@ public class OdtTableExtraction {
                         }
                     }
                 }
+                // anomalies of each semantic ID had been collected, to show once all..
+                semanticNode.showSemanticIDAnomalies();
+                semanticNode.createXMLFile(fileName, outputPath, title);
                 // dump the table model into an XML file
                 semanticNode.createXMLFile(fileName, outputPath, title);
                 if (columnCount == NORMATIVE_TABLE_SIZE) {

@@ -15,6 +15,8 @@
  */
 package de.prototypefund.en16931;
 
+import static de.prototypefund.en16931.OdtTableExtraction.mMultiHyphenDiff;
+import static de.prototypefund.en16931.OdtTableExtraction.mMultiHyphenSame;
 import static de.prototypefund.en16931.SpecificationFixes.mAllFixes;
 import de.prototypefund.en16931.type.CardinalitySemantic;
 import de.prototypefund.en16931.type.SemanticDataType;
@@ -73,13 +75,19 @@ public class NodeSemantic {
                     LOG.error("ERROR: ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
                 }
                 if (id.contains("–")) {
-                    LOG.warn("WARNING: ID of Semantic object was using a different hyphen '" + id + "'!\n");
-                    LOG.warn("Now showing the ID, where the unicode character hyphen-minus is shown as '*' and the control-character 'START OF GUARDED AREA' shown as '+': '" + id.replace("-", "*").replace("–", "+") + "'!\n\n");
+                    if (mMultiHyphenDiff == null) {
+                        mMultiHyphenDiff = new ArrayList<>();
+                    }
+                    mMultiHyphenDiff.add(id);
                     id = id.replace("–", "-"); // fixing hyphen problem so all ID have similar structure
                 } else if (!id.contains("–") && id.contains("-")) {
-                    int count = countChar(id,'-');
-                    if(count > 1){
-                        LOG.info("INFO: ID of Semantic object was using two identical hyphen of '" + id + "'!\n");
+                    int count = countChar(id, '-');
+                    if (count > 1) {
+                        if (mMultiHyphenSame == null) {
+                            mMultiHyphenSame = new ArrayList();
+                        }
+                        mMultiHyphenSame.add(id);
+
                     }
                 }
             } else {
@@ -127,6 +135,7 @@ public class NodeSemantic {
                             LOG.info("             Rules: '" + x.getRules() + "'\n");
                         }
                     }
+                    LOG.info("\n");
 
                     id = SpecificationFixes.getAlternativeID(id);
                     allSemanticNodes.put(id, this);
@@ -333,6 +342,30 @@ public class NodeSemantic {
             LOG.info("Saving extracted syntax binding into file:\n\t" + outputFilePath + "\n");
         } catch (Throwable e) {
             LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + e.getMessage(), e);
+        }
+    }
+
+    public void showSemanticIDAnomalies() {
+        if (mMultiHyphenDiff != null) {
+            LOG.warn("WARNING: Semantic IDs are using different hyphen:\n");
+            LOG.warn("\tThe unicode character hyphen-minus is shown as '*', the control-character 'START OF GUARDED AREA' as '+':\n\t");
+                for(String id : mMultiHyphenDiff){
+                    LOG.info(id.replace("-", "*").replace("–", "+") + ", ");
+                }
+            if (mMultiHyphenSame != null) {
+                LOG.info("\n\tIn addition, the following semantic IDs were using two identical hyphen:\n");
+                for(String id : mMultiHyphenSame){
+                    LOG.info(id + ", ");
+                }
+                mMultiHyphenSame.clear();
+                mMultiHyphenSame = null;
+            } else {
+                LOG.info("\n\tNo Semantic ID was using two identical hyphen!\n\n");
+            }
+                mMultiHyphenDiff.clear();
+                mMultiHyphenDiff = null;
+        }else{
+            LOG.info("INFO: Semantic IDs are using correct hyphens.\n\n");
         }
     }
 
