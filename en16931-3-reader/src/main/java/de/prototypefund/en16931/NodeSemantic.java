@@ -161,7 +161,14 @@ public class NodeSemantic {
     }
 
     public void setBusinessTerm(String bt) {
-        mBusinessTerm = bt.replaceAll("\\s+"," ").strip();
+        String testString = bt.replaceAll("\\s+"," ").strip();
+        if(!testString.equals(bt)){
+            LOG.error("WARNING: " + getId() + " 'BT description' has whitespace problems:" +
+                    "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\r):\n\t\t" +
+                    "\"" + bt.replaceAll(" ",".").replaceAll("\n","\\\\n").replaceAll("\t","\\\\t").replaceAll("\r","\\\\r").replaceAll("\f","\\\\f") + "\"\n");
+            LOG.error("\tinstead of:\n\t\t\"" + testString + "\"\n\n");
+        }
+        mBusinessTerm = testString;
     }
 
     public String getBusinessTerm() {
@@ -185,7 +192,14 @@ public class NodeSemantic {
     }
 
     public void setDescription(String d) {
-        mDescription = d.replaceAll("\\s+"," ").strip();
+        String testString = d.replaceAll("\\s+"," ").strip();
+        if(!testString.equals(d)){
+            LOG.error("WARNING: " + getId() + " 'description' has whitespace problems:" +
+                    "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\r):\n\t\t" +
+                    "\"" + d.replaceAll(" ",".").replaceAll("\n","\\\\n").replaceAll("\t","\\\\t").replaceAll("\r","\\\\r").replaceAll("\f","\\\\f") + "\"\n");
+            LOG.error("\tinstead of:\n\t\t\"" + testString + "\"\n\n");
+        }
+        mDescription = testString;
     }
 
     public String getDescription() {
