@@ -90,7 +90,7 @@ public class NodeSemantic {
                     }
                 }
             } else {
-                LOG.error("ERROR: ID of semantic object may not be empty!");
+                LOG.error("ERROR: ID of semantic object shall not be empty!");
             }
             if (allSemanticNodes == null) {
                 allSemanticNodes = new TreeMap<>(new NumberAwareStringComparator());
@@ -161,11 +161,11 @@ public class NodeSemantic {
     }
 
     public void setBusinessTerm(String bt) {
-        String testString = bt.replaceAll("\\s+"," ").strip();
-        if(!testString.equals(bt)){
-            LOG.error("WARNING: " + getId() + " 'BT description' has whitespace problems:" +
-                    "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\r):\n\t\t" +
-                    "\"" + bt.replaceAll(" ",".").replaceAll("\n","\\\\n").replaceAll("\t","\\\\t").replaceAll("\r","\\\\r").replaceAll("\f","\\\\f") + "\"\n");
+        String testString = bt.replaceAll("\\s+", " ").replaceAll(LEADING_TRAILING_WHITESPACES, "");
+        if (!testString.equals(bt)) {
+            LOG.error("WARNING: " + getId() + " 'BT description' has whitespace problems:"
+                    + "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\r):\n\t\t"
+                    + "\"" + bt.replaceAll(" ", ".").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t").replaceAll("\r", "\\\\r").replaceAll("\f", "\\\\f") + "\"\n");
             LOG.error("\tinstead of:\n\t\t\"" + testString + "\"\n\n");
         }
         mBusinessTerm = testString;
@@ -192,11 +192,11 @@ public class NodeSemantic {
     }
 
     public void setDescription(String d) {
-        String testString = d.replaceAll("\\s+"," ").strip();
-        if(!testString.equals(d)){
-            LOG.error("WARNING: " + getId() + " 'description' has whitespace problems:" +
-                    "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\r):\n\t\t" +
-                    "\"" + d.replaceAll(" ",".").replaceAll("\n","\\\\n").replaceAll("\t","\\\\t").replaceAll("\r","\\\\r").replaceAll("\f","\\\\f") + "\"\n");
+        String testString = d.replaceAll("\\s+", " ").replaceAll(LEADING_TRAILING_WHITESPACES, "");
+        if (!testString.equals(d)) {
+            LOG.error("WARNING: " + getId() + " 'description' has whitespace problems:"
+                    + "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\r):\n\t\t"
+                    + "\"" + d.replaceAll(" ", ".").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t").replaceAll("\r", "\\\\r").replaceAll("\f", "\\\\f") + "\"\n");
             LOG.error("\tinstead of:\n\t\t\"" + testString + "\"\n\n");
         }
         mDescription = testString;
@@ -241,14 +241,16 @@ public class NodeSemantic {
             if (mDataType != null) {
                 xml.append(" datatype=\"" + mDataType + "\"");
             }
-            xml.append(">\n");
-            if (syntaxRepresentations != null) {
+            if (syntaxRepresentations != null && !syntaxRepresentations.isEmpty()) {
+                xml.append(">\n");
                 for (NodeSyntax xnode : syntaxRepresentations) {
                     xml.append(xnode.toString());
                     xml.append("\n");
                 }
+                xml.append("\t</semantic>");
+            } else { // empty element due as no XML children
+                xml.append("/>");
             }
-            xml.append("\t</semantic>");
         } catch (Throwable t) {
             t.toString();
         }
@@ -274,14 +276,16 @@ public class NodeSemantic {
             if (mDataType != null) {
                 xml.append(" datatype=\"" + mDataType + "\"");
             }
-            xml.append(">\n");
-            if (syntaxRepresentations != null) {
+            if (syntaxRepresentations != null && !syntaxRepresentations.isEmpty()) {
+                xml.append(">\n");
                 for (NodeSyntax xnode : syntaxRepresentations) {
                     xml.append(xnode.toSubString());
                     xml.append("\n");
                 }
+                xml.append("\t</semantic>");
+            } else { // empty element due as no XML children
+                xml.append("/>");
             }
-            xml.append("\t</semantic>");
         } catch (Throwable t) {
             t.toString();
         }
@@ -303,7 +307,7 @@ public class NodeSemantic {
             }
 
             if (isSubFile) {
-                fileName += "_SUBSET_";
+                title = "SUBSET_" + title;
             }
 
             StringBuilder xml_Suffix = new StringBuilder();
@@ -385,7 +389,7 @@ public class NodeSemantic {
         }
         LOG.error("\n\nERROR: There are " + duplicates.size() + " duplications of syntax within semantic nodes!\n" + sb.toString());
     }
-
+// 2DO Later Svante - CURRENTLY NO WARNING IF XML WAS USED IN MULTIPLE SEMANTICS
 //    Set<List<SemanticNode>> findDuplicates() {
 //        Set<List<SemanticNode>> duplicates = new HashSet<>();
 //
@@ -406,6 +410,7 @@ public class NodeSemantic {
 //        // 3) Alle Keys ausgeben als Fehlermeldung
 //        return duplicates;
 //    }
+
     /**
      * This enum contains all table header row label of the semantic object
      */

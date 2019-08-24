@@ -47,72 +47,53 @@ public abstract class NodeSyntax {
     public NodeSyntax(String path, NodeSemantic semanticParent, Boolean isXml) {
         try {
             assert semanticParent != null;
-            mIsXml = isXml;
             path = path.replaceAll(LEADING_TRAILING_WHITESPACES, "");
-            mSemanticParent = semanticParent;
-            mSemanticParent.addSyntaxRepresentation(this);
-            if (allSyntaxNodes == null) {
-                allSyntaxNodes = new TreeMap<String, NodeSyntax>();
-            }
-            String duplicatePath = path + "_1";
-            List<NodeSyntax> duplicates = null;
-            if (!allSyntaxNodes.containsKey(duplicatePath)) {
-                if (!allSyntaxNodes.containsKey(path)) {
-                    allSyntaxNodes.put(path, this);
-                    mPath = path;
-                } else { // collison remove the previous path and add DUPLICATE_SUFFIX
-                    NodeSyntax firstNode = allSyntaxNodes.remove(path);
-                    firstNode.mPath = duplicatePath;
-                    allSyntaxNodes.put(duplicatePath, firstNode);
-                    allSyntaxNodes.put(path + "_2", this);
-                    mPath = path + "_2";
-                    // add all duplicates in a List for later error processing
-                    duplicates = new ArrayList<NodeSyntax>(2);
-                    duplicates.add(firstNode);
-                    duplicates.add(this);
-                    if (duplicatePathList == null) {
-                        duplicatePathList = new HashMap<String, List<NodeSyntax>>();
-                    }
-                    duplicatePathList.put(path, duplicates);
+            if (path != null && !path.isEmpty()) {
+                mIsXml = isXml;
+                mPath = path;
+                mSemanticParent = semanticParent;
+                mSemanticParent.addSyntaxRepresentation(this);
+                if (allSyntaxNodes == null) {
+                    allSyntaxNodes = new TreeMap<String, NodeSyntax>();
                 }
-            } else { // if the xpatch was already MORE THAN ONCE as ID before
-                String pathDuplicateId = null;
-                for (int i = 3; i < allSyntaxNodes.size(); i++) {
-                    pathDuplicateId = path + "_" + i;
-                    if (!allSyntaxNodes.containsKey(pathDuplicateId)) {
-                        allSyntaxNodes.put(pathDuplicateId, this);
-                        mPath = pathDuplicateId;
-                        break;
-                    }
-                }
-                // add all duplicates in a List for later error processing
-                duplicates = duplicatePathList.get(path);
-                duplicates.add(this);
-                duplicatePathList.put(path, duplicates);
-//                Map<String, String> fixes = mAllFixes.get(tableId);
-//                if (fixes.containsKey(path)) { // but a fix is available
-//                    String fix = fixes.get(path);
-//                    if (!allSyntaxNodes.containsKey(fix)) {
-//                        allSyntaxNodes.put(fix, this); // apply fix
-//                    } else {
-//                        mWARNING_FixAlreadyTaken = Boolean.TRUE;
-//                        SpecificationFixes.hasError = Boolean.TRUE;
-//                        LOG.error("\n\nERROR: Fix: '" + fix + "', already taken for path '" + path + "'\n");
-//                        path = SpecificationFixes.getAlternativeID(path);
-//                        allSyntaxNodes.put(path, this);
-//                    }
-//                } else {
-//                    mWARNING_FixUnavailable = Boolean.TRUE;
-//                    SpecificationFixes.hasError = Boolean.TRUE;
-//                    NodeSyntax x = allSyntaxNodes.get(path);
-//                    NodeSemantic s = x.getSemanticNode();
-//                    LOG.error("\n\nERROR: Existing Path: '" + path + "'\n");
-//                    LOG.error("       Related semanticNode ID: '" + s.getId() + "'\n");
-//                    LOG.error("       Related Syntax Rules: '" + x.getRules() + "'\n");
-//                    path = SpecificationFixes.getAlternativeID(path);
+// 2DO Later Svante - CURRENTLY NO WARNING IF XML WAS USED IN MULTIPLE SEMANTICS
+//            String duplicatePath = path + "_1";
+//                String duplicatePath = path;
+//                List<NodeSyntax> duplicates = null;
+//            if (!allSyntaxNodes.containsKey(duplicatePath)) {
+//                if (!allSyntaxNodes.containsKey(path)) {
 //                    allSyntaxNodes.put(path, this);
+//                    mPath = path;
+//                } else { // collison remove the previous path and add DUPLICATE_SUFFIX
+//                    NodeSyntax firstNode = allSyntaxNodes.remove(path);
+//                    firstNode.mPath = duplicatePath;
+//                    allSyntaxNodes.put(duplicatePath, firstNode);
+//                    allSyntaxNodes.put(path + "_2", this);
+//                    mPath = path + "_2";
+//                    // add all duplicates in a List for later error processing
+//                    duplicates = new ArrayList<NodeSyntax>(2);
+//                    duplicates.add(firstNode);
+//                    duplicates.add(this);
+//                    if (duplicatePathList == null) {
+//                        duplicatePathList = new HashMap<String, List<NodeSyntax>>();
+//                    }
+//                    duplicatePathList.put(path, duplicates);
 //                }
-
+//            } else { // if the xpath was already MORE THAN ONCE as ID before
+//                String pathDuplicateId = null;
+//                for (int i = 3; i < allSyntaxNodes.size(); i++) {
+//                    pathDuplicateId = path + "_" + i;
+//                    if (!allSyntaxNodes.containsKey(pathDuplicateId)) {
+//                        allSyntaxNodes.put(pathDuplicateId, this);
+//                        mPath = pathDuplicateId;
+//                        break;
+//                    }
+//                }
+//                // add all duplicates in a List for later error processing
+//                duplicates = duplicatePathList.get(path);
+//                duplicates.add(this);
+//                duplicatePathList.put(path, duplicates);
+//            }
             }
         } catch (Throwable t) {
             LOG.error("ERROR: Problem in SyntaxNode creation!", t);
