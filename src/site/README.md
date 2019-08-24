@@ -63,7 +63,8 @@ There is an [own chapter for software developers about the software](docs/softwa
 1. Download the JAR with all dependencies includes [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
 2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)__"
 3. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/))
-*NOTE:* I do not use the DOCX files, but save them to ODT as I [worked for 20 years on the OpenDocument format (and predecessor)](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office-collab) and [maintain an ODF library](https://github.com/tdf/odftoolkit).
+
+*NOTE:* I do not use the DOCX files, but save them to ODT as I [worked for 20 years on the OpenDocument format (and predecessors)](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office-collab) and [maintain an ODF library](https://github.com/tdf/odftoolkit).
 4. To extract data from the specification via command-line call and move the output into a text file:<br/>"__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) specification.odt (or directory)  > log.txt__"
 
 ### Data Analysis

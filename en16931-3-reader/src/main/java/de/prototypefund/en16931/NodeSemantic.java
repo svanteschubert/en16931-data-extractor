@@ -240,7 +240,7 @@ public class NodeSemantic {
             }
             if (mDataType != null) {
                 xml.append(" datatype=\"" + mDataType + "\"");
-            }            
+            }
             if (syntaxRepresentations != null && !syntaxRepresentations.isEmpty()) {
                 xml.append(">\n");
                 for (NodeSyntax xnode : syntaxRepresentations) {

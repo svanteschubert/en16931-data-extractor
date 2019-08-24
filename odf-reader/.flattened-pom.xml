@@ -23,11 +23,11 @@
     <parent>
         <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor-base</artifactId>
-        <version>20190823</version>
+        <version>20190825</version>
     </parent>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odf-reader</artifactId>
-    <version>20190823</version>
+    <version>20190825</version>
     <name>ODFDOM</name>
     <description>ODFDOM is an OpenDocument Format (ODF) framework. Its purpose
         is to provide an easy common way to create, access and
