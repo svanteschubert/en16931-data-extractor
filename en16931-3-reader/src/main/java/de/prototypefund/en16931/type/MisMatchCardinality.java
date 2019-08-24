@@ -86,7 +86,7 @@ public enum MisMatchCardinality implements MisMatch {
 
     static void clearStatistic(){
         if(statistic != null){
-            statistic.clear();;
+            statistic.clear();
         }
     }
 }

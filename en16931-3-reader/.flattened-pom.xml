@@ -23,11 +23,11 @@
     <parent>
         <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor-base</artifactId>
-        <version>20190823</version>
+        <version>20190825</version>
     </parent>
     <groupId>de.prototypefund</groupId>
     <artifactId>en16931-data-extractor</artifactId>
-    <version>20190823</version>
+    <version>20190825</version>
     <name>EU Specification Data Reader (en16931-3)</name>
     <description>This data extractor is the first step to automate the creation of
         software based on an European standard.

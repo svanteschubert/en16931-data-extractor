@@ -88,7 +88,7 @@ public enum CardinalityXml {
 
     static void clearStatistic(){
         if(statistic != null){
-            statistic.clear();;
+            statistic.clear();
         }
     }
 }

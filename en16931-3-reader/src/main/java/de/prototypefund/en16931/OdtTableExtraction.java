@@ -75,6 +75,7 @@ public class OdtTableExtraction {
     // used by NodeSemantics to collect info on Semantic ID problem using different hyphens
     static List<String> mMultiHyphenDiff = null;
     static List<String> mMultiHyphenSame = null;
+
     /**
      * @param odtFileName the file name of the specification or a directory
      * where specifications are any descendant documents!
@@ -95,6 +96,7 @@ public class OdtTableExtraction {
             absPath += odtFileName;
         }
         collectSpecData(new File(absPath));
+        TypeStatistic.allDocuments();
     }
 
     /**
@@ -208,7 +210,7 @@ public class OdtTableExtraction {
                     || ((columnCount == INFORMATIVE_TABLE_SIZE || columnCount == INFORMATIVE_EDIFACT_TABLE_SIZE) && getCellContent(tc).equals(SYNTAX_TABLE_HEADINGS[0].getLabel())))) {
                 LOG.error("ERROR: WRONG TABLE: '" + mTableId + "' + IS NOT A TABLE FOR DATA EXTRACTION!");
             } else {
-            	LOG.info("\n--------------------------------------------------------------------------------------------------------\n");
+                LOG.info("\n--------------------------------------------------------------------------------------------------------\n");
                 LOG.info("Table Heading:\n\t" + title + "\n");
                 LOG.info("--------------------------------------------------------------------------------------------------------\n\n");
                 //*********
@@ -226,6 +228,7 @@ public class OdtTableExtraction {
                     tr = table.getRowByIndex(r);
                     LOG.debug("\n**** NEW ROW ****");
                     int cellCount = tr.getCellCount();
+                    boolean isNewSemantic = Boolean.FALSE;
 
                     syntaxNode = null;
                     for (int c = 0; c < cellCount; c++) {
@@ -244,9 +247,12 @@ public class OdtTableExtraction {
                                         LOG.debug("IS EMPTY!!!");
                                     } else {
                                         semanticNode = new NodeSemantic(cellContent, mTableId);
+                                        isNewSemantic = Boolean.TRUE;
                                     }
                                 }
-                                label = mapSemantic(cellContent, c, semanticNode);
+                                if (isNewSemantic) {
+                                    label = mapSemantic(cellContent, c, semanticNode);
+                                }
 
                                 // Second Part of Row - Syntax
                             } else {
@@ -301,7 +307,7 @@ public class OdtTableExtraction {
                                 }
                                 // Second Part of Row - Semantic Model
                             } else {
-                                if (c == syntax_header_length) {
+                                if (c == syntax_header_length) { // semanticID
                                     cellContent = cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "");
                                     // same semantic node, if there is NO ID or the previous ID
                                     if (cellContent.isEmpty()) { // semantic ID is empty
@@ -311,10 +317,13 @@ public class OdtTableExtraction {
                                         semanticNode = NodeSemantic.allSemanticNodes.get(cellContent);
                                         if (semanticNode == null) {
                                             semanticNode = new NodeSemantic(cellContent, mTableId);
+                                            isNewSemantic = Boolean.TRUE;
                                         }
                                     }
                                 } else {
-                                    label = mapSemantic(cellContent, c - syntax_header_length, semanticNode);
+                                    if (isNewSemantic) {
+                                        label = mapSemantic(cellContent, c - syntax_header_length, semanticNode);
+                                    }
                                 }
                                 // Finally after all semantics have been added, add the syntax that was remembered from the start of the informative table
                                 if (c == cellCount - 1) {

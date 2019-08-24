@@ -85,7 +85,7 @@ public enum MisMatchSemantic implements MisMatch {
 
     static void clearStatistic(){
         if(statistic != null){
-            statistic.clear();;
+            statistic.clear();
         }
     }
 }

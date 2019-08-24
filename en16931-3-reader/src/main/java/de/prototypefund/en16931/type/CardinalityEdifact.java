@@ -102,7 +102,7 @@ public enum CardinalityEdifact {
 
     static void clearStatistic(){
         if(statistic != null){
-            statistic.clear();;
+            statistic.clear();
         }
     }
 }

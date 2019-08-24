@@ -130,7 +130,6 @@ public class TypeStatistic {
         }
         if (m != null) {
             mCardinalites.putAll(m);
-
             m.clear();
             CardinalityXml.clearStatistic();
         }

@@ -89,7 +89,7 @@ public enum CardinalitySemantic {
 
     static void clearStatistic(){
         if(statistic != null){
-            statistic.clear();;
+            statistic.clear();
         }
     }
 }
