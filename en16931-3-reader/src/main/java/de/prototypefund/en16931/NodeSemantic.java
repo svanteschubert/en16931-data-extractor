@@ -161,7 +161,7 @@ public class NodeSemantic {
     }
 
     public void setBusinessTerm(String bt) {
-        mBusinessTerm = bt;
+        mBusinessTerm = bt.replaceAll("\\s+"," ").strip();
     }
 
     public String getBusinessTerm() {
@@ -185,7 +185,7 @@ public class NodeSemantic {
     }
 
     public void setDescription(String d) {
-        mDescription = d;
+        mDescription = d.replaceAll("\\s+"," ").strip();
     }
 
     public String getDescription() {
