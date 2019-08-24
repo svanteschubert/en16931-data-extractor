@@ -18,6 +18,7 @@ package de.prototypefund.en16931;
 import static de.prototypefund.en16931.OdtTableExtraction.mMultiHyphenDiff;
 import static de.prototypefund.en16931.OdtTableExtraction.mMultiHyphenSame;
 import de.prototypefund.en16931.type.CardinalitySemantic;
+import de.prototypefund.en16931.type.NumberAwareStringComparator;
 import de.prototypefund.en16931.type.SemanticDataType;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -92,7 +93,7 @@ public class NodeSemantic {
                 LOG.error("ERROR: ID of semantic object may not be empty!");
             }
             if (allSemanticNodes == null) {
-                allSemanticNodes = new TreeMap<>();
+                allSemanticNodes = new TreeMap<>(new NumberAwareStringComparator());
             }
             // new semantic ID
             if (!allSemanticNodes.containsKey(id)) {
