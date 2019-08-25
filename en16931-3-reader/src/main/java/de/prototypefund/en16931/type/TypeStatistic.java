@@ -152,19 +152,21 @@ public class TypeStatistic {
      */
     static public void allDocuments() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\n\n+++ GLOABL DATATYPEUSAGE STATISTIC:\n");
+        sb.append("\n\n\n+++ GLOABL DATATYPE USAGE STATISTIC:\n");
         sb.append("++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        log(sb.append("* Semantic Data Type"), mSemanticDataTypes);
-        log(sb.append("* Mismatch Cardinal."), mMismatchCardinality);
-        log(sb.append("* Mismatch Data Type"), mMismatchDataTypes);
-        log(sb.append("* Mismatch Semantic"), mMismatchSemantic);
-        log(sb.append("* Mismatch Structural"), mMismatchStructural);
-        log(sb.append("* Types of XML"), mTypesOfXml);
-        log(sb.append("* Cardinalities used by Semantic and XML"), mCardinalites);
-        log(sb.append("* Cardinalities used by EDIFACT"), mCardinalitesEdifact);
+        log(sb.append("+ Semantic Data Type"), mSemanticDataTypes);
+        log(sb.append("+ Mismatch Cardinal."), mMismatchCardinality);
+        log(sb.append("+ Mismatch Data Type"), mMismatchDataTypes);
+        log(sb.append("+ Mismatch Semantic"), mMismatchSemantic);
+        log(sb.append("+ Mismatch Structural"), mMismatchStructural);
+        log(sb.append("+ Types of UBL"), mTypesOfUblXml);
+        log(sb.append("+ Types of EDIFACT/CII"), mTypesOfXml);
+        log(sb.append("+ Cardinalities used by Semantic and XML"), mCardinalites);
+        log(sb.append("+ Cardinalities used by EDIFACT"), mCardinalitesEdifact);
         sb.append("++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         LOG.info(sb.toString());
     }
+
 
     static private void log(StringBuilder sb, SortedMap<String, Integer> statistic) {
         sb.append(": ");

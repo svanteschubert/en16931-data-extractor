@@ -70,4 +70,5 @@ There is an [own chapter for software developers about the software](docs/softwa
 ### Data Analysis
 - The extracted data can be found as XML files aside the input documents.
 - Use a text file comparing tool like [Total Commander on Windows (MENU:Files -> Compare By Content)](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and its twin the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML file.
-![In our example only the title is different between the two tables](docs/resources/TotalCommanderComparison.png)
+The example below shows a correct data set, as only the heading bearing the two table names is different between the two tables
+![Example:](docs/resources/TotalCommanderComparison.png)

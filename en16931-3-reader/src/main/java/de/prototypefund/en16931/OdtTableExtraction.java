@@ -96,7 +96,7 @@ public class OdtTableExtraction {
             absPath += odtFileName;
         }
         collectSpecData(new File(absPath));
-        TypeStatistic.allDocuments();
+        //TypeStatistic.allDocuments();
     }
 
     /**
