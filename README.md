@@ -31,7 +31,7 @@ In its 3rd part (EN16931-3) the EU specification binds the XML syntax with the E
 The informative table (here Table 3) does not add any new information compared to its preceding sibling the normative talbe (here Table 2). The informative table starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
 
 *NOTE:*
-In theory, both tables should provide the same data.
+In theory, the *exact complete data of the informative table* should already exist in the preceding normative table.
 
 ## Software: EN16931 Data Extractor
 The data extractor is a simple Java tool that can be called from comamnd line. It reads from one or more office documents of EN16931-3 the containing syntax binding (or mapping) tables.
@@ -69,5 +69,5 @@ There is an [own chapter for software developers about the software](docs/softwa
 
 ### Data Analysis
 - The extracted data can be found as XML files aside the input documents.
-- Use a text comparing tool like [Total Commander on Windows](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
+- Use a text file comparing tool like [Total Commander on Windows (MENU:Files -> Compare By Content)](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML files.
 ![In our example only the title is different between the two tables](docs/resources/TotalCommanderComparison.png)
