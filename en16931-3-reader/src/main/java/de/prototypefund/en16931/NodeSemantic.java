@@ -257,7 +257,7 @@ public class NodeSemantic {
         return xml.toString();
     }
 
-    public String toSubString() {
+    public String toSubString(boolean onlySemantic) {
         StringBuilder xml = new StringBuilder();
         try {
             xml.append("\t<semantic id=\"" + mID + "\"");
@@ -276,7 +276,7 @@ public class NodeSemantic {
             if (mDataType != null) {
                 xml.append(" datatype=\"" + mDataType + "\"");
             }
-            if (syntaxRepresentations != null && !syntaxRepresentations.isEmpty()) {
+            if (!onlySemantic && syntaxRepresentations != null && !syntaxRepresentations.isEmpty()) {
                 xml.append(">\n");
                 for (NodeSyntax xnode : syntaxRepresentations) {
                     xml.append(xnode.toSubString());
@@ -292,22 +292,30 @@ public class NodeSemantic {
         return xml.toString();
     }
 
+    public void createSemanticXMLFile(String fileName, String outputPath, String title) {
+        createXMLFileVariants(fileName, outputPath, title, Boolean.FALSE, Boolean.TRUE);
+    }
+
     public void createSubXMLFile(String fileName, String outputPath, String title) {
-        createXMLFileVariants(fileName, outputPath, title, Boolean.TRUE);
+        createXMLFileVariants(fileName, outputPath, title, Boolean.TRUE, Boolean.FALSE);
     }
 
     public void createXMLFile(String fileName, String outputPath, String title) {
-        createXMLFileVariants(fileName, outputPath, title, Boolean.FALSE);
+        createXMLFileVariants(fileName, outputPath, title, Boolean.FALSE, Boolean.FALSE);
     }
 
-    private void createXMLFileVariants(String fileName, String outputPath, String title, Boolean isSubFile) {
+    private void createXMLFileVariants(String fileName, String outputPath, String title, Boolean isSubFile, Boolean onlySemantic) {
         try {
             if (fileName.endsWith(ODT_SUFFIX)) {
                 fileName = fileName.substring(0, fileName.length() - ODT_SUFFIX.length());
             }
 
             if (isSubFile) {
-                title = "SUBSET_" + title;
+                title = "_SUBSET_" + title;
+            } else if (onlySemantic) {
+                title = "SEMANTIC_" + title;
+            }else{
+                title = "_" + title;
             }
 
             StringBuilder xml_Suffix = new StringBuilder();
@@ -316,8 +324,8 @@ public class NodeSemantic {
             int xmlCount = 0;
             for (NodeSemantic s : semanticNodes) {
                 if (s != null) {
-                    if (isSubFile) {
-                        xml_Suffix.append(s.toSubString()).append("\n");
+                    if (isSubFile || onlySemantic) {
+                        xml_Suffix.append(s.toSubString(onlySemantic)).append("\n");
                     } else {
                         xml_Suffix.append(s.toString()).append("\n");
                     }
@@ -332,7 +340,7 @@ public class NodeSemantic {
             StringBuilder xml_Prefix = new StringBuilder();
             int semanticCount = semanticNodes.size();
             xml_Prefix.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<semantics semantics=\"" + semanticCount + "\" xml=\"" + xmlCount + "\" file=\"" + fileName + "\" table=\"" + title + "\">\n");
-            String outputFilePath = FileHelper.saveStringToFile(new File(outputPath + fileName + "__" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
+            String outputFilePath = FileHelper.saveStringToFile(new File(outputPath + fileName + "_" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml"), xml_Prefix.append(xml_Suffix).toString());
             LOG.info("\nSaving extracted syntax binding into file:\n\t" + outputFilePath + "\n");
         } catch (Throwable e) {
             LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + e.getMessage(), e);

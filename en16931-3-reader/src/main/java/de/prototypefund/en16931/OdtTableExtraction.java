@@ -352,6 +352,7 @@ public class OdtTableExtraction {
                 if (columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) {
                     semanticNode.createSubXMLFile(fileName, outputPath, title);
                 }
+                semanticNode.createSemanticXMLFile(fileName, outputPath, title);                
                 // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
                 TypeStatistic.table(title, mIsXML, mIsUBL);
