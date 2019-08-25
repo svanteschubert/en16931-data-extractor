@@ -28,7 +28,7 @@ In its 3rd part (EN16931-3) the EU specification binds the XML syntax with the E
 1. The first "normative table" (see "Table 2" below) describe the syntax binding from the semantic (light grey) to XML (dark grey),
 2. the second "informative table" (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
 ![Two example tables for UN/CEFACT](docs/resources/3-3-both-tables.png)
-The informative table does not add any new information. It starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
+The informative table (here Table 3) does not add any new information compared to its preceding sibling the normative talbe (here Table 2). The informative table starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
 
 *NOTE:*
 In theory, both tables should provide the same data.
