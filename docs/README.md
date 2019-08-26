@@ -44,7 +44,6 @@ This new XML structure is straight forward: A list of semantic entities, each co
 
 *NOTE:*
 To ease comparison of a "normative table" from the specification with it's (hopefully identically) "informative table" twin, which has fewer XML columns, the normative table is being saved twice, once with all information and a second time as a subset equal to the informative table infoset, making file comparison easier.
-The name of our own XML files is a combination of: "specification document name" + "table name" + ".xml"
 
 ## Software Prerequisites
 ### Running (everybody, e.g. CEN Technical Writer)
@@ -60,15 +59,18 @@ There is an [own chapter for software developers about the software](docs/softwa
 
 ## Usage
 ### Extracting the Data
-1. Download the JAR with all dependencies includes [en16931-data-extractor-20190825-jar-with-dependencies.jar](docs/en16931-data-extractor-20190825-jar-with-dependencies.jar)
-2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-20190825-jar-with-dependencies.jar](docs/en16931-data-extractor-20190825-jar-with-dependencies.jar)__"
+1. Download the JAR with all dependencies includes [en16931-data-extractor-20190826-jar-with-dependencies.jar](docs/en16931-data-extractor-20190826-jar-with-dependencies.jar)
+2. To see version information via command-line call:<br/>"__java -jar [en16931-data-extractor-20190826-jar-with-dependencies.jar](docs/en16931-data-extractor-20190826-jar-with-dependencies.jar)__"
 3. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/) on Ubuntu 19.04 (disco) via commandline: 'libreoffice --headless --convert-to odt *.docx')
 
 *NOTE:* I do not use the DOCX files, but save them to ODT as I [worked for 20 years on the OpenDocument format (and predecessors)](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office-collab) and [maintain an ODF library](https://github.com/tdf/odftoolkit).
-4. To extract data from the specification via command-line call and move the output into a text file:<br/>"__java -jar [en16931-data-extractor-20190825-jar-with-dependencies.jar](docs/en16931-data-extractor-20190825-jar-with-dependencies.jar) specification.odt (or directory)  > log.txt__"
+4. To extract data from the specification via command-line call and move the output into a text file:<br/>"__java -jar [en16931-data-extractor-20190826-jar-with-dependencies.jar](docs/en16931-data-extractor-20190826-jar-with-dependencies.jar) specification.odt (or directory)  > log.txt__"
 
 ### Data Analysis
-- The extracted data can be found as XML files aside the input documents.
+- The extracted data can be found at three locations aside the input document:
+1. For each table of EN16931-3, which defines a syntax binding, an XML file was saved in a folder named equal to the specification name.
+2. For each syntax-binding the data-set of the informative syntax-binding table and its preceding normative table data-set (which has the suffix _SUBSET as it does not save all XML columns), a folder "_SAME_BINDING_<Format>" has been created with the identical XML files within.
+3. Every semantic data-set of each syntax binding table is being saved as XML within the "_SAME_SEMANTIC_ folder.
 - Use a text file comparing tool like [Total Commander on Windows (MENU:Files -> Compare By Content)](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and its twin the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML file.
 The example below shows a correct data set, as only the heading bearing the two table names is different between the two tables
 ![Example:](docs/resources/TotalCommanderComparison.png)
