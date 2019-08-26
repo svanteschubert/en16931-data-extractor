@@ -72,5 +72,5 @@ There is an [own chapter for software developers about the software](docs/softwa
 2. For each syntax-binding the data-set of the informative syntax-binding table and its preceding normative table data-set (which has the suffix _SUBSET as it does not save all XML columns), a folder "_SAME_BINDING_<Format>" has been created with the identical XML files within.
 3. Every semantic data-set of each syntax binding table is being saved as XML within the "_SAME_SEMANTIC_ folder.
 - Use a text file comparing tool like [Total Commander on Windows (MENU:Files -> Compare By Content)](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and its twin the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML file.
-The example below shows a correct data set, as only the heading bearing the two table names is different between the two tables
+The example below - using fictitious data - shows a data set with a problem, as aside of the heading bearing the two table names is different between the two tables, the XML cardinality shall not be different between normative and informatie syntax binding table:
 ![Example:](docs/resources/TotalCommanderComparison.png)
