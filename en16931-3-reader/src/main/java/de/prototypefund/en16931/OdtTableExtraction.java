@@ -75,7 +75,9 @@ public class OdtTableExtraction {
     // used by NodeSemantics to collect info on Semantic ID problem using different hyphens
     static List<String> mMultiHyphenDiff = null;
     static List<String> mMultiHyphenSame = null;
-
+    // following variables used for dynamic directory naming of output syntax-binding dirs
+    static int mSyntaxBindingCounter = 0;
+    static String mSyntaxBindingLastFileName = "";
     /**
      * @param odtFileName the file name of the specification or a directory
      * where specifications are any descendant documents!
@@ -344,15 +346,16 @@ public class OdtTableExtraction {
                 }
                 // anomalies of each semantic ID had been collected, to show once all..
                 semanticNode.showSemanticIDAnomalies();
-                // dump the table model into an XML file
-                semanticNode.createXMLFile(fileName, outputPath, title);
-                if (columnCount == NORMATIVE_TABLE_SIZE) {
-                    semanticNode.createSubXMLFile(fileName, outputPath, title);
+                if (columnCount == NORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) {
+                    // dump the table model into an XML file
+                    semanticNode.createXMLFile(fileName, outputPath, title, Boolean.TRUE);
+                    semanticNode.createSubXMLFile(fileName, outputPath, title, Boolean.TRUE);
+                    semanticNode.createSemanticXMLFile(fileName, outputPath, title, Boolean.TRUE);
+                }else { // informative table
+                    semanticNode.createXMLFile(fileName, outputPath, title, Boolean.FALSE);
+                    semanticNode.createSubXMLFile(fileName, outputPath, title, Boolean.FALSE); // created in subdirectory
+                    semanticNode.createSemanticXMLFile(fileName, outputPath, title, Boolean.FALSE);
                 }
-                if (columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) {
-                    semanticNode.createSubXMLFile(fileName, outputPath, title);
-                }
-                semanticNode.createSemanticXMLFile(fileName, outputPath, title);                
                 // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();
                 TypeStatistic.table(title, mIsXML, mIsUBL);
