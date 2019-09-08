@@ -78,6 +78,7 @@ public class OdtTableExtraction {
     // following variables used for dynamic directory naming of output syntax-binding dirs
     static int mSyntaxBindingCounter = 0;
     static String mSyntaxBindingLastFileName = "";
+
     /**
      * @param odtFileName the file name of the specification or a directory
      * where specifications are any descendant documents!
@@ -203,6 +204,8 @@ public class OdtTableExtraction {
                 } else {
                     mIsUBL = Boolean.FALSE;
                 }
+            } else {
+                mIsUBL = Boolean.FALSE;
             }
             assert table.getHeaderColumnCount() == 0;
             OdfTableRow tr = table.getRowByIndex(0);
@@ -351,7 +354,7 @@ public class OdtTableExtraction {
                     semanticNode.createXMLFile(fileName, outputPath, title, Boolean.TRUE);
                     semanticNode.createSubXMLFile(fileName, outputPath, title, Boolean.TRUE);
                     semanticNode.createSemanticXMLFile(fileName, outputPath, title, Boolean.TRUE);
-                }else { // informative table
+                } else { // informative table
                     semanticNode.createXMLFile(fileName, outputPath, title, Boolean.FALSE);
                     semanticNode.createSubXMLFile(fileName, outputPath, title, Boolean.FALSE); // created in subdirectory
                     semanticNode.createSemanticXMLFile(fileName, outputPath, title, Boolean.FALSE);

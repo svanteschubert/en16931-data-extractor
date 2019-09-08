@@ -11,7 +11,7 @@
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing,
- *  software distributed under the License is distributed on an
+ *  software distributed under the License isx distributed on an
  *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  *  KIND, either express or implied.  See the License for the
  *  specific language governing permissions and limitations
@@ -30,7 +30,7 @@ public class ExtractionTest {
          a directory containg several ODT specification documents,
         either relative to workign directory "en16831-3-reader" or
         to classpath "target/test-classes" */
-    private static final String odtResource = "16931-3-3_example.odt";
+    private static final String odtResource = "FprCEN_TS_16931-3-4.odt";
 
     @Test
     public void collectSpecData() throws Exception {

@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.prototypefund</groupId>
     <artifactId>en16931-extractor-base</artifactId>
-    <version>20190826</version>
+    <version>20190908</version>
     <packaging>pom</packaging>
     <name>Data Extractor for the European e-Invoice Specification (en16931)</name>
     <description>Open sourced for the creators of the e-invoice specification to allow easier sanity checks of the data within the tables.
@@ -60,7 +60,7 @@
         <maven.compiler.source>9</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>9</jdk.version>
-        <revision>20190826</revision>
+        <revision>20190908</revision>
     </properties>
     <dependencyManagement>
         <dependencies>
