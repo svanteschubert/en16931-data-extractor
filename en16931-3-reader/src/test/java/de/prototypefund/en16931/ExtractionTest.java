@@ -20,7 +20,6 @@
  *********************************************************************** */
 package de.prototypefund.en16931;
 
-import de.prototypefund.en16931.type.TypeStatistic;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +27,9 @@ public class ExtractionTest {
 
     /* Might be a specification document as ODF or
          a directory containg several ODT specification documents,
-        either relative to workign directory "en16831-3-reader" or
+        either relative to working directory "en16831-3-reader" or
         to classpath "target/test-classes" */
-    private static final String odtResource = "FprCEN_TS_16931-3-4.odt";
+    private static final String odtResource = "16931-3-3_example.odt";
 
     @Test
     public void collectSpecData() throws Exception {
