@@ -23,11 +23,11 @@
     <parent>
         <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor-base</artifactId>
-        <version>20190908</version>
+        <version>20191006</version>
     </parent>
     <groupId>de.prototypefund</groupId>
     <artifactId>en16931-data-extractor</artifactId>
-    <version>20190908</version>
+    <version>20191006</version>
     <name>EU Specification Data Reader (en16931-3)</name>
     <description>This data extractor is the first step to automate the creation of
         software based on an European standard.
@@ -66,8 +66,8 @@
     <dependencies>
         <dependency>
             <groupId>org.odftoolkit</groupId>
-            <artifactId>odf-reader</artifactId>
-            <version>${revision}</version>
+            <artifactId>odfdom-java</artifactId>
+            <version>1.0.0-BETA1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

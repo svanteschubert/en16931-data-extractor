@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.prototypefund</groupId>
     <artifactId>en16931-extractor-base</artifactId>
-    <version>20190908</version>
+    <version>20191006</version>
     <packaging>pom</packaging>
     <name>Data Extractor for the European e-Invoice Specification (en16931)</name>
     <description>Open sourced for the creators of the e-invoice specification to allow easier sanity checks of the data within the tables.
@@ -47,7 +47,6 @@
         </developer>
     </developers>
     <modules>
-        <module>odf-reader</module>
         <module>en16931-3-reader</module>
     </modules>
     <scm>
@@ -60,43 +59,8 @@
         <maven.compiler.source>9</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>9</jdk.version>
-        <revision>20190908</revision>
+        <revision>20191006</revision>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>xml-apis</groupId>
-                <artifactId>xml-apis</artifactId>
-                <version>1.4.01</version>
-            </dependency>
-            <dependency>
-                <groupId>xerces</groupId>
-                <artifactId>xercesImpl</artifactId>
-                <version>2.12.0</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                <version>3.9.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                <version>3.9.0</version>
-                <classifier>tests</classifier>
-            </dependency>
-            <dependency>
-                <groupId>net.rootdev</groupId>
-                <artifactId>java-rdfa</artifactId>
-                <version>0.4.2</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <build>
         <plugins>
             <plugin>

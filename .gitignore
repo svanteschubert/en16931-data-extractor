@@ -8,6 +8,7 @@
 nb-configuration.xml
 
 # VSCode files
+.vscode/
 .project
 .settings/
 .classpath

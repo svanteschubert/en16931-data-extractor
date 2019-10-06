@@ -29,49 +29,12 @@
     <properties>
         <jdk.version>9</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>20190908</revision>
+        <revision>20191006</revision>
         <maven.compiler.source>9</maven.compiler.source>
         <maven.compiler.target>9</maven.compiler.target>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>xml-apis</groupId>
-                <artifactId>xml-apis</artifactId>
-                <version>1.4.01</version>
-            </dependency>
-            <dependency>
-                <groupId>xerces</groupId>
-                <artifactId>xercesImpl</artifactId>
-                <version>2.12.0</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                <version>3.9.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                <classifier>tests</classifier>
-                <version>3.9.0</version>
-            </dependency>
-            <dependency>
-                <groupId>net.rootdev</groupId>
-                <artifactId>java-rdfa</artifactId>
-                <version>0.4.2</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <modules>
-        <module>odf-reader</module>
         <module>en16931-3-reader</module>
     </modules>
 
@@ -155,8 +118,9 @@
                     <!--<excludes><exclude>src/main/**/*.whatever</exclude></excludes>-->
                     <!-- All files are included by default:
                     <includes>
-                        <include>**</include>
-                    </includes>-->
+                        <include>**</include
+                    </includes>
+                    -->
                 </configuration>
             </plugin>
         </plugins>
