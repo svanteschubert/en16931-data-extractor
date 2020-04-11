@@ -20,6 +20,7 @@ import static de.prototypefund.en16931.OdtTableExtraction.mMultiHyphenSame;
 import static de.prototypefund.en16931.OdtTableExtraction.mSyntaxBindingCounter;
 import static de.prototypefund.en16931.OdtTableExtraction.mSyntaxBindingLastFileName;
 import de.prototypefund.en16931.type.CardinalitySemantic;
+import de.prototypefund.en16931.type.MisMatch;
 import de.prototypefund.en16931.type.NumberAwareStringComparator;
 import de.prototypefund.en16931.type.SemanticDataType;
 import java.io.ByteArrayOutputStream;
@@ -67,6 +68,10 @@ public class NodeSemantic {
     private static String SAME_BINDING_PREFIX = "_SAME_BINDING";
     private static String BINDING_TYPE_INVOICE = "_INV__";
     private static String BINDING_TYPE_CREDIT_NOTE = "_CN__";
+    private static final Integer CAR_1 = 1;
+    private static final Integer CAR_2 = 2;
+    private static final Integer CAR_3 = 3;
+    private static final Integer CAR_4 = 4;
 
     public NodeSemantic(String id, String tableId) {
         try {
@@ -391,7 +396,173 @@ public class NodeSemantic {
         return SAME_BINDING_PREFIX + enType + fileName;
     }
 
-    public void showSemanticIDAnomalies() {
+    /**
+     Compares the resulting mismatch from the given cardinalites of semantic & syntax,
+     with the given mismatches!
+     */
+    static public void validateCardinalityMismatches() {
+
+        System.out.println("\n");
+        System.out.println("***************************");
+        System.out.println("* Cardinality Mismatches  *");
+        System.out.println("***************************");
+        StringBuilder sb = new StringBuilder();
+        // for loop as functional operations
+        for(NodeSemantic s : allSemanticNodes.values()){
+            sb.append("\nSemantic ID: " + s.mID + "\n");
+            sb.append("Semantic Term: " + s.mBusinessTerm + "\n");
+            if (s.syntaxRepresentations != null) {
+                for (NodeSyntax x : s.syntaxRepresentations) {
+                    if (x != null) {
+                        getCardinaltiyMismatches(sb, s, x, s.getCardinality().getValue(), x.getCardinality(), x.getMisMatches());
+                    }
+                }
+            }else{
+                System.out.print(sb.toString());
+                sb = sb.delete(0, sb.length());
+                System.out.println("ERROR: Semantic without XML representation!!!");
+            }
+        }
+        System.out.println("\n\n");
+    }
+
+    static private void getCardinaltiyMismatches(StringBuilder sb, NodeSemantic s, NodeSyntax x, String cSem,  String cSyn, MisMatch[] mm){
+        // evaluate the cardinality mismatch by comparing semantic & syntax cardinality
+        // 1) Give errors, if cardinality is missing!
+        if(cSem != null){
+            sb.append("Cardinality-Semantic: " + cSem + "\n");
+        }else{
+            System.out.print(sb.toString());
+            sb = sb.delete(0, sb.length());
+            System.out.println("ERROR: Semantic Cardinality have to be set!");
+        }
+        if(cSyn != null){
+            sb.append("Cardinality-Syntax: " + cSyn + "\n");
+        }else{
+            // there has to be a cardinality, unless it is an attribute (unique)
+            if(!x.getPath().contains("@")){
+                System.out.print(sb.toString());
+                sb = sb.delete(0, sb.length());
+                System.out.println("ERROR: XML Cardinality have to be set!");
+            }else{
+                sb.append("Using an XML attribute!\n");
+            }
+        }
+
+        // 2) Gather existing cardinality
+        Set<Integer> cm = null;
+        if (mm != null) {
+            for (MisMatch m : mm) {
+                if(m != null){
+                    //System.out.println("Mismatch m: " + m.getValue());
+                    if (m.getValue().startsWith("CAR-")) {
+                        if(cm == null){
+                            cm = new HashSet<Integer>();
+                        }
+                        Integer cmLevel = getCardinality(Integer.parseInt(m.getValue().substring(4)));
+                        if(cm.contains(cmLevel)){
+                            System.out.print(sb.toString());
+                            sb = sb.delete(0, sb.length());
+                            System.out.println("ERROR: Cardinality level " + cmLevel + " is multiple times present!");
+                        }
+                        cm.add(cmLevel);
+                    }
+                }else{
+                    System.out.print(sb.toString());
+                    sb = sb.delete(0, sb.length());
+                    System.out.println("ERROR: Mismatch should be set!");
+                }
+            }
+        }
+
+        // 3) Test cardinality
+        if(cSem != null && cSyn != null){
+            if(!cSyn.equals(cSem)){
+                if(cSem.charAt(0) != cSyn.charAt(0)){
+                    // CAR-1
+                    if(cSem.charAt(0) == '0' && cSyn.charAt(0) == '1'){
+                        if (cm != null) {
+                            if (!cm.contains(CAR_1)) {
+                                System.out.print(sb.toString());
+                                sb = sb.delete(0, sb.length());
+                                System.out.println("ERROR: CAR-1 is missing!");
+                            } else {
+                                cm.remove(CAR_1);
+                            }
+                        }
+                    }
+                    // CAR-2
+                    else if (cSem.charAt(0) == '1' && cSyn.charAt(0) == '0') {
+                        if (cm != null) {
+                            if (!cm.contains(CAR_2)) {
+                                System.out.print(sb.toString());
+                                sb = sb.delete(0, sb.length());
+                                System.out.println("ERROR: CAR-2 is missing!");
+                            } else {
+                                cm.remove(CAR_2);
+                            }
+                        }
+                    }
+                }
+                if(cSem.charAt(3) != cSyn.charAt(3)){
+                    // CAR-3
+                    if(cSem.charAt(3) == '1' && cSyn.charAt(3) == 'n'){
+                        if (cm != null) {
+                            if (!cm.contains(CAR_3)) {
+                                System.out.print(sb.toString());
+                                sb = sb.delete(0, sb.length());
+                                System.out.println("ERROR: CAR-3 is missing!");
+                            } else {
+                                cm.remove(CAR_3);
+                            }
+                        }
+                    }
+                    // CAR-4
+                    else if(cSem.charAt(3) == 'n' && cSyn.charAt(3) == '1'){
+                        if (cm != null) {
+                            if (!cm.contains(CAR_4)) {
+                                System.out.print(sb.toString());
+                                sb = sb.delete(0, sb.length());
+                                System.out.println("ERROR: CAR-4 is missing!");
+                            } else {
+                                cm.remove(CAR_4);
+                            }
+                        }
+                    }
+                }
+                if(cm != null && cm.size() > 0){
+                    for(Integer i : cm){
+                        System.out.print(sb.toString());
+                        sb = sb.delete(0, sb.length());
+                        System.out.println("ERROR: CAR-" + i + " is misplaced!");
+                    }
+                }
+            }
+        }
+        cm = null;
+        sb = sb.delete(0, sb.length());
+    }
+
+    static private Integer getCardinality(Integer i){
+        Integer cardinality = null;
+        switch(i){
+            case 1:
+                cardinality = CAR_1;
+                break;
+            case 2:
+                cardinality = CAR_2;
+                break;
+            case 3:
+                cardinality = CAR_3;
+                break;
+            case 4:
+                cardinality = CAR_4;
+                break;
+        }
+        return cardinality;
+    }
+
+    static public void showSemanticIDAnomalies() {
         if (mMultiHyphenDiff != null) {
             LOG.warn("WARNING: Semantic IDs are using different hyphen characters:\n");
             LOG.warn("\t\tThe unicode character hyphen-minus is shown as '*', the control-character 'START OF GUARDED AREA' as '+':\n\t\t");

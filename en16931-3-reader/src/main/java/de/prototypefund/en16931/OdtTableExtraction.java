@@ -347,8 +347,15 @@ public class OdtTableExtraction {
                         }
                     }
                 }
-                // anomalies of each semantic ID had been collected, to show once all..
+                //** HERE THE COMPLETE TABLE ARE LOADED - DOING SANITY TESTS **/
+
+                // Traverse all semantics if the cardinality is correct or if not the correct mismatch was placed!
+                semanticNode.validateCardinalityMismatches();
+
+                // All anomalies of each semantic ID had been collected during parse, to show once all..
                 semanticNode.showSemanticIDAnomalies();
+
+                //** HERE THE MODEL IS BEING SERIALIZED TO FILES **//
                 if (columnCount == NORMATIVE_TABLE_SIZE || columnCount == NORMATIVE_EDIFACT_TABLE_SIZE) {
                     // dump the table model into an XML file
                     semanticNode.createXMLFile(fileName, outputPath, title, Boolean.TRUE);

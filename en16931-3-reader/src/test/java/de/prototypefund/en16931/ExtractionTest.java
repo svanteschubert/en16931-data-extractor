@@ -29,13 +29,13 @@ public class ExtractionTest {
          a directory containg several ODT specification documents.
         Path can be relative to working directory "en16831-3-reader" or
         to the classpath "target/test-classes", where files from "src/test/resources" will be copied to! */
-    private static final String odtResource =   "./"; // or only a single document via "16931-3-3_example.odt";
+    private static final String ODT_RESOURCE =   "./"; // or only a single document via "16931-3-3_example.odt";
 
     @Test
     public void collectSpecData() throws Exception {
         try {
-            new OdtTableExtraction().collectSpecData(odtResource);
-        } catch (Throwable t) {
+            new OdtTableExtraction().collectSpecData(ODT_RESOURCE);
+        } catch (Exception t) {
             LoggerFactory.getLogger(ExtractionTest.class.getName()).error("ERROR: " + t.getMessage(), t);
         }
     }
