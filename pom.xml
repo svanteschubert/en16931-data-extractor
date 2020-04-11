@@ -27,9 +27,9 @@
     <packaging>pom</packaging>
 
     <properties>
-        <jdk.version>9</jdk.version>
+        <jdk.version>11</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>20191006</revision>
+        <revision>20200411</revision>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
