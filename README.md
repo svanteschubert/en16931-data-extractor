@@ -47,10 +47,10 @@ To ease comparison of a "normative table" from the specification with it's (hope
 
 ## Software Prerequisites
 ### Running (everybody, e.g. CEN Technical Writer)
-- [>= JDK 9](https://jdk.java.net/12/)
+- [>= JDK 9](https://openjdk.java.net/install/)
 
 ### Building (developers)
-- [>= JDK 9](https://jdk.java.net/12/)
+- [>= JDK 9](https://openjdk.java.net/install/)
 - [GIT](https://git-scm.com/)
 - [>= Apache Maven 3.5](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
@@ -76,3 +76,10 @@ There is an [own chapter for software developers about the software](docs/softwa
 **Example:**
 The picture below - using fictitious data - shows a data set with a problem, as aside of the heading bearing the two table names is different between the two tables, the XML cardinality shall not be different between normative and informatie syntax binding table:
 ![Example:](docs/resources/TotalCommanderComparison.png)
+
+**Participation**
+Pull requests are most welcome! :-)
+
+Please note that this README.md is being generated. The version number and paths to the JAR are being replaced by automation during every build (ie. 'mvn install'). The README.md to edit can be found at <ROOT>/site/README.md.
+
+The reason for this was to automate not only the build, but also the deployment of the JAR with all dependencies for the user (see usage sectio above). For this reason the revision number from the <ROOT>/pom.xml - I am using the date - is being added to the generated artefacts and the artefacts (JARs & documentation) are being copied to the github site directory (ie. <ROOT>/docs).
