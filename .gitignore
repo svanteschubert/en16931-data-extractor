@@ -40,3 +40,6 @@ target*/
 # backup files
 *~
 \#*
+
+# Svantes CEN/TC 434 documents not to be published in his folder
+svante/
