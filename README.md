@@ -77,7 +77,8 @@ There is an [own chapter for software developers about the software](docs/softwa
 The picture below - using fictitious data - shows a data set with a problem, as aside of the heading bearing the two table names is different between the two tables, the XML cardinality shall not be different between normative and informatie syntax binding table:
 ![Example:](docs/resources/TotalCommanderComparison.png)
 
-**Participation**
+## Participation
+
 Pull requests are most welcome! :-)
 
 Please note that this README.md is being generated. The version number and paths to the JAR are being replaced by automation during every build (ie. 'mvn install'). The README.md to edit can be found at <ROOT>/site/README.md.
