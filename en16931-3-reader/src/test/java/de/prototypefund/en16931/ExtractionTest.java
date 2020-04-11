@@ -25,11 +25,11 @@ import org.slf4j.LoggerFactory;
 
 public class ExtractionTest {
 
-    /* Might be a specification document as ODF or
-         a directory containg several ODT specification documents,
-        either relative to working directory "en16831-3-reader" or
-        to classpath "target/test-classes" */
-    private static final String odtResource = "16931-3-3_example.odt";
+    /* Might be a syntax binding specification document as ODT or
+         a directory containg several ODT specification documents.
+        Path can be relative to working directory "en16831-3-reader" or
+        to the classpath "target/test-classes", where files from "src/test/resources" will be copied to! */
+    private static final String odtResource =   "./"; // or only a single document via "16931-3-3_example.odt";
 
     @Test
     public void collectSpecData() throws Exception {
