@@ -17,12 +17,12 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.prototypefund</groupId>
     <artifactId>en16931-extractor-base</artifactId>
-    <version>20191006</version>
+    <version>20200411</version>
     <packaging>pom</packaging>
     <name>Data Extractor for the European e-Invoice Specification (en16931)</name>
     <description>Open sourced for the creators of the e-invoice specification to allow easier sanity checks of the data within the tables.
@@ -55,11 +55,11 @@
         <url>https://github.com/svanteschubert/en16931-data-extractor.git</url>
     </scm>
     <properties>
-        <maven.compiler.target>9</maven.compiler.target>
-        <maven.compiler.source>9</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>9</jdk.version>
-        <revision>20191006</revision>
+        <jdk.version>11</jdk.version>
+        <revision>20200411</revision>
     </properties>
     <build>
         <plugins>

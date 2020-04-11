@@ -17,17 +17,17 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.prototypefund</groupId>
         <artifactId>en16931-extractor-base</artifactId>
-        <version>20191006</version>
+        <version>20200411</version>
     </parent>
     <groupId>de.prototypefund</groupId>
     <artifactId>en16931-data-extractor</artifactId>
-    <version>20191006</version>
+    <version>20200411</version>
     <name>EU Specification Data Reader (en16931-3)</name>
     <description>This data extractor is the first step to automate the creation of
         software based on an European standard.
