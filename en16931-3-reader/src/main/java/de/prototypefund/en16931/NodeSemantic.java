@@ -397,8 +397,8 @@ public class NodeSemantic {
     }
 
     /**
-     Compares the resulting mismatch from the given cardinalites of semantic & syntax,
-     with the given mismatches!
+     * Compares the resulting mismatch from the given cardinalites of semantic &
+     * syntax, with the given mismatches!
      */
     static public void validateCardinalityMismatches() {
 
@@ -408,144 +408,152 @@ public class NodeSemantic {
         System.out.println("***************************");
         StringBuilder sb = new StringBuilder();
         // for loop as functional operations
-        for(NodeSemantic s : allSemanticNodes.values()){
+        for (NodeSemantic s : allSemanticNodes.values()) {
             sb.append("\nSemantic ID: " + s.mID + "\n");
             sb.append("Semantic Term: " + s.mBusinessTerm + "\n");
             if (s.syntaxRepresentations != null) {
-                for (NodeSyntax x : s.syntaxRepresentations) {
-                    if (x != null) {
-                        getCardinaltiyMismatches(sb, s, x, s.getCardinality().getValue(), x.getCardinality(), x.getMisMatches());
-                    }
-                }
-            }else{
+                getCardinaltiyMismatches(sb, s);
+            } else {
+                sb.append("WARNING: Semantic without XML representation!!!\n");
                 System.out.print(sb.toString());
-                sb = sb.delete(0, sb.length());
-                System.out.println("ERROR: Semantic without XML representation!!!");
             }
+            sb = sb.delete(0, sb.length());
         }
         System.out.println("\n\n");
     }
 
-    static private void getCardinaltiyMismatches(StringBuilder sb, NodeSemantic s, NodeSyntax x, String cSem,  String cSyn, MisMatch[] mm){
-        // evaluate the cardinality mismatch by comparing semantic & syntax cardinality
-        // 1) Give errors, if cardinality is missing!
-        if(cSem != null){
-            sb.append("Cardinality-Semantic: " + cSem + "\n");
-        }else{
+    static private void getCardinaltiyMismatches(StringBuilder sb, NodeSemantic s) {
+        Boolean hasError = Boolean.FALSE;
+        String cSem = s.getCardinality().getValue();
+
+        for (NodeSyntax x : s.syntaxRepresentations) {
+            if (x != null) {
+                String cSyn = x.getCardinality();
+                MisMatch[] mm = x.getMisMatches();
+                sb.append("XML path: " + x.mPath + "\n");
+                // evaluate the cardinality mismatch by comparing semantic & syntax cardinality
+                // 1) Give errors, if cardinality is missing!
+                if (cSem != null) {
+                    sb.append("Cardinality-Semantic: " + cSem + "\n");
+                } else {
+                    hasError = Boolean.TRUE;
+                    sb.append("ERROR: Semantic Cardinality have to be set!\n");
+                }
+                if (cSyn != null) {
+                    sb.append("Cardinality-Syntax:   " + cSyn + "\n");
+                } else {
+                    // there has to be a cardinality, unless it is an attribute (unique)
+                    if (!x.getPath().contains("@")) {
+                        hasError = Boolean.TRUE;
+                        sb.append("ERROR: XML Cardinality have to be set!\n");
+                    } else {
+                        sb.append("Using an XML attribute!\n");
+                    }
+                }
+
+                // 2) Gather existing cardinality
+                Set<Integer> cm = null;
+                if (mm != null) {
+                    for (MisMatch m : mm) {
+                        if (m != null) {
+                            //System.out.println("Mismatch m: " + m.getValue());
+                            if (m.getValue().startsWith("CAR-")) {
+                                if (cm == null) {
+                                    cm = new HashSet<Integer>();
+                                }
+                                Integer cmLevel = getCardinality(Integer.parseInt(m.getValue().substring(4)));
+                                if (cm.contains(cmLevel)) {
+                                    hasError = Boolean.TRUE;
+                                    sb.append("ERROR: Cardinality level " + cmLevel + " is multiple times present!\n");
+                                }
+                                cm.add(cmLevel);
+                                // Potential information loss during roundtrip from syntax to semantic and back (just info)
+//                                if (cmLevel.equals(CAR_2) || cmLevel.equals(CAR_4)) {
+//                                    hasError = Boolean.TRUE;
+//                                    sb.append("\nWARNING: Potential information loss due to limited XML: CAR-" + cmLevel + "!");
+//                                }
+//                                if (cmLevel.equals(CAR_1) || cmLevel.equals(CAR_3)) {
+//                                    hasError = Boolean.TRUE;
+//                                    sb.append("\nWARNING: Potential information loss due to limited EU semantic: CAR-" + cmLevel + "!");
+//                                }
+                            }
+                        } else {
+                            hasError = Boolean.TRUE;
+                            sb.append("ERROR: Mismatch should be set!\n");
+                        }
+                    }
+                }
+
+                // 3) Test cardinality
+                if (cSem != null && cSyn != null) {
+                    if (!cSyn.equals(cSem)) {
+                        if (cSem.charAt(0) != cSyn.charAt(0)) {
+                            // CAR-1
+                            if (cSem.charAt(0) == '0' && cSyn.charAt(0) == '1') {
+                                if (cm != null) {
+                                    if (!cm.contains(CAR_1)) {
+                                        hasError = Boolean.TRUE;
+                                        sb.append("ERROR: CAR-1 is missing!\n");
+                                    } else {
+                                        cm.remove(CAR_1);
+                                    }
+                                }
+                            } // CAR-2
+                            else if (cSem.charAt(0) == '1' && cSyn.charAt(0) == '0') {
+                                if (cm != null) {
+                                    if (!cm.contains(CAR_2)) {
+                                        hasError = Boolean.TRUE;
+                                        sb.append("ERROR: CAR-2 is missing!\n");
+                                    } else {
+                                        cm.remove(CAR_2);
+                                    }
+                                }
+                            }
+                        }
+                        if (cSem.charAt(3) != cSyn.charAt(3)) {
+                            // CAR-3
+                            if (cSem.charAt(3) == '1' && cSyn.charAt(3) == 'n') {
+                                if (cm != null) {
+                                    if (!cm.contains(CAR_3)) {
+                                        hasError = Boolean.TRUE;
+                                        sb.append("ERROR: CAR-3 is missing!\n");
+                                    } else {
+                                        cm.remove(CAR_3);
+                                    }
+                                }
+                            } // CAR-4
+                            else if (cSem.charAt(3) == 'n' && cSyn.charAt(3) == '1') {
+                                if (cm != null) {
+                                    if (!cm.contains(CAR_4)) {
+                                        hasError = Boolean.TRUE;
+                                        sb.append("ERROR: CAR-4 is missing!\n");
+                                    } else {
+                                        cm.remove(CAR_4);
+                                    }
+                                }
+                            }
+                        }
+                        if (cm != null && cm.size() > 0) {
+                            for (Integer i : cm) {
+                                hasError = Boolean.TRUE;
+                                sb.append("ERROR: CAR-" + i + " is misplaced!\n");
+                            }
+                        }
+                    }
+                }
+                cm = null;
+            } // if
+        } // for
+        if (hasError) {
             System.out.print(sb.toString());
-            sb = sb.delete(0, sb.length());
-            System.out.println("ERROR: Semantic Cardinality have to be set!");
+            hasError = Boolean.FALSE;
         }
-        if(cSyn != null){
-            sb.append("Cardinality-Syntax: " + cSyn + "\n");
-        }else{
-            // there has to be a cardinality, unless it is an attribute (unique)
-            if(!x.getPath().contains("@")){
-                System.out.print(sb.toString());
-                sb = sb.delete(0, sb.length());
-                System.out.println("ERROR: XML Cardinality have to be set!");
-            }else{
-                sb.append("Using an XML attribute!\n");
-            }
-        }
-
-        // 2) Gather existing cardinality
-        Set<Integer> cm = null;
-        if (mm != null) {
-            for (MisMatch m : mm) {
-                if(m != null){
-                    //System.out.println("Mismatch m: " + m.getValue());
-                    if (m.getValue().startsWith("CAR-")) {
-                        if(cm == null){
-                            cm = new HashSet<Integer>();
-                        }
-                        Integer cmLevel = getCardinality(Integer.parseInt(m.getValue().substring(4)));
-                        if(cm.contains(cmLevel)){
-                            System.out.print(sb.toString());
-                            sb = sb.delete(0, sb.length());
-                            System.out.println("ERROR: Cardinality level " + cmLevel + " is multiple times present!");
-                        }
-                        cm.add(cmLevel);
-                    }
-                }else{
-                    System.out.print(sb.toString());
-                    sb = sb.delete(0, sb.length());
-                    System.out.println("ERROR: Mismatch should be set!");
-                }
-            }
-        }
-
-        // 3) Test cardinality
-        if(cSem != null && cSyn != null){
-            if(!cSyn.equals(cSem)){
-                if(cSem.charAt(0) != cSyn.charAt(0)){
-                    // CAR-1
-                    if(cSem.charAt(0) == '0' && cSyn.charAt(0) == '1'){
-                        if (cm != null) {
-                            if (!cm.contains(CAR_1)) {
-                                System.out.print(sb.toString());
-                                sb = sb.delete(0, sb.length());
-                                System.out.println("ERROR: CAR-1 is missing!");
-                            } else {
-                                cm.remove(CAR_1);
-                            }
-                        }
-                    }
-                    // CAR-2
-                    else if (cSem.charAt(0) == '1' && cSyn.charAt(0) == '0') {
-                        if (cm != null) {
-                            if (!cm.contains(CAR_2)) {
-                                System.out.print(sb.toString());
-                                sb = sb.delete(0, sb.length());
-                                System.out.println("ERROR: CAR-2 is missing!");
-                            } else {
-                                cm.remove(CAR_2);
-                            }
-                        }
-                    }
-                }
-                if(cSem.charAt(3) != cSyn.charAt(3)){
-                    // CAR-3
-                    if(cSem.charAt(3) == '1' && cSyn.charAt(3) == 'n'){
-                        if (cm != null) {
-                            if (!cm.contains(CAR_3)) {
-                                System.out.print(sb.toString());
-                                sb = sb.delete(0, sb.length());
-                                System.out.println("ERROR: CAR-3 is missing!");
-                            } else {
-                                cm.remove(CAR_3);
-                            }
-                        }
-                    }
-                    // CAR-4
-                    else if(cSem.charAt(3) == 'n' && cSyn.charAt(3) == '1'){
-                        if (cm != null) {
-                            if (!cm.contains(CAR_4)) {
-                                System.out.print(sb.toString());
-                                sb = sb.delete(0, sb.length());
-                                System.out.println("ERROR: CAR-4 is missing!");
-                            } else {
-                                cm.remove(CAR_4);
-                            }
-                        }
-                    }
-                }
-                if(cm != null && cm.size() > 0){
-                    for(Integer i : cm){
-                        System.out.print(sb.toString());
-                        sb = sb.delete(0, sb.length());
-                        System.out.println("ERROR: CAR-" + i + " is misplaced!");
-                    }
-                }
-            }
-        }
-        cm = null;
-        sb = sb.delete(0, sb.length());
     }
 
-    static private Integer getCardinality(Integer i){
+
+    static private Integer getCardinality(Integer i) {
         Integer cardinality = null;
-        switch(i){
+        switch (i) {
             case 1:
                 cardinality = CAR_1;
                 break;
