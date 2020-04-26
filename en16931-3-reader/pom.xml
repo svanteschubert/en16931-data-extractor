@@ -134,14 +134,13 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <!-- JDK 8 as workaround for exception,
-                            see https://bugs.openjdk.java.net/browse/JDK-8212233 -->
-                            <source>8</source>
                             <doclint>none</doclint>
-                            <additionalparam>${javadoc.opts}</additionalparam>
+                            <additionalOptions>
+                                <additionalOption>${javadoc.opts}</additionalOption>
+                            </additionalOptions>
                         </configuration>
                     </execution>
-                </executions>
+                </executions>                
             </plugin>
             <plugin><!-- copying the JAR (with all dependencies) into the DOCS directory -->
                 <artifactId>maven-resources-plugin</artifactId>
