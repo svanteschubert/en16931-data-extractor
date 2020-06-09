@@ -98,7 +98,7 @@
             <plugin>
                 <groupId>org.ec4j.maven</groupId>
                 <artifactId>editorconfig-maven-plugin</artifactId>
-                <version>0.0.10</version>
+                <version>0.1.0</version>
                 <executions>
                     <execution>
                         <id>whitespace</id>
