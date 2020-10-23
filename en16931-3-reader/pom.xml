@@ -144,7 +144,7 @@
             </plugin>
             <plugin><!-- copying the JAR (with all dependencies) into the DOCS directory -->
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>copy-to-DOCS</id>
