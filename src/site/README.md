@@ -81,13 +81,13 @@ There is an [own chapter for software developers about the software](docs/softwa
 ### Extracting the Data
 
 1. Download the JAR with all dependencies includes [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)
-2. To see version information via command-line call:
+1. To see version information via command-line call:
 "__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar)__"
-3. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/) on Ubuntu 19.04 (disco) via commandline: 'libreoffice --headless --convert-to odt *.docx')
+1. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/) on Ubuntu 19.04 (disco) via commandline: 'libreoffice --headless --convert-to odt *.docx')
 
 *NOTE:* I do not use the DOCX files, but save them to ODT as I [worked for 20 years on the OpenDocument format (and predecessors)](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office-collab) and [maintain an ODF library](https://github.com/tdf/odftoolkit).
 
-4. To extract data from the specification via command-line call and move the output into a text file:<br/>
+1. To extract data from the specification via command-line call and move the output into a text file:<br/>
 "__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) specification.odt (or directory)  > log.txt__"
 
 ### Data Analysis
@@ -96,11 +96,11 @@ There is an [own chapter for software developers about the software](docs/softwa
 
     1. For each table of EN16931-3, which defines a syntax binding, an XML file was saved in a folder named equal to the specification name.
     2. For each syntax-binding the data-set of the informative syntax-binding table and its preceding normative table data-set (which has the suffix _SUBSET as it does not save all XML columns), a folder "\_SAME_BINDING\_\<Format\>" has been created with the identical XML files within.
-    3. Every semantic data-set of each syntax binding table is being saved as XML within the "_SAME_SEMANTIC_ folder.
+    3. Every semantic data-set of each syntax binding table is being saved as XML within the "*SAME_SEMANTIC* folder.
 
 - Use a text file comparing tool like [Total Commander on Windows (MENU:Files -> Compare By Content)](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and its twin the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML file.
 
-**Example:**
+__Example:__
 The picture below - using fictitious data - shows a data set with a problem, as aside of the heading bearing the two table names is different between the two tables, the XML cardinality shall not be different between normative and informative syntax binding table:
 ![Example:](docs/resources/TotalCommanderComparison.png)
 
