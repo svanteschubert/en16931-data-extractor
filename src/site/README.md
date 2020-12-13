@@ -16,7 +16,7 @@ Some reasoning behind from a developers bird perspective:
 2. Graph: UBL XML - W3C XML grammar (describes all allowed XML files of UBL)
 3. Graph: UN/CEFACT CII XML - W3C XML grammar (describes all allowed XML files of UN/CEFACT)
 
-The syntax bindings - that this tool is extracting - are contecting "graph 2" with "graph 1" and "graph 2" with "graph 3".
+The syntax bindings - that this tool is extracting - are connecting "graph 2" with "graph 1" and "graph 2" with "graph 3".
 In addition, aside of the grammar there are more restrictions upon the XML that W3C Schema is not able to express ([given by ISO Schematron constraints](https://github.com/CenPC434/validation)), for instance an order date has to be earlier than the pay date.
 These schematron restrictions can be seen as additional relations upon the XML grammar graphs (graph 2 & graph 3).
 It is planned to map those XML constraints later to the "Semantic Data model" level (graph 1). By this it could be validated if there are constraints only for UBL or UN/CEFACT and missing for the other XML.
@@ -28,13 +28,13 @@ In its 3rd part (EN16931-3) the EU specification binds the XML syntax with the E
 1. The first "normative table" (see "Table 2" below) describe the syntax binding from the semantic (light grey) to XML (dark grey),
 2. the second "informative table" (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
 ![Two example tables for UN/CEFACT](docs/resources/3-3-both-tables.png)
-The informative table (here Table 3) does not add any new information compared to its preceding sibling the normative talbe (here Table 2). The informative table starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
+The informative table (here Table 3) does not add any new information compared to its preceding sibling the normative table (here Table 2). The informative table starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
 
 *NOTE:*
 In theory, the *exact complete data of the informative table* should already exist in the preceding normative table.
 
 ## Software: EN16931 Data Extractor
-The data extractor is a simple Java tool that can be called from comamnd line. It reads from one or more office documents of EN16931-3 the containing syntax binding (or mapping) tables.
+The data extractor is a simple Java tool that can be called from command line. It reads from one or more office documents of EN16931-3 the containing syntax binding (or mapping) tables.
 For each table, each row is being split into the:
 - __XML part (dark grey)__
 - __Semantic part (light grey)__
@@ -64,17 +64,18 @@ There is an [own chapter for software developers about the software](docs/softwa
 3. Save the CEN DOCX documents of EN16931-3 as ODT (tested with [LibreOffice 6.2.5.2](https://www.libreoffice.org/download/download/) on Ubuntu 19.04 (disco) via commandline: 'libreoffice --headless --convert-to odt *.docx')
 
 *NOTE:* I do not use the DOCX files, but save them to ODT as I [worked for 20 years on the OpenDocument format (and predecessors)](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office-collab) and [maintain an ODF library](https://github.com/tdf/odftoolkit).
+
 4. To extract data from the specification via command-line call and move the output into a text file:<br/>"__java -jar [en16931-data-extractor-${project.version}-jar-with-dependencies.jar](docs/en16931-data-extractor-${project.version}-jar-with-dependencies.jar) specification.odt (or directory)  > log.txt__"
 
 ### Data Analysis
 - The extracted data can be found at three locations aside the input document:
 1. For each table of EN16931-3, which defines a syntax binding, an XML file was saved in a folder named equal to the specification name.
-2. For each syntax-binding the data-set of the informative syntax-binding table and its preceding normative table data-set (which has the suffix _SUBSET as it does not save all XML columns), a folder "_SAME_BINDING_<Format>" has been created with the identical XML files within.
+2. For each syntax-binding the data-set of the informative syntax-binding table and its preceding normative table data-set (which has the suffix _SUBSET as it does not save all XML columns), a folder "\_SAME_BINDING\_\<Format\>" has been created with the identical XML files within.
 3. Every semantic data-set of each syntax binding table is being saved as XML within the "_SAME_SEMANTIC_ folder.
 - Use a text file comparing tool like [Total Commander on Windows (MENU:Files -> Compare By Content)](https://www.ghisler.com/download.htm) to detect the differences between the ["informative"](docs/resources/16931-3-3_example_informative.xml) and its twin the ["normative SUBSET"](docs/resources/16931-3-3_example_SUBSETnormative.xml) XML file.
 
 **Example:**
-The picture below - using fictitious data - shows a data set with a problem, as aside of the heading bearing the two table names is different between the two tables, the XML cardinality shall not be different between normative and informatie syntax binding table:
+The picture below - using fictitious data - shows a data set with a problem, as aside of the heading bearing the two table names is different between the two tables, the XML cardinality shall not be different between normative and informative syntax binding table:
 ![Example:](docs/resources/TotalCommanderComparison.png)
 
 ## Participation
