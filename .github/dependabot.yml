@@ -1,0 +1,12 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: org.apache.logging.log4j:log4j-slf4j18-impl
+    versions:
+    - 2.14.0
