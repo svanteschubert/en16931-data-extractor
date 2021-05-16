@@ -2,14 +2,14 @@
 
 ## Summary
 
-Open sourced for the creators of the EU e-invoice specification to allow easier sanity checks of the data within the tables to improve the quality of the specification.
+Open sourced for the creators of the EU e-invoice specification to allow easier sanity checks of the data within the syntax binding tables (within EN16931-3-2 and EN16931-3-3) to improve the quality of the CEN specification.
 Build as part of the [PrototypeFund project "paperless"](https://prototypefund.de/project/papierloser-alltag/) to generate larger parts of the software implementing the [European e-invoice specification (EN16931)](https://invoice.fans/en/EN16931-en/).
 
 ## Background
 
 ### The EU e-Invoice Specification (EN16931)
 
-There is [a wonderful online introduction for EN16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Compliance+with+eInvoicing+standard) given by the EU.
+There is [a wonderful online introduction for EN16931](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Compliance+with+eInvoicing+standard) given by the EU and [great presentation slides from CEF](https://ec.europa.eu/cefdigital/wiki/download/attachments/59180282/CEFeInvoicingWebinar%239UnderstandingUBL_CII_v1.0.pdf?version=1&modificationDate=1520420915552&api=v2).
 
 ### Reason for this Software
 
@@ -31,19 +31,22 @@ Also the same restrictions on the semantic graph might be reused for other older
 ## Specification EN16931-3: Details on Syntax Binding
 
 The EU e-invoice specification demands the support of two XML file formats [OASIS UBL 1.2](http://docs.oasis-open.org/ubl/UBL-2.1.html) and [UN/CEFACT XML Industry Invoice D16B](https://www.unece.org/cefact/xml_schemas/index).
-In its 3rd part (EN16931-3) the EU specification binds the XML syntax with the EU e-invoice semantic. For each syntax exist a document, which contains at least two mapping table.
+
+![EU Syntax Binding](./docs/resources/EN16931-SyntaxBinding.png)
+
+In its 3rd part (EN16931-3) - the deliverable of WG 3 of CEN TC434 - the EU specification binds the XML syntax with the EU e-invoice semantic. For each syntax exist a document, which contains at least two mapping table.
 
 1. The first "normative table" (see "Table 2" below) describe the syntax binding from the semantic (light grey) to XML (dark grey),
 2. the second "informative table" (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
 ![Two example tables for UN/CEFACT](docs/resources/3-3-both-tables.png)
-The informative table (here Table 3) does not add any new information compared to its preceding sibling the normative talbe (here Table 2). The informative table starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
+The informative table (here Table 3) does not add any new information compared to its preceding sibling the normative table (here Table 2). The informative table starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
 
 *NOTE:*
 In theory, the *exact complete data of the informative table* should already exist in the preceding normative table.
 
 ## Software: EN16931 Data Extractor
 
-The data extractor is a simple Java tool that can be called from comamnd line. It reads from one or more office documents of EN16931-3 the containing syntax binding (or mapping) tables.
+The data extractor is a simple Java tool that can be called from command line. It reads from one or more office documents of EN16931-3 the containing syntax binding (or mapping) tables.
 For each table, each row is being split into the:
 
 - __XML part (dark grey)__
@@ -101,4 +104,4 @@ Pull requests are most welcome! :-)
 
 Please note that this README.md is being generated. The version number and paths to the JAR are being replaced by automation during every build (ie. 'mvn install'). The README.md to edit can be found at &lt;ROOT&gt;/site/README.md.
 
-The reason for this was to automate not only the build, but also the deployment of the JAR with all dependencies for the user (see usage sectio above). For this reason the revision number from the &lt;ROOT&gt;/pom.xml - I am using the date - is being added to the generated artefacts and the artefacts (JARs & documentation) are being copied to the github site directory (ie. &lt;ROOT&gt;/docs).
+The reason for this was to automate not only the build, but also the deployment of the JAR with all dependencies for the user (see usage section above). For this reason the revision number from the &lt;ROOT&gt;/pom.xml - I am using the date - is being added to the generated artefacts and the artefacts (JARs & documentation) are being copied to the github site directory (ie. &lt;ROOT&gt;/docs).
