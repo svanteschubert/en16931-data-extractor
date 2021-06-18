@@ -38,12 +38,12 @@ In its 3rd part (EN16931-3) - the deliverable of WG 3 of CEN TC434 - the EU spec
 
 1. The first "normative table" (see "Table 2" below) describe the syntax binding from the semantic (light grey) to XML (dark grey),
 ![Normative Syntax Binding: Semantic to XML (UBL)](docs/resources/3-2-normative-table.png)
-2. The second "informative table" (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
+2. Below the desired access to the normative syntax binding as structured XML data instead of PDF (digital paper/stone).
+![Normative Syntax Binding (UBL) as extracted XML](docs/resources/3-2-normative-xml.png)
+3. The second "informative table" (see Table 3 below) describes it the other way around from XML (dark grey) to semantic (light grey).
 ![Informative Syntax Binding: XML to Semantic (UBL)](docs/resources/3-2-informative-table.png)
 The informative table (here Table 3) does not add any new information compared to its preceding sibling the normative table (here Table 2). The informative table starts with the XML part (dark grey), but uses only two of the five XML attributes from the prior normative table.
 *NOTE:* In theory, the *exact complete data of the informative table* should already exist in the preceding normative table.
-3. Desired to have access to the normative syntax binding as structured XML data instead of PDF (digital stone)
-![Normative Syntax Binding (UBL) as extracted XML](docs/resources/3-2-normative-xml.png)
 
 The above images where overtaken from [public EU webinar slides](https://ec.europa.eu/cefdigital/wiki/download/attachments/59180282/CEFeInvoicingWebinar%239UnderstandingUBL_CII_v1.0.pdf?version=1&modificationDate=1520420915552&api=v2).
 
