@@ -42,12 +42,12 @@ public class FinancialAccuracy {
         BigDecimal b2 = new BigDecimal("75");
         BigDecimal b3 = b1.multiply(b2);
         System.out.println(b3);
-        
+
         System.out.print("\n\t1.05 * 0.70 = ");
         BigDecimal c1 = new BigDecimal("1.05");
         BigDecimal c2 = new BigDecimal("0.70");
         BigDecimal c3 = c1.multiply(c2);
-        System.out.println(c3);        
+        System.out.println(c3);
 
         System.out.print("\n\t1 / 900 = ");
         BigDecimal d1 = new BigDecimal("1");
@@ -63,7 +63,7 @@ public class FinancialAccuracy {
         System.out.print("\t0.1 + 0.1 + 0.1 = ");
         System.out.println(new BigDecimal("0.1").add(new BigDecimal("0.1")).add(new BigDecimal("0.1")));
 
-                                                                                                                    
+
         System.out.println("\n======================================================================================\n");
         // Decimal Precision - 7, 16 or 34 digits
         // Note: Additional preceding zeros may be given by exponent!
@@ -73,7 +73,7 @@ public class FinancialAccuracy {
 
         System.out.println("TESTING Decimal Precision - 7, 16 or 34 digits");
         System.out.println("\tNote: Additional preceding zeros may be given by exponent!\n");
-        
+
         System.out.println("7 digits:");
         System.out.println("https://en.wikipedia.org/wiki/Decimal32_floating-point_format");
         System.out.println("\tDECIMAL-32: Devide 1 by 900 =");

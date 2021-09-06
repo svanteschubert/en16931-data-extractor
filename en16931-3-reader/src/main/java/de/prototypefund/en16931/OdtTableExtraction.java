@@ -360,11 +360,13 @@ public class OdtTableExtraction {
                     // dump the table model into an XML file
                     semanticNode.createXMLFile(fileName, outputPath, title, Boolean.TRUE);
                     semanticNode.createSubXMLFile(fileName, outputPath, title, Boolean.TRUE);
-                    semanticNode.createSemanticXMLFile(fileName, outputPath, title, Boolean.TRUE);
+                    semanticNode.createSemanticXMLFile(fileName.replace(".xml",".json"), outputPath, title, Boolean.TRUE);
+                    semanticNode.createSemanticJSONFile(fileName, outputPath, title, Boolean.TRUE);
                 } else { // informative table
                     semanticNode.createXMLFile(fileName, outputPath, title, Boolean.FALSE);
                     semanticNode.createSubXMLFile(fileName, outputPath, title, Boolean.FALSE); // created in subdirectory
                     semanticNode.createSemanticXMLFile(fileName, outputPath, title, Boolean.FALSE);
+                    semanticNode.createSemanticJSONFile(fileName, outputPath, title, Boolean.TRUE);
                 }
                 // log all duplicated XML nodes
 //2DO            semanticNode.logDuplicateXPathErrors();

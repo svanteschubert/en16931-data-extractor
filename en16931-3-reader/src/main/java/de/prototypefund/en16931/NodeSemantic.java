@@ -306,8 +306,47 @@ public class NodeSemantic {
         return xml.toString();
     }
 
+    private String toJSONSubString(boolean onlySemantic) {
+        StringBuilder xml = new StringBuilder();
+        try {
+            xml.append("\t{ \"id\":\"" + mID + "\",");
+            if (mLevel != null) {
+                xml.append(" \"level\":\"" + mLevel + "\",");
+            }
+            if (mCardinality != null) {
+                xml.append(" \"card\":\"" + mCardinality.getValue() + "\",");
+            }
+            if (mBusinessTerm != null) {
+                xml.append(" \"bt\":\"" + mBusinessTerm + "\",");
+            }
+            if (mDescription != null) {
+                xml.append(" \"desc\":\"" + mDescription + "\",");
+            }
+            if (mDataType != null) {
+                xml.append(" \"datatype\":\"" + mDataType + "\"");
+            }
+            xml = deleteFinalChar(xml, ',');
+            xml.append("}");
+        } catch (Throwable t) {
+            t.toString();
+        }
+        return xml.toString();
+    }
+
+    private StringBuilder deleteFinalChar(StringBuilder xml, char finalChar){
+        int length = xml.length();
+        if(xml.charAt(length - 1) == finalChar){
+            xml.deleteCharAt(length - 1);
+        }
+        return xml;
+    }
+
     public void createSemanticXMLFile(String fileName, String outputPath, String title, Boolean isNormative) {
         createXMLFileVariants(fileName, outputPath, title, Boolean.FALSE, Boolean.TRUE, isNormative);
+    }
+
+    public void createSemanticJSONFile(String fileName, String outputPath, String title, Boolean isNormative) {
+        createJSONFileVariants(fileName, outputPath, title, Boolean.FALSE, Boolean.TRUE, isNormative);
     }
 
     public void createSubXMLFile(String fileName, String outputPath, String title, Boolean isNormative) {
@@ -353,12 +392,53 @@ public class NodeSemantic {
         }
     }
 
+    private void createJSONFileVariants(String fileName, String outputPath, String title, Boolean isSubFile, Boolean onlySemantic, Boolean isNormative) {
+        try {
+            if (fileName.endsWith(ODT_SUFFIX)) {
+                fileName = fileName.substring(0, fileName.length() - ODT_SUFFIX.length());
+            }
+            StringBuilder xml_Suffix = new StringBuilder();
+            Collection<NodeSemantic> semanticNodes = this.allSemanticNodes.values();
+            int xmlCount = 0;
+            for (NodeSemantic s : semanticNodes) {
+                if (s != null && (isSubFile || onlySemantic)) {
+                    xml_Suffix.append(s.toJSONSubString(onlySemantic)).append(",");
+                } else {
+                    LOG.error("ERROR: DATA MODEL IS EMPTY!!");
+                }
+                if (s.syntaxRepresentations != null) {
+                    xmlCount += s.syntaxRepresentations.size();
+                }
+            }
+            xml_Suffix = deleteFinalChar(xml_Suffix, ',');
+            xml_Suffix.append("\n]}");
+            StringBuilder xml_Prefix = new StringBuilder();
+            int semanticCount = semanticNodes.size();
+            xml_Prefix.append("{ \"semanticCount\":\"" + semanticCount + "\", " + " \"file\":\"" + fileName + "\", \"table\":\"" + title + "\", " + "\"semantics\":[\n");
+            // XML files are saved in at least different folder (same semantic data-set, same informative & normative-subset, full table dataset)
+            String outputFilePath = getOutputFilePath(fileName, outputPath, title, isSubFile, onlySemantic, isNormative, ".json");
+            FileHelper.saveStringToFile(new File(outputFilePath), xml_Prefix.append(xml_Suffix).toString());
+            LOG.info("\nSaving extracted syntax binding into file:\n\t" + outputFilePath + "\n");
+        } catch (Throwable e) {
+            LoggerFactory.getLogger(NodeSemantic.class.getName()).error("ERROR: " + e.getMessage(), e);
+        }
+    }
+
     /**
      * XML files are saved in at least three different folder (same semantic
      * data-set, same informative & normative-subset, full table dataset) In the
      * case of UBL there are even two same informative & normative-subsets.
      */
     private String getOutputFilePath(String fileName, String outputPath, String title, Boolean isSubFile, Boolean onlySemantic, Boolean isNormative) {
+        return getOutputFilePath(fileName, outputPath, title, isSubFile, onlySemantic, isNormative, ".xml");
+    }
+
+    /**
+     * XML files are saved in at least three different folder (same semantic
+     * data-set, same informative & normative-subset, full table dataset) In the
+     * case of UBL there are even two same informative & normative-subsets.
+     */
+    private String getOutputFilePath(String fileName, String outputPath, String title, Boolean isSubFile, Boolean onlySemantic, Boolean isNormative, String outputFileSuffix) {
         String outputFilePath = null;
         if (isSubFile) {
             if (isNormative) {
@@ -367,17 +447,17 @@ public class NodeSemantic {
             String bindingDirName = getBindingDirName(fileName);
             File newDir = new File(outputPath + File.separator + bindingDirName);
             newDir.mkdir();
-            outputFilePath = newDir.getAbsolutePath() + File.separator + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml";
+            outputFilePath = newDir.getAbsolutePath() + File.separator + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + outputFileSuffix;
         } else if (onlySemantic) {
             title += FILE_SUFFIX__SEMANTIC;
             File newDir = new File(outputPath + File.separator + SAME_SEMANTIC_DIR_NAME);
             newDir.mkdir();
-            outputFilePath = newDir.getAbsolutePath() + File.separator + fileName + "_" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml";
+            outputFilePath = newDir.getAbsolutePath() + File.separator + fileName + "_" + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + outputFileSuffix;
         } else {
             // informative data needs to be saved twice (root and subdirectory for comparison)
             File newDir = new File(outputPath + File.separator + fileName);
             newDir.mkdir();
-            outputFilePath = newDir.getAbsolutePath() + File.separator + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + ".xml";
+            outputFilePath = newDir.getAbsolutePath() + File.separator + title.replaceAll(INVALID_FILE_CHARACTERS, "_") + outputFileSuffix;
         }
         return outputFilePath;
     }
