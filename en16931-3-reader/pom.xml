@@ -134,10 +134,10 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <doclint>none</doclint>
+                            <doclint>none</doclint><!--
                             <additionalOptions>
                                 <additionalOption>${javadoc.opts}</additionalOption>
-                            </additionalOptions>
+                            </additionalOptions>-->
                         </configuration>
                     </execution>
                 </executions>                
