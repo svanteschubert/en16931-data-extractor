@@ -140,7 +140,7 @@
                             </additionalOptions>-->
                         </configuration>
                     </execution>
-                </executions>                
+                </executions>
             </plugin>
             <plugin><!-- copying the JAR (with all dependencies) into the DOCS directory -->
                 <artifactId>maven-resources-plugin</artifactId>
@@ -168,6 +168,10 @@
                                     <includes>
                                         <include>**/*</include>
                                     </includes>
+                                    <excludes>
+                                        <exclude>**/*.png</exclude>
+                                        <exclude>**/*.pdf</exclude>
+                                    </excludes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -223,11 +227,6 @@
                             <includes>
                                 <include>**/*</include>
                             </includes>
-                            <excludes>
-                                <exclude>resources/*</exclude>
-                                <exclude>README.md</exclude>
-                                <exclude>software.md</exclude>
-                            </excludes>                            
                             <followSymlinks>false</followSymlinks>
                         </fileset>
                     </filesets>
