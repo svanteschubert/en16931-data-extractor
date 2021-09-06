@@ -223,6 +223,11 @@
                             <includes>
                                 <include>**/*</include>
                             </includes>
+                            <excludes>
+                                <exclude>resources/*</exclude>
+                                <exclude>README.md</exclude>
+                                <exclude>software.md</exclude>
+                            </excludes>                            
                             <followSymlinks>false</followSymlinks>
                         </fileset>
                     </filesets>
