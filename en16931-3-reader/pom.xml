@@ -164,14 +164,9 @@
                                 </resource>
                                 <resource> <!-- copy documentation (using latest version) -->
                                     <directory>${project.basedir}/../src/site/</directory>
-                                    <filtering>true</filtering>
                                     <includes>
                                         <include>**/*</include>
                                     </includes>
-                                    <excludes>
-                                        <exclude>**/*.png</exclude>
-                                        <exclude>**/*.pdf</exclude>
-                                    </excludes>
                                 </resource>
                             </resources>
                         </configuration>
