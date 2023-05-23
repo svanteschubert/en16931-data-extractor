@@ -65,11 +65,11 @@ To ease comparison of a "normative table" from the specification with it's (hope
 
 ### Running (everybody, e.g. CEN Technical Writer)
 
-- [>= JDK 9](https://openjdk.java.net/install/)
+- [>= JDK 11](https://openjdk.java.net/install/)
 
 ### Building (developers)
 
-- [>= JDK 9](https://openjdk.java.net/install/)
+- [>= JDK 11](https://openjdk.java.net/install/)
 - [GIT](https://git-scm.com/)
 - [>= Apache Maven 3.5](https://maven.apache.org/download.cgi?Preferred=ftp://mirror.reverse.net/pub/apache/)
 
