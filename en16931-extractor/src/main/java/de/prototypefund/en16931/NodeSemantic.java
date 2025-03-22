@@ -17,8 +17,8 @@ package de.prototypefund.en16931;
 
 import static de.prototypefund.en16931.OdtTableDataExtraction.mMultiHyphenDiff;
 import static de.prototypefund.en16931.OdtTableDataExtraction.mMultiHyphenSame;
-import static de.prototypefund.en16931.OdtTableDataExtraction.mSyntaxBindingCounter;
-import static de.prototypefund.en16931.OdtTableDataExtraction.mSyntaxBindingLastFileName;
+import static de.prototypefund.en16931.OdtTableDataExtraction.mWG3_SyntaxBindingCounter;
+import static de.prototypefund.en16931.OdtTableDataExtraction.mWG3_SyntaxBindingLastFileName;
 import de.prototypefund.en16931.type.CardinalitySemantic;
 import de.prototypefund.en16931.type.MisMatch;
 import de.prototypefund.en16931.type.NumberAwareStringComparator;
@@ -464,12 +464,12 @@ public class NodeSemantic {
 
     private String getBindingDirName(String fileName) {
         String enType = BINDING_TYPE_INVOICE;
-        if (!fileName.equals(mSyntaxBindingLastFileName)) {
-            mSyntaxBindingLastFileName = fileName;
-            mSyntaxBindingCounter = 1;
+        if (!fileName.equals(mWG3_SyntaxBindingLastFileName)) {
+            mWG3_SyntaxBindingLastFileName = fileName;
+            mWG3_SyntaxBindingCounter = 1;
         } else {
-            mSyntaxBindingCounter++;
-            if (mSyntaxBindingCounter > 2) {
+            mWG3_SyntaxBindingCounter++;
+            if (mWG3_SyntaxBindingCounter > 2) {
                 enType = BINDING_TYPE_CREDIT_NOTE;
             }
         }
