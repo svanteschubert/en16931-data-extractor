@@ -61,7 +61,8 @@ public class NodeSemantic {
     private static final String mERROR_ID = "ID ALREADY TAKEN";
     Boolean mWARNING_FixAlreadyTaken = Boolean.FALSE;
     Boolean mWARNING_FixUnavailable = Boolean.FALSE;
-    // Following properites are for naming the new output directories for the various output files
+    // Following properites are for naming the new output directories for the
+    // various output files
     private static String FILE_SUFFIX__SUBSET = "_SUBSET";
     private static String FILE_SUFFIX__SEMANTIC = "_SEMANTIC";
     private static String SAME_SEMANTIC_DIR_NAME = "_SAME_SEMANTIC";
@@ -76,35 +77,15 @@ public class NodeSemantic {
     public NodeSemantic(String id, String tableId) {
         try {
             mTableId = tableId;
-            // check if ID is empty
-            if (!id.replaceAll(LEADING_TRAILING_WHITESPACES, "").isEmpty()) {
-                if (id.startsWith(BUSINESS_TERM_PREFIX)) {
-                    isBusinessGroup = Boolean.FALSE;
-                    testID(id);
-                } else if (id.startsWith(BUSINESS_GROUP_PREFIX)) {
-                    isBusinessGroup = Boolean.TRUE;
-                    testID(id);
-                } else {
-                    LOG.error("ERROR: ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '" + id + "'!");
-                }
-                if (id.contains("–")) {
-                    if (mMultiHyphenDiff == null) {
-                        mMultiHyphenDiff = new ArrayList<>();
-                    }
-                    mMultiHyphenDiff.add(id);
-                    id = id.replace("–", "-"); // fixing hyphen problem so all ID have similar structure
-                } else if (!id.contains("–") && id.contains("-")) {
-                    int count = countChar(id, '-');
-                    if (count > 1) {
-                        if (mMultiHyphenSame == null) {
-                            mMultiHyphenSame = new ArrayList();
-                        }
-                        mMultiHyphenSame.add(id);
-
-                    }
-                }
+            if (id.startsWith(BUSINESS_TERM_PREFIX)) {
+                isBusinessGroup = Boolean.FALSE;
+                testID(id);
+            } else if (id.startsWith(BUSINESS_GROUP_PREFIX)) {
+                isBusinessGroup = Boolean.TRUE;
+                testID(id);
             } else {
-                LOG.error("ERROR: ID of semantic object shall not be empty!");
+                LOG.error("ERROR: ID of Semantic object have to start, either with 'BT-' or 'BG-'! The ID was '"
+                    + id + "'!");
             }
             if (allSemanticNodes == null) {
                 allSemanticNodes = new TreeMap<>(new NumberAwareStringComparator());
@@ -146,13 +127,41 @@ public class NodeSemantic {
         }
     }
 
-    private void testID(String id) {
+    static String unifyID(String id){
+        if (!id.replaceAll(LEADING_TRAILING_WHITESPACES, "").isEmpty()) {
+
+            if (id.contains("–")) {
+                if (mMultiHyphenDiff == null) {
+                    mMultiHyphenDiff = new ArrayList<>();
+                }
+                mMultiHyphenDiff.add(id);
+                id = id.replace("–", "-"); // fixing hyphen problem so all ID have similar structure
+            } else if (!id.contains("–") && id.contains("-")) {
+                int count = countChar(id, '-');
+                if (count > 1) {
+                    if (mMultiHyphenSame == null) {
+                        mMultiHyphenSame = new ArrayList();
+                    }
+                    mMultiHyphenSame.add(id);
+
+                }
+            }
+        } else {
+            LOG.error("ERROR: ID of semantic object shall not be empty!");
+        }
+        return id;
+    }
+
+    private static void testID(String id) {
         String numberCandidate = id.substring(BUSINESS_TERM_PREFIX.length(), id.length());
-        numberCandidate = numberCandidate.replace("-", "1").replace("–", "2"); // 16931-3-4 uses two different hyphen in its ID "BT-18–1"
+        numberCandidate = numberCandidate.replace("-", "1").replace("–", "2"); // 16931-3-4 uses two different hyphen in
+                                                                               // its ID "BT-18–1"
         try {
             Integer.parseInt(numberCandidate);
         } catch (NumberFormatException e) {
-            LOG.error("ERROR: Semantic ID is not as as usual. Expected is a 'BT-' or 'BG-' with numbers and further '-', but the ID was '" + id + "'!");
+            LOG.error(
+                    "ERROR: Semantic ID is not as as usual. Expected is a 'BT-' or 'BG-' with numbers and further '-', but the ID was '"
+                            + id + "'!");
         }
     }
 
@@ -179,7 +188,9 @@ public class NodeSemantic {
         if (!testString.equals(bt)) {
             LOG.warn("WARNING: " + getId() + " 'BT description' has whitespace problems:"
                     + "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\n):\n\t\t"
-                    + "\"" + bt.replaceAll(" ", ".").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t").replaceAll("\r", "\\\\r").replaceAll("\f", "\\\\f") + "\"\n");
+                    + "\"" + bt.replaceAll(" ", ".").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t")
+                            .replaceAll("\r", "\\\\r").replaceAll("\f", "\\\\f")
+                    + "\"\n");
             LOG.warn("\tinstead of:\n\t\t\"" + testString + "\"\n\n");
         }
         mBusinessTerm = testString;
@@ -210,7 +221,9 @@ public class NodeSemantic {
         if (!testString.equals(d)) {
             LOG.warn("WARNING: " + getId() + " 'description' has whitespace problems:"
                     + "\n\tWith visible whitespace (space = . and Java abbreviations \\t,\\r,\\f,\\n):\n\t\t"
-                    + "\"" + d.replaceAll(" ", ".").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t").replaceAll("\r", "\\\\r").replaceAll("\f", "\\\\f") + "\"\n");
+                    + "\"" + d.replaceAll(" ", ".").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t")
+                            .replaceAll("\r", "\\\\r").replaceAll("\f", "\\\\f")
+                    + "\"\n");
             LOG.warn("\tinstead of:\n\t\t\"" + testString + "\"\n\n");
         }
         mDescription = testString;
@@ -333,9 +346,9 @@ public class NodeSemantic {
         return xml.toString();
     }
 
-    private StringBuilder deleteFinalChar(StringBuilder xml, char finalChar){
+    private StringBuilder deleteFinalChar(StringBuilder xml, char finalChar) {
         int length = xml.length();
-        if(xml.charAt(length - 1) == finalChar){
+        if (xml.charAt(length - 1) == finalChar) {
             xml.deleteCharAt(length - 1);
         }
         return xml;
@@ -357,13 +370,15 @@ public class NodeSemantic {
         createXMLFileVariants(fileName, outputPath, title, Boolean.FALSE, Boolean.FALSE, isNormative);
     }
 
-    private void createXMLFileVariants(String fileName, String outputPath, String title, Boolean isSubFile, Boolean onlySemantic, Boolean isNormative) {
+    private void createXMLFileVariants(String fileName, String outputPath, String title, Boolean isSubFile,
+            Boolean onlySemantic, Boolean isNormative) {
         try {
             if (fileName.endsWith(ODT_SUFFIX)) {
                 fileName = fileName.substring(0, fileName.length() - ODT_SUFFIX.length());
             }
             StringBuilder xml_Suffix = new StringBuilder();
-            Collection<NodeSemantic> semanticNodes = this.allSemanticNodes.values();
+            // Create a copy of the values to avoid ConcurrentModificationException
+            Collection<NodeSemantic> semanticNodes = new ArrayList<>(this.allSemanticNodes.values());
             int xmlCount = 0;
             for (NodeSemantic s : semanticNodes) {
                 if (s != null) {
@@ -382,7 +397,8 @@ public class NodeSemantic {
             xml_Suffix.append("</semantics>");
             StringBuilder xml_Prefix = new StringBuilder();
             int semanticCount = semanticNodes.size();
-            xml_Prefix.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<semantics semantics=\"" + semanticCount + "\" xml=\"" + xmlCount + "\" file=\"" + fileName + "\" table=\"" + title + "\">\n");
+            xml_Prefix.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<semantics semantics=\"" + semanticCount
+                    + "\" xml=\"" + xmlCount + "\" file=\"" + fileName + "\" table=\"" + title + "\">\n");
             // XML files are saved in at least different folder (same semantic data-set, same informative & normative-subset, full table dataset)
             String outputFilePath = getOutputFilePath(fileName, outputPath, title, isSubFile, onlySemantic, isNormative);
             FileHelper.saveStringToFile(new File(outputFilePath), xml_Prefix.append(xml_Suffix).toString());
@@ -776,7 +792,7 @@ public class NodeSemantic {
         }
     }
 
-    private int countChar(String str, char c) {
+    private static int countChar(String str, char c) {
         int count = 0;
 
         for (int i = 0; i < str.length(); i++) {
