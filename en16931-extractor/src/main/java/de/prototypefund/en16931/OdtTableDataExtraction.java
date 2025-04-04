@@ -310,11 +310,15 @@ public class OdtTableDataExtraction {
                         if (c == syntax_header_length) {
                             cellContent = cellContent.replaceAll(LEADING_TRAILING_WHITESPACES, "");
                             if (!cellContent.isEmpty()) {
-                                String finalCellContent = NodeSemantic.unifyID(cellContent);
-                                semanticNode = NodeSemantic.allSemanticNodes.computeIfAbsent(finalCellContent,
-                                        k -> new NodeSemantic(finalCellContent, mTableId));
-                                isNewSemantic = !NodeSemantic.allSemanticNodes.containsKey(finalCellContent);
-                            } else {
+                                String unifiedId = NodeSemantic.unifyID(cellContent);
+                                if (!NodeSemantic.allSemanticNodes.containsKey(unifiedId)) {
+                                    semanticNode = new NodeSemantic(unifiedId, mTableId);
+                                    NodeSemantic.allSemanticNodes.put(unifiedId, semanticNode);
+                                    isNewSemantic = true;
+                                } else {
+                                    semanticNode = NodeSemantic.allSemanticNodes.get(unifiedId);
+                                }
+                            }else {
                                 break;
                             }
                         }
@@ -447,17 +451,25 @@ public class OdtTableDataExtraction {
             if (!cellContent.isEmpty()) {
                 switch (columnType) {
                     case TYPE: // only for XML
-                        ((NodeXml) syntaxNode).setType(cellContent);
+                        if(syntaxNode instanceof NodeXml){
+                            ((NodeXml) syntaxNode).setType(cellContent);
+                        }
                         break;
                     case CARD:
                         if (mIsXML) {
-                            ((NodeXml) syntaxNode).setCardinalityXml(cellContent);
+                            if(syntaxNode instanceof NodeXml){
+                                ((NodeXml) syntaxNode).setCardinalityXml(cellContent);
+                            }
                         } else {
-                            ((NodeEdifact) syntaxNode).setCardinalityEdifact(cellContent);
+                            if(syntaxNode instanceof NodeEdifact){
+                                ((NodeEdifact) syntaxNode).setCardinalityEdifact(cellContent);
+                            }
                         }
                         break;
                     case NAME: // only for EDIFACT
-                        ((NodeEdifact) syntaxNode).setName(cellContent);
+                        if(syntaxNode instanceof NodeEdifact){
+                            ((NodeEdifact) syntaxNode).setName(cellContent);
+                        }
                         break;
                     case MATCH:
                         syntaxNode.setMisMatch(cellContent);
